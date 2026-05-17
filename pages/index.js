@@ -2414,6 +2414,8 @@ const UI = {
     celebMsg: ["Super travail !", "Continue comme ça !", "Tu es un vrai codeur !", "Impressionnant !", "Je suis fier de toi !"],
     xpGained: "+50 XP", lessons: "leçons",
     studioTitle: "📺 Dans Roblox Studio",
+    studioOpen: "▼ Ouvrir les instructions Studio",
+    studioClose: "▲ Fermer",
     studioWhere: "Où écrire ce code :",
     studioSteps: "Étapes :",
     exerciseTitle: "Mini-défi Studio",
@@ -2434,6 +2436,8 @@ Module : ${mod || "général"}. ${lesson ? `Leçon : "${lesson.title?.fr}". Conc
     celebMsg: ["Great work!", "Keep it up!", "You're a real coder!", "Impressive!", "I'm proud of you!"],
     xpGained: "+50 XP", lessons: "lessons",
     studioTitle: "📺 In Roblox Studio",
+    studioOpen: "▼ Open Studio instructions",
+    studioClose: "▲ Close",
     studioWhere: "Where to write this code:",
     studioSteps: "Steps:",
     exerciseTitle: "Studio Mini-Challenge",
@@ -2454,6 +2458,8 @@ Module: ${mod || "general"}. ${lesson ? `Lesson: "${lesson.title?.en}". Concept:
     celebMsg: ["¡Gran trabajo!", "¡Sigue así!", "¡Eres un programador de verdad!", "¡Impresionante!", "¡Estoy orgulloso de ti!"],
     xpGained: "+50 XP", lessons: "lecciones",
     studioTitle: "📺 En Roblox Studio",
+    studioOpen: "▼ Abrir las instrucciones Studio",
+    studioClose: "▲ Cerrar",
     studioWhere: "Dónde escribir este código:",
     studioSteps: "Pasos:",
     exerciseTitle: "Mini-reto Studio",
@@ -2509,12 +2515,24 @@ function t(obj, lang) { return obj?.[lang] || obj?.fr || obj || ""; }
 
 function highlightLua(code) {
   const kw = ["local","function","if","then","elseif","else","end","while","do","for","return","true","false","not","and","or","nil","repeat","until","break","in"];
-  let h = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-    .replace(/(--\[\[[\s\S]*?\]\]|--[^\n]*)/g,'<span style="color:#6272a4;font-style:italic">$1</span>')
-    .replace(/"([^"]*)"/g,'<span style="color:#50fa7b">"$1"</span>')
-    .replace(/\b(\d+(?:\.\d+)?)\b/g,'<span style="color:#bd93f9">$1</span>');
+  // Step 1: HTML-escape
+  let h = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  // Step 2: Extract comments and strings first (replace with placeholders), so they aren't re-processed
+  const tokens = [];
+  const placeholder = (val) => { tokens.push(val); return `\x00${tokens.length-1}\x00`; };
+  // Comments (multi-line then single-line)
+  h = h.replace(/--\[\[[\s\S]*?\]\]/g, m => placeholder('<span style="color:#6272a4;font-style:italic">'+m+'</span>'));
+  h = h.replace(/--[^\n]*/g, m => placeholder('<span style="color:#6272a4;font-style:italic">'+m+'</span>'));
+  // Strings
+  h = h.replace(/"([^"]*)"/g, m => placeholder('<span style="color:#50fa7b">'+m+'</span>'));
+  // Numbers
+  h = h.replace(/\b(\d+(?:\.\d+)?)\b/g,'<span style="color:#bd93f9">$1</span>');
+  // Keywords
   kw.forEach(k => { h = h.replace(new RegExp(`\\b(${k})\\b`,"g"),'<span style="color:#ff79c6;font-weight:500">$1</span>'); });
+  // Capitalized identifiers (like Players, Vector3, Instance)
   h = h.replace(/\b([A-Z][a-zA-Z]+)(?=[:.])/g,'<span style="color:#8be9fd">$1</span>');
+  // Restore placeholders
+  h = h.replace(/\x00(\d+)\x00/g, (_, i) => tokens[parseInt(i,10)]);
   return h;
 }
 
@@ -2549,7 +2567,7 @@ function StudioSection({ lesson, lang, ui }) {
         <span style={{ fontSize:18 }}>🖥️</span>
         <div style={{ flex:1 }}>
           <div style={{ fontWeight:700,color:"#92400e",fontSize:14 }}>{ui.studioTitle}</div>
-          <div style={{ fontSize:12,color:"#b45309" }}>{open ? "▲ Fermer" : "▼ Ouvrir les instructions Studio"}</div>
+          <div style={{ fontSize:12,color:"#b45309" }}>{open ? ui.studioClose : ui.studioOpen}</div>
         </div>
       </div>
       {open && (
@@ -2579,9 +2597,29 @@ function StudioSection({ lesson, lang, ui }) {
 
 function ChatPanel({ ui, lesson, module, lang, onClose }) {
   const greetings = {
-    fr: "Howdy partenaire ! Je suis Superpapa973 🤠 Pose-moi toutes tes questions sur cette leçon !",
-    en: "Howdy partner! I'm Superpapa973 🤠 Ask me anything about this lesson!",
-    es: "¡Howdy compañero! Soy Superpapa973 🤠 ¡Pregúntame lo que quieras sobre esta lección!"
+    fr: "Howdy partenaire ! Je suis Superpapa973 🤠 Pose-moi une question, ou clique sur une suggestion en bas !",
+    en: "Howdy partner! I'm Superpapa973 🤠 Ask me a question or tap a suggestion below!",
+    es: "¡Howdy compañero! Soy Superpapa973 🤠 ¡Hazme una pregunta o toca una sugerencia abajo!"
+  };
+  const suggestions = {
+    fr: [
+      "Peux-tu m'expliquer plus simplement ?",
+      "Donne-moi un autre exemple",
+      "À quoi ça sert dans un vrai jeu ?",
+      "Comment je peux m'entraîner ?"
+    ],
+    en: [
+      "Can you explain more simply?",
+      "Give me another example",
+      "What's this used for in a real game?",
+      "How can I practice?"
+    ],
+    es: [
+      "¿Puedes explicarlo más simple?",
+      "Dame otro ejemplo",
+      "¿Para qué sirve en un juego real?",
+      "¿Cómo puedo practicar?"
+    ]
   };
   const [messages, setMessages] = useState([{ role:"assistant", content:greetings[lang] }]);
   const [input, setInput] = useState("");
@@ -2589,9 +2627,9 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
   const bottomRef = useRef(null);
   useEffect(()=>{ bottomRef.current?.scrollIntoView({behavior:"smooth"}); }, [messages, loading]);
 
-  const send = async () => {
-    if (!input.trim() || loading) return;
-    const q = input.trim(); setInput("");
+  const sendText = async (text) => {
+    if (!text.trim() || loading) return;
+    const q = text.trim(); setInput("");
     const newMessages = [...messages, { role:"user", content:q }];
     setMessages(newMessages); setLoading(true);
     try {
@@ -2603,6 +2641,9 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
     } catch { setMessages(prev=>[...prev,{role:"assistant",content:"⚠️ Erreur réseau !"}]); }
     setLoading(false);
   };
+
+  const send = () => sendText(input);
+  const showSuggestions = messages.length <= 2 && !loading;
 
   return (
     <div style={{ border:"0.5px solid #e2e8f0",borderRadius:16,overflow:"hidden",marginTop:12 }}>
@@ -2618,6 +2659,21 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
         {loading && <div style={{ padding:"8px 12px",background:"#fff",borderRadius:"12px 12px 12px 2px",color:"#718096",fontSize:13,alignSelf:"flex-start",border:"0.5px solid #e2e8f0" }}>Superpapa réfléchit...</div>}
         <div ref={bottomRef} />
       </div>
+      {showSuggestions && (
+        <div style={{ padding:"8px 10px",background:"#fffbeb",borderTop:"1px solid #fde68a",display:"flex",flexWrap:"wrap",gap:6 }}>
+          <div style={{ fontSize:10,color:"#92400e",fontWeight:600,width:"100%",marginBottom:2 }}>
+            {lang==="fr"&&"💡 Suggestions de questions :"}
+            {lang==="en"&&"💡 Question suggestions:"}
+            {lang==="es"&&"💡 Sugerencias de preguntas:"}
+          </div>
+          {suggestions[lang].map((s, i) => (
+            <button key={i} onClick={()=>sendText(s)} disabled={loading}
+              style={{ background:"#fff",border:"0.5px solid #f59e0b",color:"#92400e",borderRadius:14,padding:"5px 10px",fontSize:11,cursor:loading?"not-allowed":"pointer",lineHeight:1.3 }}>
+              {s}
+            </button>
+          ))}
+        </div>
+      )}
       <div style={{ padding:10,display:"flex",gap:8,background:"#fff",borderTop:"0.5px solid #e2e8f0" }}>
         <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder={ui.placeholder}
           style={{ flex:1,padding:"8px 14px",border:"0.5px solid #cbd5e0",borderRadius:20,fontSize:13,outline:"none" }} />
@@ -2636,7 +2692,21 @@ function LessonView({ lesson, module, ui, lang, onBack, completed, onComplete, o
 
   const handleListen = async () => {
     if (speaking) { stopSpeak(); setSpeaking(false); return; }
-    const text = `${t(lesson.superpapa,lang)}. ${t(lesson.explanation,lang)}. ${t(lesson.tip,lang)}`;
+    // Clean symbols that read awkwardly aloud
+    const dashWord = { fr: "deux tirets", en: "double dash", es: "dos guiones" }[lang] || "double dash";
+    const concatWord = { fr: "puis", en: "and", es: "y" }[lang] || "and";
+    const clean = (s) => (s || "")
+      .replace(/--/g, dashWord)
+      .replace(/\.\./g, " " + concatWord + " ")
+      .replace(/\(\)/g, "")
+      .replace(/\s+/g, " ");
+    const parts = [
+      t(lesson.title, lang),
+      clean(t(lesson.superpapa, lang)),
+      clean(t(lesson.explanation, lang)),
+      clean(t(lesson.tip, lang))
+    ];
+    const text = parts.filter(Boolean).join(". ");
     setSpeaking(true);
     await speak(text, lang, () => setSpeaking(false));
   };
