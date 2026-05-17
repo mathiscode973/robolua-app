@@ -6,17 +6,19 @@ import Head from "next/head";
 function SuperpapaAvatar({ size = 120, animate = false }) {
   return (
     <svg width={size} height={size * 1.45} viewBox="0 0 100 145" style={animate ? { animation: "pulse 2s ease-in-out infinite" } : {}}>
-      {/* Bord chapeau */}
-      <ellipse cx="50" cy="42" rx="32" ry="6" fill="#b8945a" />
-      {/* Corps chapeau */}
-      <rect x="30" y="18" width="40" height="26" rx="4" fill="#c8a96e" />
-      {/* Bande chapeau */}
-      <rect x="30" y="36" width="40" height="5" fill="#8B6914" />
-      {/* Sommet chapeau arrondi */}
-      <ellipse cx="50" cy="18" rx="20" ry="5" fill="#b8945a" />
+      {/* Bord chapeau blanc */}
+      <ellipse cx="50" cy="42" rx="32" ry="6" fill="#ededed" />
+      <ellipse cx="50" cy="40" rx="32" ry="3" fill="#f8f8f8" />
+      {/* Corps chapeau blanc */}
+      <path d="M 30 42 Q 30 18 50 16 Q 70 18 70 42 Z" fill="#ffffff" stroke="#d0d0d0" strokeWidth="0.5" />
+      {/* Bande chapeau noire */}
+      <rect x="30" y="36" width="40" height="4" fill="#2d2d2d" />
+      {/* Petits creux sur le sommet (style cowboy) */}
+      <ellipse cx="50" cy="18" rx="14" ry="3" fill="#e8e8e8" />
+      <ellipse cx="50" cy="18" rx="6" ry="2" fill="#d8d8d8" />
       {/* ✝ CROIX sur le chapeau */}
-      <rect x="47.5" y="20" width="5" height="14" rx="1" fill="#5a3a1a" />
-      <rect x="42" y="24" width="16" height="4" rx="1" fill="#5a3a1a" />
+      <rect x="47.5" y="20" width="5" height="14" rx="1" fill="#8B6914" />
+      <rect x="42" y="24" width="16" height="4" rx="1" fill="#8B6914" />
       {/* Cheveux blancs sur les côtés */}
       <rect x="29" y="44" width="8" height="10" rx="3" fill="#e0e0e0" />
       <rect x="63" y="44" width="8" height="10" rx="3" fill="#e0e0e0" />
@@ -158,16 +160,38 @@ const MODULES = [
           en: "Lines starting with -- are comments. Roblox ignores them — they're just to explain your code!",
           es: "Las líneas que empiezan con -- son comentarios. ¡Roblox los ignora — solo sirven para explicar tu código!"
         },
-        code: `-- Mon premier script Roblox !
+        code: {
+          fr: `-- Mon premier script Roblox !
 -- Les commentaires expliquent le code
 
-print("Bonjour le monde !")
-print("Je m'appelle Mathis")
-print("Je code dans Roblox !")
+print("Hello world!")
+print("My name is Mathis")
+print("I code in Roblox!")
 
 -- On peut aussi afficher des nombres
 print(42)
 print(100 + 200)`,
+          en: `-- My first Roblox script!
+-- Comments explain the code
+
+print("Hello world!")
+print("My name is Mathis")
+print("I code in Roblox!")
+
+-- We can display numbers too
+print(42)
+print(100 + 200)`,
+          es: `-- ¡Mi primer script de Roblox!
+-- Los comentarios explican el código
+
+print("Hello world!")
+print("My name is Mathis")
+print("I code in Roblox!")
+
+-- También podemos mostrar números
+print(42)
+print(100 + 200)`
+        },
         studio: {
           where: { fr: "ServerScriptService", en: "ServerScriptService", es: "ServerScriptService" },
           steps: {
@@ -228,21 +252,53 @@ print(100 + 200)`,
           en: "Always use 'local' before your variables! It keeps them tidy in your script and avoids mysterious bugs.",
           es: "¡Usa siempre 'local' antes de tus variables! Las mantiene ordenadas en tu script y evita bugs misteriosos."
         },
-        code: `local monPrenom = "Mathis"      -- texte
-local monAge = 11               -- nombre
-local jaimeCoder = true         -- vrai/faux
+        code: {
+          fr: `local myName = "Mathis"      -- texte
+local myAge = 11             -- nombre
+local iLikeCoding = true     -- vrai/faux
 
-print("Salut, je suis " .. monPrenom)
-print("J'ai " .. monAge .. " ans")
+print("Salut, je suis " .. myName)
+print("J'ai " .. myAge .. " ans")
 
 -- On peut changer la valeur !
-monAge = 12
-print("Maintenant j'ai " .. monAge .. " ans")
+myAge = 12
+print("Maintenant j'ai " .. myAge .. " ans")
 
 -- Calculs avec les variables
 local points = 100
 local bonus = 50
 print("Score total : " .. points + bonus)`,
+          en: `local myName = "Mathis"      -- text
+local myAge = 11             -- number
+local iLikeCoding = true     -- true/false
+
+print("Hi, I am " .. myName)
+print("I am " .. myAge .. " years old")
+
+-- We can change the value!
+myAge = 12
+print("Now I am " .. myAge .. " years old")
+
+-- Math with variables
+local points = 100
+local bonus = 50
+print("Total score: " .. points + bonus)`,
+          es: `local myName = "Mathis"      -- texto
+local myAge = 11             -- número
+local iLikeCoding = true     -- verdadero/falso
+
+print("Hola, soy " .. myName)
+print("Tengo " .. myAge .. " años")
+
+-- ¡Podemos cambiar el valor!
+myAge = 12
+print("Ahora tengo " .. myAge .. " años")
+
+-- Cálculos con variables
+local points = 100
+local bonus = 50
+print("Puntuación total: " .. points + bonus)`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -276,24 +332,62 @@ print("Score total : " .. points + bonus)`,
           en: "Choose clear names for your functions. 'makeJump()' is much better than 'f1()' — in 6 months you'll still know what it does!",
           es: "Elige nombres claros para tus funciones. '¡hacerSaltar()' es mucho mejor que 'f1()' — ¡en 6 meses seguirás sabiendo qué hace!"
         },
-        code: `-- Définir une fonction
-local function direBonjour()
+        code: {
+          fr: `-- Définir une fonction
+local function sayHello()
     print("Salut tout le monde !")
     print("Bienvenue dans mon jeu !")
 end
 
 -- Appeler la fonction
-direBonjour()
-direBonjour()  -- encore !
+sayHello()
+sayHello()  -- encore !
 
 -- Fonction avec un calcul
-local function afficherScore()
+local function showScore()
     local score = 9001
     print("Ton score : " .. score)
     print("C'est OVER 9000 !!!")
 end
 
-afficherScore()`,
+showScore()`,
+          en: `-- Define a function
+local function sayHello()
+    print("Hello everyone!")
+    print("Welcome to my game!")
+end
+
+-- Call the function
+sayHello()
+sayHello()  -- again!
+
+-- Function with a calculation
+local function showScore()
+    local score = 9001
+    print("Your score: " .. score)
+    print("That's OVER 9000!!!")
+end
+
+showScore()`,
+          es: `-- Definir una función
+local function sayHello()
+    print("¡Hola a todos!")
+    print("¡Bienvenido a mi juego!")
+end
+
+-- Llamar a la función
+sayHello()
+sayHello()  -- ¡otra vez!
+
+-- Función con un cálculo
+local function showScore()
+    local score = 9001
+    print("Tu puntuación: " .. score)
+    print("¡Es MÁS de 9000!!!")
+end
+
+showScore()`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -339,21 +433,53 @@ afficherScore()`,
           en: "A function can receive multiple parameters separated by commas, and return multiple values too!",
           es: "¡Una función puede recibir varios parámetros separados por comas, y también devolver varios valores!"
         },
-        code: `local function accueillir(prenom, score)
-    print("Bienvenue " .. prenom .. " !")
+        code: {
+          fr: `local function greet(name, score)
+    print("Bienvenue " .. name .. " !")
     print("Ton score : " .. score .. " points")
 end
 
-accueillir("Mathis", 1500)
-accueillir("Lucas", 800)
+greet("Mathis", 1500)
+greet("Lucas", 800)
 
 -- Fonction qui retourne une valeur
-local function calculerBonus(score, multi)
+local function calculateBonus(score, multi)
     return score * multi
 end
 
-local monBonus = calculerBonus(100, 3)
-print("Bonus : " .. monBonus)  -- 300`,
+local myBonus = calculateBonus(100, 3)
+print("Bonus : " .. myBonus)  -- 300`,
+          en: `local function greet(name, score)
+    print("Welcome " .. name .. "!")
+    print("Your score: " .. score .. " points")
+end
+
+greet("Mathis", 1500)
+greet("Lucas", 800)
+
+-- Function that returns a value
+local function calculateBonus(score, multi)
+    return score * multi
+end
+
+local myBonus = calculateBonus(100, 3)
+print("Bonus: " .. myBonus)  -- 300`,
+          es: `local function greet(name, score)
+    print("¡Bienvenido " .. name .. "!")
+    print("Tu puntuación: " .. score .. " puntos")
+end
+
+greet("Mathis", 1500)
+greet("Lucas", 800)
+
+-- Función que devuelve un valor
+local function calculateBonus(score, multi)
+    return score * multi
+end
+
+local myBonus = calculateBonus(100, 3)
+print("Bonus: " .. myBonus)  -- 300`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -387,27 +513,71 @@ print("Bonus : " .. monBonus)  -- 300`,
           en: "== tests if two things are equal. = assigns a value. Confusing the two is the #1 beginner mistake!",
           es: "== comprueba si dos cosas son iguales. = asigna un valor. ¡Confundirlos es el error #1 de los principiantes!"
         },
-        code: `local vie = 65
-local bouclier = true
+        code: {
+          fr: `local health = 65
+local shield = true
 
-if vie <= 0 then
+if health <= 0 then
     print("GAME OVER !")
-elseif vie <= 25 then
+elseif health <= 25 then
     print("DANGER ! Fuis !")
-elseif vie <= 50 then
+elseif health <= 50 then
     print("Tu es blessé...")
 else
     print("Tu es en pleine forme !")
 end
 
 -- Combiner les conditions
-if vie > 30 and bouclier == true then
+if health > 30 and shield == true then
     print("Tu peux attaquer !")
 end
 
-if vie <= 10 or not bouclier then
+if health <= 10 or not shield then
     print("Utilise une potion !")
 end`,
+          en: `local health = 65
+local shield = true
+
+if health <= 0 then
+    print("GAME OVER!")
+elseif health <= 25 then
+    print("DANGER! Run!")
+elseif health <= 50 then
+    print("You are hurt...")
+else
+    print("You are in great shape!")
+end
+
+-- Combine conditions
+if health > 30 and shield == true then
+    print("You can attack!")
+end
+
+if health <= 10 or not shield then
+    print("Use a potion!")
+end`,
+          es: `local health = 65
+local shield = true
+
+if health <= 0 then
+    print("¡GAME OVER!")
+elseif health <= 25 then
+    print("¡PELIGRO! ¡Huye!")
+elseif health <= 50 then
+    print("Estás herido...")
+else
+    print("¡Estás en perfecta forma!")
+end
+
+-- Combinar condiciones
+if health > 30 and shield == true then
+    print("¡Puedes atacar!")
+end
+
+if health <= 10 or not shield then
+    print("¡Usa una poción!")
+end`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -441,30 +611,80 @@ end`,
           en: "Add print() everywhere to see what's happening. It's the simplest and most effective technique — even pros use it!",
           es: "¡Añade print() en todas partes para ver qué pasa. ¡Es la técnica más simple y efectiva — ¡incluso los pros la usan!"
         },
-        code: `-- Debouncing : éviter trop de déclenchements
-local peutSauter = true
+        code: {
+          fr: `-- Debouncing : éviter trop de déclenchements
+local canJump = true
 
-local function sauter()
-    if not peutSauter then return end
-    peutSauter = false
+local function jump()
+    if not canJump then return end
+    canJump = false
     print("Saut !")
     task.wait(0.5)
-    peutSauter = true
+    canJump = true
 end
 
-sauter()
-sauter()  -- ignoré
+jump()
+jump()  -- ignoré
 
 -- pcall : attraper les erreurs sans planter
-local succes, erreur = pcall(function()
+local success, err = pcall(function()
     local x = nil
-    print(x.valeur)  -- bug !
+    print(x.value)  -- bug !
 end)
 
-if not succes then
-    print("Erreur : " .. erreur)
+if not success then
+    print("Erreur : " .. err)
     print("Le jeu continue !")
 end`,
+          en: `-- Debouncing: avoid too many triggers
+local canJump = true
+
+local function jump()
+    if not canJump then return end
+    canJump = false
+    print("Jump!")
+    task.wait(0.5)
+    canJump = true
+end
+
+jump()
+jump()  -- ignored
+
+-- pcall: catch errors without crashing
+local success, err = pcall(function()
+    local x = nil
+    print(x.value)  -- bug!
+end)
+
+if not success then
+    print("Error: " .. err)
+    print("Game continues!")
+end`,
+          es: `-- Debouncing: evitar muchos disparos
+local canJump = true
+
+local function jump()
+    if not canJump then return end
+    canJump = false
+    print("¡Salto!")
+    task.wait(0.5)
+    canJump = true
+end
+
+jump()
+jump()  -- ignorado
+
+-- pcall: capturar errores sin bloquear
+local success, err = pcall(function()
+    local x = nil
+    print(x.value)  -- ¡bug!
+end)
+
+if not success then
+    print("Error: " .. err)
+    print("¡El juego continúa!")
+end`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -498,24 +718,62 @@ end`,
           en: "Always make sure your condition becomes false eventually — otherwise you create an infinite loop that freezes everything!",
           es: "¡Asegúrate siempre de que tu condición se vuelva falsa algún día — de lo contrario creas un bucle infinito que bloquea todo!"
         },
-        code: `-- Compte à rebours
-local temps = 5
-while temps > 0 do
-    print("Départ dans : " .. temps)
+        code: {
+          fr: `-- Compte à rebours
+local time = 5
+while time > 0 do
+    print("Départ dans : " .. time)
     task.wait(1)
-    temps = temps - 1
+    time = time - 1
 end
 print("C'EST PARTI !")
 
 -- Régénération de vie
-local vie = 30
-local vieMax = 100
-while vie < vieMax do
-    vie = vie + 10
-    print("Vie : " .. vie .. "/" .. vieMax)
+local health = 30
+local maxHealth = 100
+while health < maxHealth do
+    health = health + 10
+    print("Vie : " .. health .. "/" .. maxHealth)
     task.wait(2)
 end
 print("Vie au maximum !")`,
+          en: `-- Countdown
+local time = 5
+while time > 0 do
+    print("Starting in: " .. time)
+    task.wait(1)
+    time = time - 1
+end
+print("GO!")
+
+-- Health regeneration
+local health = 30
+local maxHealth = 100
+while health < maxHealth do
+    health = health + 10
+    print("Health: " .. health .. "/" .. maxHealth)
+    task.wait(2)
+end
+print("Health at maximum!")`,
+          es: `-- Cuenta regresiva
+local time = 5
+while time > 0 do
+    print("Empezando en: " .. time)
+    task.wait(1)
+    time = time - 1
+end
+print("¡VAMOS!")
+
+-- Regeneración de vida
+local health = 30
+local maxHealth = 100
+while health < maxHealth do
+    health = health + 10
+    print("Vida: " .. health .. "/" .. maxHealth)
+    task.wait(2)
+end
+print("¡Vida al máximo!")`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -549,7 +807,8 @@ print("Vie au maximum !")`,
           en: "Use 'for' when you know exactly how many times to repeat. Use 'while' when you don't know in advance.",
           es: "Usa 'for' cuando sepas exactamente cuántas veces repetir. Usa 'while' cuando no lo sepas de antemano."
         },
-        code: `-- Boucle for de base
+        code: {
+          fr: `-- Boucle for de base
 for i = 1, 5 do
     print("Tour " .. i)
 end
@@ -571,6 +830,51 @@ for i = 1, 100 do
         break
     end
 end`,
+          en: `-- Basic for loop
+for i = 1, 5 do
+    print("Round " .. i)
+end
+
+-- Count backwards
+for i = 10, 1, -1 do
+    print("Count: " .. i)
+end
+
+-- Create 5 enemies
+for i = 1, 5 do
+    print("Enemy " .. i .. " created!")
+end
+
+-- Break: exit the loop
+for i = 1, 100 do
+    if i == 7 then
+        print("Magic number found!")
+        break
+    end
+end`,
+          es: `-- Bucle for básico
+for i = 1, 5 do
+    print("Vuelta " .. i)
+end
+
+-- Contar hacia atrás
+for i = 10, 1, -1 do
+    print("Cuenta: " .. i)
+end
+
+-- Crear 5 enemigos
+for i = 1, 5 do
+    print("¡Enemigo " .. i .. " creado!")
+end
+
+-- Break: salir del bucle
+for i = 1, 100 do
+    if i == 7 then
+        print("¡Número mágico encontrado!")
+        break
+    end
+end`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -616,23 +920,59 @@ end`,
           en: "In Lua, arrays start at index 1, not 0 like other languages. # gives the size of the array.",
           es: "En Lua, los arrays empiezan en el índice 1, no en 0 como otros lenguajes. # da el tamaño del array."
         },
-        code: `local inventaire = {"Épée", "Bouclier", "Potion"}
+        code: {
+          fr: `local inventory = {"Sword", "Shield", "Potion"}
 
-print(inventaire[1])   -- Épée
-print(inventaire[3])   -- Potion
-print("Taille : " .. #inventaire)  -- 3
+print(inventory[1])   -- Sword
+print(inventory[3])   -- Potion
+print("Taille : " .. #inventory)  -- 3
 
 -- Ajouter
-table.insert(inventaire, "Arc")
-print("Après ajout : " .. #inventaire)  -- 4
+table.insert(inventory, "Bow")
+print("Après ajout : " .. #inventory)  -- 4
 
 -- Supprimer
-table.remove(inventaire, 1)  -- enlève Épée
+table.remove(inventory, 1)  -- enlève Sword
 
 -- Parcourir
-for index, objet in ipairs(inventaire) do
-    print(index .. ". " .. objet)
+for index, item in ipairs(inventory) do
+    print(index .. ". " .. item)
 end`,
+          en: `local inventory = {"Sword", "Shield", "Potion"}
+
+print(inventory[1])   -- Sword
+print(inventory[3])   -- Potion
+print("Size: " .. #inventory)  -- 3
+
+-- Add
+table.insert(inventory, "Bow")
+print("After adding: " .. #inventory)  -- 4
+
+-- Remove
+table.remove(inventory, 1)  -- removes Sword
+
+-- Iterate
+for index, item in ipairs(inventory) do
+    print(index .. ". " .. item)
+end`,
+          es: `local inventory = {"Sword", "Shield", "Potion"}
+
+print(inventory[1])   -- Sword
+print(inventory[3])   -- Potion
+print("Tamaño: " .. #inventory)  -- 3
+
+-- Añadir
+table.insert(inventory, "Bow")
+print("Después de añadir: " .. #inventory)  -- 4
+
+-- Eliminar
+table.remove(inventory, 1)  -- quita Sword
+
+-- Recorrer
+for index, item in ipairs(inventory) do
+    print(index .. ". " .. item)
+end`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -666,25 +1006,65 @@ end`,
           en: "You can nest tables inside tables — a player with an inventory (array) inside their profile (dictionary). Games use this all the time!",
           es: "¡Puedes anidar tablas dentro de tablas — un jugador con un inventario (array) dentro de su ficha (diccionario). ¡Los juegos lo usan todo el tiempo!"
         },
-        code: `local joueur = {
-    nom = "Mathis",
-    vie = 100,
-    force = 45,
-    niveau = 7,
-    estVivant = true
+        code: {
+          fr: `local player = {
+    name = "Mathis",
+    health = 100,
+    strength = 45,
+    level = 7,
+    isAlive = true
 }
 
-print("Joueur : " .. joueur.nom)
-print("Niveau " .. joueur.niveau)
+print("Joueur : " .. player.name)
+print("Niveau " .. player.level)
 
 -- Modifier
-joueur.vie = joueur.vie - 25
-print("Vie : " .. joueur.vie)
+player.health = player.health - 25
+print("Vie : " .. player.health)
 
 -- Parcourir avec pairs()
-for cle, valeur in pairs(joueur) do
-    print(cle .. " = " .. tostring(valeur))
+for key, value in pairs(player) do
+    print(key .. " = " .. tostring(value))
 end`,
+          en: `local player = {
+    name = "Mathis",
+    health = 100,
+    strength = 45,
+    level = 7,
+    isAlive = true
+}
+
+print("Player: " .. player.name)
+print("Level " .. player.level)
+
+-- Modify
+player.health = player.health - 25
+print("Health: " .. player.health)
+
+-- Iterate with pairs()
+for key, value in pairs(player) do
+    print(key .. " = " .. tostring(value))
+end`,
+          es: `local player = {
+    name = "Mathis",
+    health = 100,
+    strength = 45,
+    level = 7,
+    isAlive = true
+}
+
+print("Jugador: " .. player.name)
+print("Nivel " .. player.level)
+
+-- Modificar
+player.health = player.health - 25
+print("Vida: " .. player.health)
+
+-- Recorrer con pairs()
+for key, value in pairs(player) do
+    print(key .. " = " .. tostring(value))
+end`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -718,11 +1098,12 @@ end`,
           en: "table.sort modifies the original array. If you want to keep the original intact, copy it first into a new array.",
           es: "table.sort modifica el array original. Si quieres mantener el original intacto, cópialo primero en un nuevo array."
         },
-        code: `local scores = {
-    {nom = "Mathis", score = 4200},
-    {nom = "Lucas", score = 1800},
-    {nom = "Emma", score = 5500},
-    {nom = "Noah", score = 3100},
+        code: {
+          fr: `local scores = {
+    {name = "Mathis", score = 4200},
+    {name = "Lucas", score = 1800},
+    {name = "Emma", score = 5500},
+    {name = "Noah", score = 3100},
 }
 
 -- Trier du meilleur au moins bon
@@ -731,16 +1112,63 @@ table.sort(scores, function(a, b)
 end)
 
 print("=== CLASSEMENT ===")
-for pos, j in ipairs(scores) do
-    print(pos .. ". " .. j.nom .. " - " .. j.score)
+for pos, p in ipairs(scores) do
+    print(pos .. ". " .. p.name .. " - " .. p.score)
 end
 
 -- Chercher un joueur
-for i, j in ipairs(scores) do
-    if j.nom == "Emma" then
+for i, p in ipairs(scores) do
+    if p.name == "Emma" then
         print("Emma est en position " .. i)
     end
 end`,
+          en: `local scores = {
+    {name = "Mathis", score = 4200},
+    {name = "Lucas", score = 1800},
+    {name = "Emma", score = 5500},
+    {name = "Noah", score = 3100},
+}
+
+-- Sort from best to worst
+table.sort(scores, function(a, b)
+    return a.score > b.score
+end)
+
+print("=== LEADERBOARD ===")
+for pos, p in ipairs(scores) do
+    print(pos .. ". " .. p.name .. " - " .. p.score)
+end
+
+-- Find a player
+for i, p in ipairs(scores) do
+    if p.name == "Emma" then
+        print("Emma is in position " .. i)
+    end
+end`,
+          es: `local scores = {
+    {name = "Mathis", score = 4200},
+    {name = "Lucas", score = 1800},
+    {name = "Emma", score = 5500},
+    {name = "Noah", score = 3100},
+}
+
+-- Ordenar de mejor a peor
+table.sort(scores, function(a, b)
+    return a.score > b.score
+end)
+
+print("=== CLASIFICACIÓN ===")
+for pos, p in ipairs(scores) do
+    print(pos .. ". " .. p.name .. " - " .. p.score)
+end
+
+-- Buscar un jugador
+for i, p in ipairs(scores) do
+    if p.name == "Emma" then
+        print("Emma está en posición " .. i)
+    end
+end`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -786,7 +1214,8 @@ end`,
           en: "Golden rule: health, damage, scores → Server. Interface, camera, visual effects → Client.",
           es: "Regla de oro: vida, daño, puntuaciones → Servidor. Interfaz, cámara, efectos visuales → Cliente."
         },
-        code: `--[[ SCRIPT (côté serveur - ServerScriptService) ]]
+        code: {
+          fr: `--[[ SCRIPT (côté serveur - ServerScriptService) ]]
 local Players = game:GetService("Players")
 
 Players.PlayerAdded:Connect(function(player)
@@ -797,7 +1226,7 @@ Players.PlayerAdded:Connect(function(player)
     leaderstats.Parent = player
     
     local coins = Instance.new("IntValue")
-    coins.Name = "Pièces"
+    coins.Name = "Coins"
     coins.Value = 0
     coins.Parent = leaderstats
 end)
@@ -805,6 +1234,45 @@ end)
 --[[ LOCAL SCRIPT (côté client - StarterPlayerScripts) ]]
 local player = game.Players.LocalPlayer
 print("Bonjour " .. player.Name)`,
+          en: `--[[ SCRIPT (server side - ServerScriptService) ]]
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+    print("Player connected: " .. player.Name)
+    
+    local leaderstats = Instance.new("Folder")
+    leaderstats.Name = "leaderstats"
+    leaderstats.Parent = player
+    
+    local coins = Instance.new("IntValue")
+    coins.Name = "Coins"
+    coins.Value = 0
+    coins.Parent = leaderstats
+end)
+
+--[[ LOCAL SCRIPT (client side - StarterPlayerScripts) ]]
+local player = game.Players.LocalPlayer
+print("Hello " .. player.Name)`,
+          es: `--[[ SCRIPT (lado servidor - ServerScriptService) ]]
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+    print("Jugador conectado: " .. player.Name)
+    
+    local leaderstats = Instance.new("Folder")
+    leaderstats.Name = "leaderstats"
+    leaderstats.Parent = player
+    
+    local coins = Instance.new("IntValue")
+    coins.Name = "Coins"
+    coins.Value = 0
+    coins.Parent = leaderstats
+end)
+
+--[[ LOCAL SCRIPT (lado cliente - StarterPlayerScripts) ]]
+local player = game.Players.LocalPlayer
+print("Hola " .. player.Name)`
+        },
         studio: {
           where: { fr: "ServerScriptService (Script) + StarterPlayerScripts (LocalScript)", en: "ServerScriptService (Script) + StarterPlayerScripts (LocalScript)", es: "ServerScriptService (Script) + StarterPlayerScripts (LocalScript)" },
           steps: {
@@ -856,30 +1324,80 @@ print("Bonjour " .. player.Name)`,
           en: "NEVER trust data sent by the client — a malicious player can modify it. Always validate server-side!",
           es: "¡NUNCA confíes en los datos enviados por el cliente — un jugador malicioso puede modificarlos. ¡Siempre valida en el servidor!"
         },
-        code: `--[[ Dans ReplicatedStorage : crée un RemoteEvent "AcheterObjet" ]]
+        code: {
+          fr: `--[[ Dans ReplicatedStorage : crée un RemoteEvent "BuyItem" ]]
 
 --[[ LOCAL SCRIPT (client) ]]
 local RS = game:GetService("ReplicatedStorage")
-local remote = RS:WaitForChild("AcheterObjet")
+local remote = RS:WaitForChild("BuyItem")
 
 -- Le joueur clique "Acheter"
-local function acheter()
-    remote:FireServer("Épée de feu", 500)
+local function buy()
+    remote:FireServer("Fire Sword", 500)
     print("Demande envoyée au serveur...")
 end
-acheter()
+buy()
 
 --[[ SCRIPT (serveur) ]]
-local remote = RS:WaitForChild("AcheterObjet")
-remote.OnServerEvent:Connect(function(player, objet, prix)
-    local coins = player.leaderstats.Pièces
-    if coins.Value >= prix then
-        coins.Value = coins.Value - prix
-        print(player.Name .. " a acheté : " .. objet)
+local remote = RS:WaitForChild("BuyItem")
+remote.OnServerEvent:Connect(function(player, item, price)
+    local coins = player.leaderstats.Coins
+    if coins.Value >= price then
+        coins.Value = coins.Value - price
+        print(player.Name .. " a acheté : " .. item)
     else
         print("Pas assez de pièces !")
     end
 end)`,
+          en: `--[[ In ReplicatedStorage: create a RemoteEvent "BuyItem" ]]
+
+--[[ LOCAL SCRIPT (client) ]]
+local RS = game:GetService("ReplicatedStorage")
+local remote = RS:WaitForChild("BuyItem")
+
+-- Player clicks "Buy"
+local function buy()
+    remote:FireServer("Fire Sword", 500)
+    print("Request sent to server...")
+end
+buy()
+
+--[[ SCRIPT (server) ]]
+local remote = RS:WaitForChild("BuyItem")
+remote.OnServerEvent:Connect(function(player, item, price)
+    local coins = player.leaderstats.Coins
+    if coins.Value >= price then
+        coins.Value = coins.Value - price
+        print(player.Name .. " bought: " .. item)
+    else
+        print("Not enough coins!")
+    end
+end)`,
+          es: `--[[ En ReplicatedStorage: crea un RemoteEvent "BuyItem" ]]
+
+--[[ LOCAL SCRIPT (cliente) ]]
+local RS = game:GetService("ReplicatedStorage")
+local remote = RS:WaitForChild("BuyItem")
+
+-- El jugador hace clic en "Comprar"
+local function buy()
+    remote:FireServer("Fire Sword", 500)
+    print("Petición enviada al servidor...")
+end
+buy()
+
+--[[ SCRIPT (servidor) ]]
+local remote = RS:WaitForChild("BuyItem")
+remote.OnServerEvent:Connect(function(player, item, price)
+    local coins = player.leaderstats.Coins
+    if coins.Value >= price then
+        coins.Value = coins.Value - price
+        print(player.Name .. " compró: " .. item)
+    else
+        print("¡No hay suficientes monedas!")
+    end
+end)`
+        },
         studio: {
           where: { fr: "ReplicatedStorage + ServerScriptService + StarterPlayerScripts", en: "ReplicatedStorage + ServerScriptService + StarterPlayerScripts", es: "ReplicatedStorage + ServerScriptService + StarterPlayerScripts" },
           steps: {
@@ -928,29 +1446,77 @@ end)`,
           en: "Place ModuleScripts in ReplicatedStorage if used both client AND server side. In ServerScriptService if server side only.",
           es: "Coloca los ModuleScripts en ReplicatedStorage si se usan en el lado del cliente Y del servidor. En ServerScriptService si solo en el lado del servidor."
         },
-        code: `--[[ MODULE MathJeu (dans ReplicatedStorage) ]]
-local MathJeu = {}
+        code: {
+          fr: `--[[ MODULE GameMath (dans ReplicatedStorage) ]]
+local GameMath = {}
 
-function MathJeu.calculerDegats(force, defense)
-    local base = math.max(0, force - defense)
+function GameMath.calculateDamage(strength, defense)
+    local base = math.max(0, strength - defense)
     return base + math.random(-5, 5)
 end
 
-function MathJeu.xpPourNiveau(niveau)
-    return niveau * niveau * 100
+function GameMath.xpForLevel(level)
+    return level * level * 100
 end
 
-return MathJeu  -- OBLIGATOIRE !
+return GameMath  -- OBLIGATOIRE !
 
 --[[ Dans ton Script : utiliser le module ]]
 local RS = game:GetService("ReplicatedStorage")
-local MathJeu = require(RS:WaitForChild("MathJeu"))
+local GameMath = require(RS:WaitForChild("GameMath"))
 
-local degats = MathJeu.calculerDegats(80, 30)
-print("Dégâts : " .. degats)
+local damage = GameMath.calculateDamage(80, 30)
+print("Dégâts : " .. damage)
 
-local xp = MathJeu.xpPourNiveau(5)
+local xp = GameMath.xpForLevel(5)
 print("XP niveau 5 : " .. xp)`,
+          en: `--[[ GameMath MODULE (in ReplicatedStorage) ]]
+local GameMath = {}
+
+function GameMath.calculateDamage(strength, defense)
+    local base = math.max(0, strength - defense)
+    return base + math.random(-5, 5)
+end
+
+function GameMath.xpForLevel(level)
+    return level * level * 100
+end
+
+return GameMath  -- REQUIRED!
+
+--[[ In your Script: use the module ]]
+local RS = game:GetService("ReplicatedStorage")
+local GameMath = require(RS:WaitForChild("GameMath"))
+
+local damage = GameMath.calculateDamage(80, 30)
+print("Damage: " .. damage)
+
+local xp = GameMath.xpForLevel(5)
+print("XP level 5: " .. xp)`,
+          es: `--[[ MÓDULO GameMath (en ReplicatedStorage) ]]
+local GameMath = {}
+
+function GameMath.calculateDamage(strength, defense)
+    local base = math.max(0, strength - defense)
+    return base + math.random(-5, 5)
+end
+
+function GameMath.xpForLevel(level)
+    return level * level * 100
+end
+
+return GameMath  -- ¡OBLIGATORIO!
+
+--[[ En tu Script: usar el módulo ]]
+local RS = game:GetService("ReplicatedStorage")
+local GameMath = require(RS:WaitForChild("GameMath"))
+
+local damage = GameMath.calculateDamage(80, 30)
+print("Daño: " .. damage)
+
+local xp = GameMath.xpForLevel(5)
+print("XP nivel 5: " .. xp)`
+        },
         studio: {
           where: { fr: "ReplicatedStorage (ModuleScript) + ServerScriptService (Script)", en: "ReplicatedStorage (ModuleScript) + ServerScriptService (Script)", es: "ReplicatedStorage (ModuleScript) + ServerScriptService (Script)" },
           steps: {
@@ -1011,22 +1577,56 @@ print("XP niveau 5 : " .. xp)`,
           en: "(pointA - pointB).Magnitude gives the distance between two points — super useful for enemy detection systems!",
           es: "¡(puntoA - puntoB).Magnitude da la distancia entre dos puntos — ¡super útil para sistemas de detección de enemigos!"
         },
-        code: `-- Créer une brique par code
-local brique = Instance.new("Part")
-brique.Size = Vector3.new(4, 2, 4)
-brique.Position = Vector3.new(0, 10, 0)
-brique.BrickColor = BrickColor.new("Bright red")
-brique.Anchored = true
-brique.Parent = workspace
+        code: {
+          fr: `-- Créer une brique par code
+local brick = Instance.new("Part")
+brick.Size = Vector3.new(4, 2, 4)
+brick.Position = Vector3.new(0, 10, 0)
+brick.BrickColor = BrickColor.new("Bright red")
+brick.Anchored = true
+brick.Parent = workspace
 
 -- Déplacer la brique
-brique.Position = Vector3.new(10, 5, 0)
+brick.Position = Vector3.new(10, 5, 0)
 
 -- Calculer une distance
 local A = Vector3.new(0, 0, 0)
 local B = Vector3.new(10, 0, 10)
 local dist = (A - B).Magnitude
 print("Distance : " .. math.floor(dist))`,
+          en: `-- Create a brick by code
+local brick = Instance.new("Part")
+brick.Size = Vector3.new(4, 2, 4)
+brick.Position = Vector3.new(0, 10, 0)
+brick.BrickColor = BrickColor.new("Bright red")
+brick.Anchored = true
+brick.Parent = workspace
+
+-- Move the brick
+brick.Position = Vector3.new(10, 5, 0)
+
+-- Calculate a distance
+local A = Vector3.new(0, 0, 0)
+local B = Vector3.new(10, 0, 10)
+local dist = (A - B).Magnitude
+print("Distance: " .. math.floor(dist))`,
+          es: `-- Crear un ladrillo por código
+local brick = Instance.new("Part")
+brick.Size = Vector3.new(4, 2, 4)
+brick.Position = Vector3.new(0, 10, 0)
+brick.BrickColor = BrickColor.new("Bright red")
+brick.Anchored = true
+brick.Parent = workspace
+
+-- Mover el ladrillo
+brick.Position = Vector3.new(10, 5, 0)
+
+-- Calcular una distancia
+local A = Vector3.new(0, 0, 0)
+local B = Vector3.new(10, 0, 10)
+local dist = (A - B).Magnitude
+print("Distancia: " .. math.floor(dist))`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -1075,24 +1675,62 @@ print("Distance : " .. math.floor(dist))`,
           en: "CFrame.lookAt(origin, target) creates a CFrame that looks toward a point — perfect for enemies following the player!",
           es: "¡CFrame.lookAt(origen, objetivo) crea un CFrame que mira hacia un punto — perfecto para enemigos que siguen al jugador!"
         },
-        code: `local brique = workspace.MaBrique
+        code: {
+          fr: `local brick = workspace.MyBrick
 
 -- Position + rotation (45 degrés)
-brique.CFrame = CFrame.new(10, 5, 0)
+brick.CFrame = CFrame.new(10, 5, 0)
     * CFrame.Angles(0, math.rad(45), 0)
 
 -- Faire tourner progressivement
 for angle = 0, 360, 5 do
-    brique.CFrame = CFrame.new(0, 5, 0)
+    brick.CFrame = CFrame.new(0, 5, 0)
         * CFrame.Angles(0, math.rad(angle), 0)
     task.wait(0.05)
 end
 
 -- Regarder vers un point
-local cible = Vector3.new(20, 5, 0)
-brique.CFrame = CFrame.lookAt(
-    brique.Position, cible
+local target = Vector3.new(20, 5, 0)
+brick.CFrame = CFrame.lookAt(
+    brick.Position, target
 )`,
+          en: `local brick = workspace.MyBrick
+
+-- Position + rotation (45 degrees)
+brick.CFrame = CFrame.new(10, 5, 0)
+    * CFrame.Angles(0, math.rad(45), 0)
+
+-- Rotate progressively
+for angle = 0, 360, 5 do
+    brick.CFrame = CFrame.new(0, 5, 0)
+        * CFrame.Angles(0, math.rad(angle), 0)
+    task.wait(0.05)
+end
+
+-- Look at a point
+local target = Vector3.new(20, 5, 0)
+brick.CFrame = CFrame.lookAt(
+    brick.Position, target
+)`,
+          es: `local brick = workspace.MyBrick
+
+-- Posición + rotación (45 grados)
+brick.CFrame = CFrame.new(10, 5, 0)
+    * CFrame.Angles(0, math.rad(45), 0)
+
+-- Rotar progresivamente
+for angle = 0, 360, 5 do
+    brick.CFrame = CFrame.new(0, 5, 0)
+        * CFrame.Angles(0, math.rad(angle), 0)
+    task.wait(0.05)
+end
+
+-- Mirar hacia un punto
+local target = Vector3.new(20, 5, 0)
+brick.CFrame = CFrame.lookAt(
+    brick.Position, target
+)`
+        },
         studio: {
           where: { fr: "Workspace (Part nommée 'MaBrique') + ServerScriptService (Script)", en: "Workspace (Part named 'MaBrique') + ServerScriptService (Script)", es: "Workspace (Part llamada 'MaBrique') + ServerScriptService (Script)" },
           steps: {
@@ -1141,8 +1779,9 @@ brique.CFrame = CFrame.lookAt(
           en: "tween.Completed:Wait() waits for the animation to finish before continuing — essential for chaining multiple animations!",
           es: "¡tween.Completed:Wait() espera a que la animación termine antes de continuar — esencial para encadenar varias animaciones!"
         },
-        code: `local TweenService = game:GetService("TweenService")
-local brique = workspace.MaBrique
+        code: {
+          fr: `local TweenService = game:GetService("TweenService")
+local brick = workspace.MyBrick
 
 -- Tween : déplacer en 2 secondes avec rebond
 local info = TweenInfo.new(2,
@@ -1150,16 +1789,55 @@ local info = TweenInfo.new(2,
     Enum.EasingDirection.Out
 )
 
-local t1 = TweenService:Create(brique, info,
+local t1 = TweenService:Create(brick, info,
     {Position = Vector3.new(20, 10, 0)})
 t1:Play()
 
 -- Attendre la fin et animer la couleur
 t1.Completed:Wait()
-local t2 = TweenService:Create(brique,
+local t2 = TweenService:Create(brick,
     TweenInfo.new(0.5, Enum.EasingStyle.Elastic),
     {Color = Color3.fromRGB(255, 200, 0)})
 t2:Play()`,
+          en: `local TweenService = game:GetService("TweenService")
+local brick = workspace.MyBrick
+
+-- Tween: move in 2 seconds with bounce
+local info = TweenInfo.new(2,
+    Enum.EasingStyle.Bounce,
+    Enum.EasingDirection.Out
+)
+
+local t1 = TweenService:Create(brick, info,
+    {Position = Vector3.new(20, 10, 0)})
+t1:Play()
+
+-- Wait for completion and animate color
+t1.Completed:Wait()
+local t2 = TweenService:Create(brick,
+    TweenInfo.new(0.5, Enum.EasingStyle.Elastic),
+    {Color = Color3.fromRGB(255, 200, 0)})
+t2:Play()`,
+          es: `local TweenService = game:GetService("TweenService")
+local brick = workspace.MyBrick
+
+-- Tween: mover en 2 segundos con rebote
+local info = TweenInfo.new(2,
+    Enum.EasingStyle.Bounce,
+    Enum.EasingDirection.Out
+)
+
+local t1 = TweenService:Create(brick, info,
+    {Position = Vector3.new(20, 10, 0)})
+t1:Play()
+
+-- Esperar el final y animar el color
+t1.Completed:Wait()
+local t2 = TweenService:Create(brick,
+    TweenInfo.new(0.5, Enum.EasingStyle.Elastic),
+    {Color = Color3.fromRGB(255, 200, 0)})
+t2:Play()`
+        },
         studio: {
           where: { fr: "Workspace (Part 'MaBrique' Anchored=true) + ServerScriptService (Script)", en: "Workspace (Part 'MaBrique' Anchored=true) + ServerScriptService (Script)", es: "Workspace (Part 'MaBrique' Anchored=true) + ServerScriptService (Script)" },
           steps: {
@@ -1220,40 +1898,110 @@ t2:Play()`,
           en: "Use 'dt' (delta time) for movements independent of computer speed. Without dt, the game runs faster on a good PC!",
           es: "¡Usa 'dt' (delta time) para movimientos independientes de la velocidad del ordenador. ¡Sin dt, el juego va más rápido en un buen PC!"
         },
-        code: `local RunService = game:GetService("RunService")
+        code: {
+          fr: `local RunService = game:GetService("RunService")
 
-local jeu = {
-    enCours = false,
+local game_state = {
+    running = false,
     score = 0,
-    tempsRestant = 60
+    timeLeft = 60
 }
 
-local function demarrer()
-    jeu.enCours = true
-    jeu.score = 0
-    jeu.tempsRestant = 60
+local function start()
+    game_state.running = true
+    game_state.score = 0
+    game_state.timeLeft = 60
     print("=== JEU DÉMARRÉ ===")
 end
 
-local connexion
-connexion = RunService.Heartbeat:Connect(function(dt)
-    if not jeu.enCours then return end
-    jeu.tempsRestant = jeu.tempsRestant - dt
-    if jeu.tempsRestant <= 0 then
-        jeu.enCours = false
-        print("GAME OVER ! Score : " .. jeu.score)
-        connexion:Disconnect()
+local connection
+connection = RunService.Heartbeat:Connect(function(dt)
+    if not game_state.running then return end
+    game_state.timeLeft = game_state.timeLeft - dt
+    if game_state.timeLeft <= 0 then
+        game_state.running = false
+        print("GAME OVER ! Score : " .. game_state.score)
+        connection:Disconnect()
     end
 end)
 
 task.spawn(function()
-    demarrer()
-    while jeu.enCours do
+    start()
+    while game_state.running do
         task.wait(5)
-        jeu.score = jeu.score + 100
-        print("Score : " .. jeu.score)
+        game_state.score = game_state.score + 100
+        print("Score : " .. game_state.score)
     end
 end)`,
+          en: `local RunService = game:GetService("RunService")
+
+local game_state = {
+    running = false,
+    score = 0,
+    timeLeft = 60
+}
+
+local function start()
+    game_state.running = true
+    game_state.score = 0
+    game_state.timeLeft = 60
+    print("=== GAME STARTED ===")
+end
+
+local connection
+connection = RunService.Heartbeat:Connect(function(dt)
+    if not game_state.running then return end
+    game_state.timeLeft = game_state.timeLeft - dt
+    if game_state.timeLeft <= 0 then
+        game_state.running = false
+        print("GAME OVER! Score: " .. game_state.score)
+        connection:Disconnect()
+    end
+end)
+
+task.spawn(function()
+    start()
+    while game_state.running do
+        task.wait(5)
+        game_state.score = game_state.score + 100
+        print("Score: " .. game_state.score)
+    end
+end)`,
+          es: `local RunService = game:GetService("RunService")
+
+local game_state = {
+    running = false,
+    score = 0,
+    timeLeft = 60
+}
+
+local function start()
+    game_state.running = true
+    game_state.score = 0
+    game_state.timeLeft = 60
+    print("=== JUEGO INICIADO ===")
+end
+
+local connection
+connection = RunService.Heartbeat:Connect(function(dt)
+    if not game_state.running then return end
+    game_state.timeLeft = game_state.timeLeft - dt
+    if game_state.timeLeft <= 0 then
+        game_state.running = false
+        print("¡GAME OVER! Puntuación: " .. game_state.score)
+        connection:Disconnect()
+    end
+end)
+
+task.spawn(function()
+    start()
+    while game_state.running do
+        task.wait(5)
+        game_state.score = game_state.score + 100
+        print("Puntuación: " .. game_state.score)
+    end
+end)`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -1287,36 +2035,98 @@ end)`,
           en: "Always use pcall() with DataStores — the connection can fail, and that shouldn't crash your game!",
           es: "¡Usa siempre pcall() con los DataStores — ¡la conexión puede fallar, y no debe bloquear tu juego!"
         },
-        code: `-- Activer : Game Settings → Security → Enable Studio Access to API Services
+        code: {
+          fr: `-- Activer : Game Settings -> Security -> Enable Studio Access to API Services
 local DSS = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
 local saves = DSS:GetDataStore("SavesMathis_v1")
 
-local function sauvegarder(player)
-    local cle = "p_" .. player.UserId
+local function save(player)
+    local key = "p_" .. player.UserId
     local data = {
-        coins = player.leaderstats.Pièces.Value,
-        niveau = player.leaderstats.Niveau.Value,
+        coins = player.leaderstats.Coins.Value,
+        level = player.leaderstats.Level.Value,
     }
     local ok, err = pcall(function()
-        saves:SetAsync(cle, data)
+        saves:SetAsync(key, data)
     end)
     if ok then print("Sauvegardé !") else warn(err) end
 end
 
-local function charger(player)
-    local cle = "p_" .. player.UserId
+local function load(player)
+    local key = "p_" .. player.UserId
     local ok, data = pcall(function()
-        return saves:GetAsync(cle)
+        return saves:GetAsync(key)
     end)
     if ok and data then
-        player.leaderstats.Pièces.Value = data.coins or 0
+        player.leaderstats.Coins.Value = data.coins or 0
         print("Chargé ! Pièces : " .. data.coins)
     end
 end
 
-Players.PlayerAdded:Connect(charger)
-Players.PlayerRemoving:Connect(sauvegarder)`,
+Players.PlayerAdded:Connect(load)
+Players.PlayerRemoving:Connect(save)`,
+          en: `-- Enable: Game Settings -> Security -> Enable Studio Access to API Services
+local DSS = game:GetService("DataStoreService")
+local Players = game:GetService("Players")
+local saves = DSS:GetDataStore("SavesMathis_v1")
+
+local function save(player)
+    local key = "p_" .. player.UserId
+    local data = {
+        coins = player.leaderstats.Coins.Value,
+        level = player.leaderstats.Level.Value,
+    }
+    local ok, err = pcall(function()
+        saves:SetAsync(key, data)
+    end)
+    if ok then print("Saved!") else warn(err) end
+end
+
+local function load(player)
+    local key = "p_" .. player.UserId
+    local ok, data = pcall(function()
+        return saves:GetAsync(key)
+    end)
+    if ok and data then
+        player.leaderstats.Coins.Value = data.coins or 0
+        print("Loaded! Coins: " .. data.coins)
+    end
+end
+
+Players.PlayerAdded:Connect(load)
+Players.PlayerRemoving:Connect(save)`,
+          es: `-- Activar: Game Settings -> Security -> Enable Studio Access to API Services
+local DSS = game:GetService("DataStoreService")
+local Players = game:GetService("Players")
+local saves = DSS:GetDataStore("SavesMathis_v1")
+
+local function save(player)
+    local key = "p_" .. player.UserId
+    local data = {
+        coins = player.leaderstats.Coins.Value,
+        level = player.leaderstats.Level.Value,
+    }
+    local ok, err = pcall(function()
+        saves:SetAsync(key, data)
+    end)
+    if ok then print("¡Guardado!") else warn(err) end
+end
+
+local function load(player)
+    local key = "p_" .. player.UserId
+    local ok, data = pcall(function()
+        return saves:GetAsync(key)
+    end)
+    if ok and data then
+        player.leaderstats.Coins.Value = data.coins or 0
+        print("¡Cargado! Monedas: " .. data.coins)
+    end
+end
+
+Players.PlayerAdded:Connect(load)
+Players.PlayerRemoving:Connect(save)`
+        },
         studio: {
           where: { fr: "Game Settings + ServerScriptService → Script", en: "Game Settings + ServerScriptService → Script", es: "Game Settings + ServerScriptService → Script" },
           steps: {
@@ -1365,36 +2175,98 @@ Players.PlayerRemoving:Connect(sauvegarder)`,
           en: "The ':' in 'Enemy:attack()' automatically passes the object itself as the first 'self' parameter. That's the magic of OOP in Lua!",
           es: "¡El ':' en 'Enemigo:atacar()' pasa automáticamente el objeto mismo como primer parámetro 'self'. ¡Esa es la magia de la POO en Lua!"
         },
-        code: `local Ennemi = {}
-Ennemi.__index = Ennemi
+        code: {
+          fr: `local Enemy = {}
+Enemy.__index = Enemy
 
-function Ennemi.new(nom, vie, force)
-    local self = setmetatable({}, Ennemi)
-    self.nom = nom
-    self.vie = vie
-    self.force = force
-    self.estVivant = true
+function Enemy.new(name, health, strength)
+    local self = setmetatable({}, Enemy)
+    self.name = name
+    self.health = health
+    self.strength = strength
+    self.isAlive = true
     return self
 end
 
-function Ennemi:subirDegats(degats)
-    self.vie = math.max(0, self.vie - degats)
-    print(self.nom .. " : " .. self.vie .. " HP")
-    if self.vie <= 0 then
-        self.estVivant = false
-        print(self.nom .. " est vaincu !")
+function Enemy:takeDamage(damage)
+    self.health = math.max(0, self.health - damage)
+    print(self.name .. " : " .. self.health .. " HP")
+    if self.health <= 0 then
+        self.isAlive = false
+        print(self.name .. " est vaincu !")
     end
 end
 
-function Ennemi:attaquer()
-    return self.force + math.random(-5, 5)
+function Enemy:attack()
+    return self.strength + math.random(-5, 5)
 end
 
-local goblin = Ennemi.new("Goblin", 50, 15)
-local dragon = Ennemi.new("Dragon", 500, 80)
-goblin:subirDegats(30)
-goblin:subirDegats(25)
-print("Dragon attaque pour : " .. dragon:attaquer())`,
+local goblin = Enemy.new("Goblin", 50, 15)
+local dragon = Enemy.new("Dragon", 500, 80)
+goblin:takeDamage(30)
+goblin:takeDamage(25)
+print("Dragon attaque pour : " .. dragon:attack())`,
+          en: `local Enemy = {}
+Enemy.__index = Enemy
+
+function Enemy.new(name, health, strength)
+    local self = setmetatable({}, Enemy)
+    self.name = name
+    self.health = health
+    self.strength = strength
+    self.isAlive = true
+    return self
+end
+
+function Enemy:takeDamage(damage)
+    self.health = math.max(0, self.health - damage)
+    print(self.name .. ": " .. self.health .. " HP")
+    if self.health <= 0 then
+        self.isAlive = false
+        print(self.name .. " is defeated!")
+    end
+end
+
+function Enemy:attack()
+    return self.strength + math.random(-5, 5)
+end
+
+local goblin = Enemy.new("Goblin", 50, 15)
+local dragon = Enemy.new("Dragon", 500, 80)
+goblin:takeDamage(30)
+goblin:takeDamage(25)
+print("Dragon attacks for: " .. dragon:attack())`,
+          es: `local Enemy = {}
+Enemy.__index = Enemy
+
+function Enemy.new(name, health, strength)
+    local self = setmetatable({}, Enemy)
+    self.name = name
+    self.health = health
+    self.strength = strength
+    self.isAlive = true
+    return self
+end
+
+function Enemy:takeDamage(damage)
+    self.health = math.max(0, self.health - damage)
+    print(self.name .. ": " .. self.health .. " HP")
+    if self.health <= 0 then
+        self.isAlive = false
+        print("¡" .. self.name .. " es derrotado!")
+    end
+end
+
+function Enemy:attack()
+    return self.strength + math.random(-5, 5)
+end
+
+local goblin = Enemy.new("Goblin", 50, 15)
+local dragon = Enemy.new("Dragon", 500, 80)
+goblin:takeDamage(30)
+goblin:takeDamage(25)
+print("Dragon ataca por: " .. dragon:attack())`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script (ou ModuleScript)", en: "ServerScriptService → Script (or ModuleScript)", es: "ServerScriptService → Script (o ModuleScript)" },
           steps: {
@@ -1428,33 +2300,89 @@ print("Dragon attaque pour : " .. dragon:attaquer())`,
           en: "To call the parent method from the child, use ParentClass.method(self, ...) — it avoids infinite recursion!",
           es: "Para llamar al método padre desde el hijo, usa ClasePadre.metodo(self, ...) — ¡evita la recursión infinita!"
         },
-        code: `local Personnage = {}
-Personnage.__index = Personnage
-function Personnage.new(nom, vie)
-    return setmetatable({nom=nom, vie=vie, force=20}, Personnage)
+        code: {
+          fr: `local Character = {}
+Character.__index = Character
+function Character.new(name, health)
+    return setmetatable({name=name, health=health, strength=20}, Character)
 end
-function Personnage:attaquer()
-    print(self.nom .. " frappe pour " .. self.force)
+function Character:attack()
+    print(self.name .. " frappe pour " .. self.strength)
 end
 
--- Guerrier hérite de Personnage
-local Guerrier = setmetatable({}, {__index = Personnage})
-Guerrier.__index = Guerrier
-function Guerrier.new(nom, vie, armure)
-    local self = Personnage.new(nom, vie)
-    setmetatable(self, Guerrier)
-    self.armure = armure
-    self.force = 40  -- plus fort !
+-- Warrior hérite de Character
+local Warrior = setmetatable({}, {__index = Character})
+Warrior.__index = Warrior
+function Warrior.new(name, health, armor)
+    local self = Character.new(name, health)
+    setmetatable(self, Warrior)
+    self.armor = armor
+    self.strength = 40  -- plus fort !
     return self
 end
-function Guerrier:attaquer()  -- redéfini !
-    print(self.nom .. " FRAPPE FORT pour " .. self.force * 1.5)
+function Warrior:attack()  -- redéfini !
+    print(self.name .. " FRAPPE FORT pour " .. self.strength * 1.5)
 end
 
-local bob = Personnage.new("Bob", 100)
-local mathis = Guerrier.new("Mathis", 150, 50)
-bob:attaquer()    -- méthode parent
-mathis:attaquer() -- méthode enfant (polymorphisme)`,
+local bob = Character.new("Bob", 100)
+local mathis = Warrior.new("Mathis", 150, 50)
+bob:attack()    -- méthode parent
+mathis:attack() -- méthode enfant (polymorphisme)`,
+          en: `local Character = {}
+Character.__index = Character
+function Character.new(name, health)
+    return setmetatable({name=name, health=health, strength=20}, Character)
+end
+function Character:attack()
+    print(self.name .. " hits for " .. self.strength)
+end
+
+-- Warrior inherits from Character
+local Warrior = setmetatable({}, {__index = Character})
+Warrior.__index = Warrior
+function Warrior.new(name, health, armor)
+    local self = Character.new(name, health)
+    setmetatable(self, Warrior)
+    self.armor = armor
+    self.strength = 40  -- stronger!
+    return self
+end
+function Warrior:attack()  -- overridden!
+    print(self.name .. " HITS HARD for " .. self.strength * 1.5)
+end
+
+local bob = Character.new("Bob", 100)
+local mathis = Warrior.new("Mathis", 150, 50)
+bob:attack()    -- parent method
+mathis:attack() -- child method (polymorphism)`,
+          es: `local Character = {}
+Character.__index = Character
+function Character.new(name, health)
+    return setmetatable({name=name, health=health, strength=20}, Character)
+end
+function Character:attack()
+    print(self.name .. " golpea por " .. self.strength)
+end
+
+-- Warrior hereda de Character
+local Warrior = setmetatable({}, {__index = Character})
+Warrior.__index = Warrior
+function Warrior.new(name, health, armor)
+    local self = Character.new(name, health)
+    setmetatable(self, Warrior)
+    self.armor = armor
+    self.strength = 40  -- ¡más fuerte!
+    return self
+end
+function Warrior:attack()  -- ¡redefinido!
+    print(self.name .. " GOLPEA FUERTE por " .. self.strength * 1.5)
+end
+
+local bob = Character.new("Bob", 100)
+local mathis = Warrior.new("Mathis", 150, 50)
+bob:attack()    -- método padre
+mathis:attack() -- método hijo (polimorfismo)`
+        },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
           steps: {
@@ -1755,7 +2683,7 @@ function LessonView({ lesson, module, ui, lang, onBack, completed, onComplete, o
             <span style={{ marginLeft:4 }}>{ui.codeTitle}</span>
           </div>
           <pre style={{ fontFamily:"'Courier New',monospace",fontSize:13,lineHeight:1.7,color:"#f8f8f2",margin:0,whiteSpace:"pre-wrap",wordBreak:"break-word" }}
-            dangerouslySetInnerHTML={{ __html:highlightLua(lesson.code) }} />
+            dangerouslySetInnerHTML={{ __html:highlightLua(typeof lesson.code === "string" ? lesson.code : (lesson.code?.[lang] || lesson.code?.fr || "")) }} />
         </div>
         {/* Studio */}
         <StudioSection lesson={lesson} lang={lang} ui={ui} />
