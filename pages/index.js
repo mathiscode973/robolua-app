@@ -5,126 +5,25 @@ import Head from "next/head";
 
 function SuperpapaAvatar({ size = 120, animate = false }) {
   return (
-    <svg width={size} height={size * 1.45} viewBox="0 0 100 145" style={animate ? { animation: "pulse 2s ease-in-out infinite" } : {}}>
-      {/* Bord chapeau blanc */}
-      <ellipse cx="50" cy="42" rx="32" ry="6" fill="#ededed" />
-      <ellipse cx="50" cy="40" rx="32" ry="3" fill="#f8f8f8" />
-      {/* Corps chapeau blanc */}
-      <path d="M 30 42 Q 30 18 50 16 Q 70 18 70 42 Z" fill="#ffffff" stroke="#d0d0d0" strokeWidth="0.5" />
-      {/* Bande chapeau noire */}
-      <rect x="30" y="36" width="40" height="4" fill="#2d2d2d" />
-      {/* Petits creux sur le sommet (style cowboy) */}
-      <ellipse cx="50" cy="18" rx="14" ry="3" fill="#e8e8e8" />
-      <ellipse cx="50" cy="18" rx="6" ry="2" fill="#d8d8d8" />
-      {/* ✝ CROIX sur le chapeau */}
-      <rect x="47.5" y="20" width="5" height="14" rx="1" fill="#8B6914" />
-      <rect x="42" y="24" width="16" height="4" rx="1" fill="#8B6914" />
-      {/* Cheveux blancs sur les côtés */}
-      <rect x="29" y="44" width="8" height="10" rx="3" fill="#e0e0e0" />
-      <rect x="63" y="44" width="8" height="10" rx="3" fill="#e0e0e0" />
-      {/* Tête */}
-      <rect x="31" y="44" width="38" height="34" rx="5" fill="#f5d5b8" />
-      {/* Sourcils gris */}
-      <rect x="36" y="50" width="10" height="3" rx="1.5" fill="#aaa" />
-      <rect x="54" y="50" width="10" height="3" rx="1.5" fill="#aaa" />
-      {/* Yeux */}
-      <rect x="36" y="54" width="10" height="9" rx="2" fill="#fff" />
-      <rect x="54" y="54" width="10" height="9" rx="2" fill="#fff" />
-      <rect x="38" y="56" width="6" height="6" rx="1.5" fill="#3d2b1f" />
-      <rect x="56" y="56" width="6" height="6" rx="1.5" fill="#3d2b1f" />
-      <rect x="40" y="57" width="2" height="2" fill="#fff" />
-      {/* Clin d'oeil droit */}
-      <path d="M54 58 Q59 56 64 58" stroke="#3d2b1f" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-      {/* Moustache blanche */}
-      <path d="M40 70 Q50 75 60 70" stroke="#ddd" strokeWidth="3" fill="none" strokeLinecap="round" />
-      {/* Sourire */}
-      <path d="M42 73 Q50 80 58 73" stroke="#c0835a" strokeWidth="2" fill="none" strokeLinecap="round" />
-      {/* Cou */}
-      <rect x="44" y="78" width="12" height="6" fill="#f5d5b8" />
-      {/* Corps veste noire */}
-      <rect x="24" y="84" width="52" height="44" rx="4" fill="#1a1a1a" />
-      {/* Chemise blanche centre */}
-      <rect x="42" y="84" width="16" height="44" fill="#f0f0f0" />
-      {/* Flammes bras gauche */}
-      <path d="M24 128 Q20 112 25 98 Q28 90 24 82 Q30 92 28 104 Q33 94 31 82 Q37 94 34 108 Q30 118 24 128Z" fill="#cc2200" />
-      <path d="M24 128 Q21 114 26 102 Q29 95 26 88 Q31 97 30 108 Q34 100 33 90 Q38 100 36 112 Q32 120 24 128Z" fill="#f6601a" />
-      <path d="M26 128 Q23 116 28 106 Q30 100 29 94 Q33 102 32 111 Q35 104 34 96 Q39 105 37 115 Q34 122 26 128Z" fill="#ffd700" />
-      {/* Flammes bras droit */}
-      <path d="M76 128 Q80 112 75 98 Q72 90 76 82 Q70 92 72 104 Q67 94 69 82 Q63 94 66 108 Q70 118 76 128Z" fill="#cc2200" />
-      <path d="M76 128 Q79 114 74 102 Q71 95 74 88 Q69 97 70 108 Q66 100 67 90 Q62 100 64 112 Q68 120 76 128Z" fill="#f6601a" />
-      <path d="M74 128 Q77 116 72 106 Q70 100 71 94 Q67 102 68 111 Q65 104 66 96 Q61 105 63 115 Q66 122 74 128Z" fill="#ffd700" />
-      {/* Mains */}
-      <rect x="12" y="86" width="13" height="12" rx="4" fill="#f5d5b8" />
-      <rect x="75" y="86" width="13" height="12" rx="4" fill="#f5d5b8" />
-      {/* Pantalon */}
-      <rect x="24" y="128" width="22" height="14" rx="3" fill="#2d3748" />
-      <rect x="54" y="128" width="22" height="14" rx="3" fill="#2d3748" />
-      {/* Chaussures */}
-      <rect x="22" y="138" width="26" height="7" rx="3" fill="#111" />
-      <rect x="52" y="138" width="26" height="7" rx="3" fill="#111" />
-    </svg>
+    <img src="/superpapa.png" alt="Superpapa973"
+      width={size} height={size * 1.45}
+      style={{
+        objectFit: "contain",
+        animation: animate ? "pulse 2.5s ease-in-out infinite" : "none"
+      }}
+    />
   );
 }
 
 function MathisAvatar({ size = 100, celebrating = false }) {
   return (
-    <svg width={size} height={size * 1.45} viewBox="0 0 100 145"
-      style={celebrating ? { animation: "popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards" } : {}}>
-      {/* Cheveux roux - plusieurs couches pour effet naturel */}
-      <ellipse cx="50" cy="30" rx="22" ry="8" fill="#a93226" />
-      <rect x="28" y="28" width="44" height="14" rx="3" fill="#c0392b" />
-      <rect x="28" y="32" width="8" height="14" rx="2" fill="#a93226" />
-      <rect x="64" y="32" width="8" height="14" rx="2" fill="#a93226" />
-      {/* Mèches */}
-      <path d="M34 28 Q36 20 40 24" stroke="#c0392b" strokeWidth="4" fill="none" strokeLinecap="round" />
-      <path d="M50 26 Q52 18 56 22" stroke="#a93226" strokeWidth="4" fill="none" strokeLinecap="round" />
-      {/* Tête */}
-      <rect x="29" y="36" width="42" height="36" rx="5" fill="#f5d5b8" />
-      {/* Yeux grands - expression enthousiaste */}
-      <rect x="34" y="44" width="12" height="12" rx="3" fill="#fff" />
-      <rect x="54" y="44" width="12" height="12" rx="3" fill="#fff" />
-      <rect x="36" y="46" width="8" height="8" rx="2" fill="#2d1a0e" />
-      <rect x="56" y="46" width="8" height="8" rx="2" fill="#2d1a0e" />
-      <rect x="38" y="47" width="3" height="3" fill="#fff" />
-      <rect x="58" y="47" width="3" height="3" fill="#fff" />
-      {/* Sourcils hauts (surpris/enthousiaste) */}
-      <rect x="34" y="41" width="12" height="3" rx="1.5" fill="#8B2500" />
-      <rect x="54" y="41" width="12" height="3" rx="1.5" fill="#8B2500" />
-      {/* Grand sourire */}
-      <path d="M35 62 Q50 74 65 62" stroke="#2d1a0e" strokeWidth="2.5" fill="#f0a0a0" strokeLinecap="round" />
-      {/* Dents */}
-      <path d="M38 64 Q50 72 62 64" fill="#fff" />
-      {/* Joues roses */}
-      <ellipse cx="35" cy="64" rx="5" ry="3" fill="#f4a0a0" opacity="0.5" />
-      <ellipse cx="65" cy="64" rx="5" ry="3" fill="#f4a0a0" opacity="0.5" />
-      {/* Cou */}
-      <rect x="43" y="72" width="14" height="8" fill="#f5d5b8" />
-      {/* Corps */}
-      <rect x="24" y="80" width="52" height="46" rx="4" fill="#1a1a1a" />
-      {/* Chemise blanche */}
-      <rect x="40" y="80" width="20" height="46" fill="#f0f0f0" />
-      {/* Flammes gauche */}
-      <path d="M24 126 Q20 110 25 96 Q28 88 24 80 Q30 90 28 102 Q33 92 31 80 Q37 92 34 106 Q30 116 24 126Z" fill="#cc2200" />
-      <path d="M25 126 Q22 112 27 102 Q30 96 28 90 Q32 98 31 108 Q34 101 33 93 Q38 101 36 113 Q33 121 25 126Z" fill="#f6601a" />
-      <path d="M27 126 Q25 116 29 108 Q31 103 30 98 Q33 104 32 113 Q34 107 33 100 Q37 108 36 118 Q33 123 27 126Z" fill="#ffd700" />
-      {/* Flammes droite */}
-      <path d="M76 126 Q80 110 75 96 Q72 88 76 80 Q70 90 72 102 Q67 92 69 80 Q63 92 66 106 Q70 116 76 126Z" fill="#cc2200" />
-      <path d="M75 126 Q78 112 73 102 Q70 96 72 90 Q68 98 69 108 Q66 101 67 93 Q62 101 64 113 Q67 121 75 126Z" fill="#f6601a" />
-      {/* Bras gauche normal */}
-      <rect x="11" y="82" width="13" height="12" rx="4" fill="#f5d5b8" />
-      {/* Bras droit LEVÉ - victoire */}
-      <rect x="76" y="60" width="12" height="26" rx="4" fill="#1a1a1a" />
-      {/* Flammes bras levé */}
-      <path d="M76 86 Q73 76 77 68 Q79 63 77 58 Q80 65 79 73 Q82 67 81 60 Q84 67 83 77 Q80 82 76 86Z" fill="#f6601a" />
-      {/* Main levée */}
-      <rect x="74" y="50" width="14" height="12" rx="4" fill="#f5d5b8" />
-      {/* Pantalon */}
-      <rect x="24" y="126" width="22" height="16" rx="3" fill="#2d3748" />
-      <rect x="54" y="126" width="22" height="16" rx="3" fill="#2d3748" />
-      {/* Chaussures */}
-      <rect x="22" y="136" width="26" height="8" rx="3" fill="#111" />
-      <rect x="52" y="136" width="26" height="8" rx="3" fill="#111" />
-    </svg>
+    <img src="/mathis.png" alt="Mathis"
+      width={size} height={size * 1.45}
+      style={{
+        objectFit: "contain",
+        animation: celebrating ? "popIn 0.5s cubic-bezier(0.34,1.56,0.64,1)" : "none"
+      }}
+    />
   );
 }
 
@@ -2621,24 +2520,61 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
       "¿Cómo puedo practicar?"
     ]
   };
+  const fallback = {
+    fr: "Oups, désolé, réessaie !",
+    en: "Oops, sorry, try again!",
+    es: "¡Ups, lo siento, inténtalo de nuevo!"
+  };
+  const networkErr = {
+    fr: "⚠️ Erreur réseau. Vérifie ta connexion internet.",
+    en: "⚠️ Network error. Check your internet connection.",
+    es: "⚠️ Error de red. Comprueba tu conexión a internet."
+  };
+  const thinking = {
+    fr: "Superpapa réfléchit...",
+    en: "Superpapa is thinking...",
+    es: "Superpapa está pensando..."
+  };
+
   const [messages, setMessages] = useState([{ role:"assistant", content:greetings[lang] }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
+
+  // Reset chat when language changes — avoids mixed-language conversations
+  useEffect(() => {
+    setMessages([{ role:"assistant", content:greetings[lang] }]);
+    setInput("");
+  }, [lang]);
+
   useEffect(()=>{ bottomRef.current?.scrollIntoView({behavior:"smooth"}); }, [messages, loading]);
 
   const sendText = async (text) => {
-    if (!text.trim() || loading) return;
-    const q = text.trim(); setInput("");
+    if (!text || !text.trim() || loading) return;
+    const q = text.trim();
+    setInput("");
     const newMessages = [...messages, { role:"user", content:q }];
-    setMessages(newMessages); setLoading(true);
+    setMessages(newMessages);
+    setLoading(true);
     try {
-      const res = await fetch("/api/chat", { method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ system: ui.systemPrompt(lesson, t(module?.title, lang)),
-          messages: newMessages.map(m=>({role:m.role,content:m.content})) }) });
+      // CRITICAL: Anthropic API requires conversations to start with role="user"
+      // Filter out the initial assistant greeting (it's UI-only, not real conversation)
+      const apiMessages = newMessages.filter((m, i) => !(i === 0 && m.role === "assistant"));
+
+      const res = await fetch("/api/chat", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          system: ui.systemPrompt(lesson, t(module?.title, lang)),
+          messages: apiMessages.map(m=>({role:m.role,content:m.content}))
+        })
+      });
       const data = await res.json();
-      setMessages(prev=>[...prev,{role:"assistant",content:data.reply||"Réessaie !"}]);
-    } catch { setMessages(prev=>[...prev,{role:"assistant",content:"⚠️ Erreur réseau !"}]); }
+      const reply = data.reply || data.error || fallback[lang];
+      setMessages(prev=>[...prev,{role:"assistant",content:reply}]);
+    } catch {
+      setMessages(prev=>[...prev,{role:"assistant",content:networkErr[lang]}]);
+    }
     setLoading(false);
   };
 
@@ -2649,14 +2585,14 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
     <div style={{ border:"0.5px solid #e2e8f0",borderRadius:16,overflow:"hidden",marginTop:12 }}>
       <div style={{ background:"#1a1a2e",padding:"10px 14px",display:"flex",alignItems:"center",gap:10 }}>
         <SuperpapaAvatar size={38} />
-        <div><div style={{ fontSize:14,fontWeight:600,color:"#fff" }}>Superpapa973</div><div style={{ fontSize:11,color:"#a0aec0" }}>Ton professeur</div></div>
+        <div><div style={{ fontSize:14,fontWeight:600,color:"#fff" }}>Superpapa973</div><div style={{ fontSize:11,color:"#a0aec0" }}>{lang==="fr"?"Ton professeur":lang==="es"?"Tu profesor":"Your teacher"}</div></div>
         <button onClick={onClose} style={{ marginLeft:"auto",border:"none",background:"rgba(255,255,255,0.1)",cursor:"pointer",color:"#fff",padding:"4px 8px",borderRadius:6,fontSize:14 }}>✕</button>
       </div>
       <div style={{ height:200,overflowY:"auto",padding:12,display:"flex",flexDirection:"column",gap:8,background:"#f8fafc" }}>
         {messages.map((m,i)=>(
           <div key={i} style={{ maxWidth:"85%",padding:"8px 12px",borderRadius:m.role==="user"?"12px 12px 2px 12px":"12px 12px 12px 2px",background:m.role==="user"?"#4C9BE8":"#fff",color:m.role==="user"?"#fff":"#2d3748",alignSelf:m.role==="user"?"flex-end":"flex-start",fontSize:13,lineHeight:1.6,border:m.role==="assistant"?"0.5px solid #e2e8f0":"none" }}>{m.content}</div>
         ))}
-        {loading && <div style={{ padding:"8px 12px",background:"#fff",borderRadius:"12px 12px 12px 2px",color:"#718096",fontSize:13,alignSelf:"flex-start",border:"0.5px solid #e2e8f0" }}>Superpapa réfléchit...</div>}
+        {loading && <div style={{ padding:"8px 12px",background:"#fff",borderRadius:"12px 12px 12px 2px",color:"#718096",fontSize:13,alignSelf:"flex-start",border:"0.5px solid #e2e8f0" }}>{thinking[lang]}</div>}
         <div ref={bottomRef} />
       </div>
       {showSuggestions && (
@@ -2897,7 +2833,7 @@ function StudioGuide({ lang, ui, onDone }) {
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [lang, setLang] = useState("fr");
+  const [lang, setLang] = useState("es");
   const [view, setView] = useState("intro");
   const [selectedModule, setSelectedModule] = useState(null);
   const [selectedLesson, setSelectedLesson] = useState(null);
