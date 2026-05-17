@@ -4,10 +4,13 @@ import Head from "next/head";
 // ─── AVATARS SVG ─────────────────────────────────────────────────────────────
 
 function SuperpapaAvatar({ size = 120, animate = false }) {
+  // T-pose image is wider (~0.84 ratio), use natural aspect with width as base
   return (
     <img src="/superpapa.png" alt="Superpapa973"
-      width={size} height={size * 1.45}
       style={{
+        width: `${size * 1.2}px`,
+        height: "auto",
+        display: "block",
         objectFit: "contain",
         animation: animate ? "pulse 2.5s ease-in-out infinite" : "none"
       }}
@@ -18,8 +21,10 @@ function SuperpapaAvatar({ size = 120, animate = false }) {
 function MathisAvatar({ size = 100, celebrating = false }) {
   return (
     <img src="/mathis.png" alt="Mathis"
-      width={size} height={size * 1.45}
       style={{
+        width: `${size}px`,
+        height: "auto",
+        display: "block",
         objectFit: "contain",
         animation: celebrating ? "popIn 0.5s cubic-bezier(0.34,1.56,0.64,1)" : "none"
       }}
@@ -2816,9 +2821,9 @@ function StudioGuide({ lang, ui, onDone }) {
   return (
     <div style={{ padding:16 }}>
       <div style={{ background:"#1a1a2e",borderRadius:20,padding:24,marginBottom:16,textAlign:"center" }}>
-        <div style={{ display:"flex",justifyContent:"center",gap:16,marginBottom:16 }}>
-          <SuperpapaAvatar size={70} animate={true} />
-          <MathisAvatar size={60} />
+        <div style={{ display:"flex",justifyContent:"center",gap:16,marginBottom:16,alignItems:"flex-end" }}>
+          <SuperpapaAvatar size={110} animate={true} />
+          <MathisAvatar size={55} />
         </div>
         <div style={{ fontSize:20,fontWeight:800,color:"#fff",marginBottom:4 }}>{c.title}</div>
         <div style={{ fontSize:14,color:"#a0aec0" }}>{c.sub}</div>
@@ -2932,12 +2937,12 @@ export default function Home() {
               </div>
               <div style={{ display:"flex",gap:20,alignItems:"flex-end",marginBottom:28 }}>
                 <div style={{ textAlign:"center" }}>
-                  <SuperpapaAvatar size={100} animate={true} />
+                  <SuperpapaAvatar size={160} animate={true} />
                   <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Superpapa973</div>
                   <div style={{ fontSize:10,color:"#718096" }}>Ton professeur</div>
                 </div>
                 <div style={{ textAlign:"center" }}>
-                  <MathisAvatar size={85} />
+                  <MathisAvatar size={80} />
                   <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Mathis</div>
                   <div style={{ fontSize:10,color:"#718096" }}>Toi !</div>
                 </div>
@@ -2967,7 +2972,7 @@ export default function Home() {
           {view==="map" && (
             <div>
               <div style={{ background:"#1a1a2e",borderRadius:16,padding:"16px 18px",marginBottom:16,display:"flex",alignItems:"center",gap:14 }}>
-                <SuperpapaAvatar size={54} animate={true} />
+                <SuperpapaAvatar size={75} animate={true} />
                 <div style={{ flex:1 }}>
                   <div style={{ fontSize:14,fontWeight:600,color:"#fff",marginBottom:2 }}>
                     {lang==="fr"&&"Choisis ton module, partenaire !"}
@@ -2976,7 +2981,7 @@ export default function Home() {
                   </div>
                   <div style={{ fontSize:12,color:"#a0aec0" }}>{completed.size}/{totalLessons} {ui.lessons} • {prog}% • {xp} XP</div>
                 </div>
-                <MathisAvatar size={50} />
+                <MathisAvatar size={45} />
               </div>
               <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
                 {MODULES.map((mod,idx)=>{
