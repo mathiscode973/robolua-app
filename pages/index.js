@@ -20,7 +20,7 @@ function SuperpapaAvatar({ size = 120, animate = false }) {
 
 function MathisAvatar({ size = 100, celebrating = false }) {
   return (
-    <img src="/mathis.png" alt="Mathis"
+    <img src="/mathis.png" alt="Michi"
       style={{
         width: `${size}px`,
         height: "auto",
@@ -69,7 +69,7 @@ const MODULES = [
 -- Les commentaires expliquent le code
 
 print("Hello world!")
-print("My name is Mathis")
+print("My name is Michi")
 print("I code in Roblox!")
 
 -- On peut aussi afficher des nombres
@@ -79,7 +79,7 @@ print(100 + 200)`,
 -- Comments explain the code
 
 print("Hello world!")
-print("My name is Mathis")
+print("My name is Michi")
 print("I code in Roblox!")
 
 -- We can display numbers too
@@ -89,7 +89,7 @@ print(100 + 200)`,
 -- Los comentarios explican el código
 
 print("Hello world!")
-print("My name is Mathis")
+print("My name is Michi")
 print("I code in Roblox!")
 
 -- También podemos mostrar números
@@ -157,7 +157,7 @@ print(100 + 200)`
           es: "¡Usa siempre 'local' antes de tus variables! Las mantiene ordenadas en tu script y evita bugs misteriosos."
         },
         code: {
-          fr: `local myName = "Mathis"      -- texte
+          fr: `local myName = "Michi"      -- texte
 local myAge = 11             -- nombre
 local iLikeCoding = true     -- vrai/faux
 
@@ -172,7 +172,7 @@ print("Maintenant j'ai " .. myAge .. " ans")
 local points = 100
 local bonus = 50
 print("Score total : " .. points + bonus)`,
-          en: `local myName = "Mathis"      -- text
+          en: `local myName = "Michi"      -- text
 local myAge = 11             -- number
 local iLikeCoding = true     -- true/false
 
@@ -187,7 +187,7 @@ print("Now I am " .. myAge .. " years old")
 local points = 100
 local bonus = 50
 print("Total score: " .. points + bonus)`,
-          es: `local myName = "Mathis"      -- texto
+          es: `local myName = "Michi"      -- texto
 local myAge = 11             -- número
 local iLikeCoding = true     -- verdadero/falso
 
@@ -343,7 +343,7 @@ showScore()`
     print("Ton score : " .. score .. " points")
 end
 
-greet("Mathis", 1500)
+greet("Michi", 1500)
 greet("Lucas", 800)
 
 -- Fonction qui retourne une valeur
@@ -358,7 +358,7 @@ print("Bonus : " .. myBonus)  -- 300`,
     print("Your score: " .. score .. " points")
 end
 
-greet("Mathis", 1500)
+greet("Michi", 1500)
 greet("Lucas", 800)
 
 -- Function that returns a value
@@ -373,7 +373,7 @@ print("Bonus: " .. myBonus)  -- 300`,
     print("Tu puntuación: " .. score .. " puntos")
 end
 
-greet("Mathis", 1500)
+greet("Michi", 1500)
 greet("Lucas", 800)
 
 -- Función que devuelve un valor
@@ -912,7 +912,7 @@ end`
         },
         code: {
           fr: `local player = {
-    name = "Mathis",
+    name = "Michi",
     health = 100,
     strength = 45,
     level = 7,
@@ -931,7 +931,7 @@ for key, value in pairs(player) do
     print(key .. " = " .. tostring(value))
 end`,
           en: `local player = {
-    name = "Mathis",
+    name = "Michi",
     health = 100,
     strength = 45,
     level = 7,
@@ -950,7 +950,7 @@ for key, value in pairs(player) do
     print(key .. " = " .. tostring(value))
 end`,
           es: `local player = {
-    name = "Mathis",
+    name = "Michi",
     health = 100,
     strength = 45,
     level = 7,
@@ -1004,7 +1004,7 @@ end`
         },
         code: {
           fr: `local scores = {
-    {name = "Mathis", score = 4200},
+    {name = "Michi", score = 4200},
     {name = "Lucas", score = 1800},
     {name = "Emma", score = 5500},
     {name = "Noah", score = 3100},
@@ -1027,7 +1027,7 @@ for i, p in ipairs(scores) do
     end
 end`,
           en: `local scores = {
-    {name = "Mathis", score = 4200},
+    {name = "Michi", score = 4200},
     {name = "Lucas", score = 1800},
     {name = "Emma", score = 5500},
     {name = "Noah", score = 3100},
@@ -1050,7 +1050,7 @@ for i, p in ipairs(scores) do
     end
 end`,
           es: `local scores = {
-    {name = "Mathis", score = 4200},
+    {name = "Michi", score = 4200},
     {name = "Lucas", score = 1800},
     {name = "Emma", score = 5500},
     {name = "Noah", score = 3100},
@@ -1943,7 +1943,7 @@ end)`
           fr: `-- Activer : Game Settings -> Security -> Enable Studio Access to API Services
 local DSS = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
-local saves = DSS:GetDataStore("SavesMathis_v1")
+local saves = DSS:GetDataStore("SavesMichi_v1")
 
 local function save(player)
     local key = "p_" .. player.UserId
@@ -1973,7 +1973,7 @@ Players.PlayerRemoving:Connect(save)`,
           en: `-- Enable: Game Settings -> Security -> Enable Studio Access to API Services
 local DSS = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
-local saves = DSS:GetDataStore("SavesMathis_v1")
+local saves = DSS:GetDataStore("SavesMichi_v1")
 
 local function save(player)
     local key = "p_" .. player.UserId
@@ -2003,7 +2003,7 @@ Players.PlayerRemoving:Connect(save)`,
           es: `-- Activar: Game Settings -> Security -> Enable Studio Access to API Services
 local DSS = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
-local saves = DSS:GetDataStore("SavesMathis_v1")
+local saves = DSS:GetDataStore("SavesMichi_v1")
 
 local function save(player)
     local key = "p_" .. player.UserId
@@ -2229,9 +2229,9 @@ function Warrior:attack()  -- redéfini !
 end
 
 local bob = Character.new("Bob", 100)
-local mathis = Warrior.new("Mathis", 150, 50)
+local michi = Warrior.new("Michi", 150, 50)
 bob:attack()    -- méthode parent
-mathis:attack() -- méthode enfant (polymorphisme)`,
+michi:attack() -- méthode enfant (polymorphisme)`,
           en: `local Character = {}
 Character.__index = Character
 function Character.new(name, health)
@@ -2256,9 +2256,9 @@ function Warrior:attack()  -- overridden!
 end
 
 local bob = Character.new("Bob", 100)
-local mathis = Warrior.new("Mathis", 150, 50)
+local michi = Warrior.new("Michi", 150, 50)
 bob:attack()    -- parent method
-mathis:attack() -- child method (polymorphism)`,
+michi:attack() -- child method (polymorphism)`,
           es: `local Character = {}
 Character.__index = Character
 function Character.new(name, health)
@@ -2283,9 +2283,9 @@ function Warrior:attack()  -- ¡redefinido!
 end
 
 local bob = Character.new("Bob", 100)
-local mathis = Warrior.new("Mathis", 150, 50)
+local michi = Warrior.new("Michi", 150, 50)
 bob:attack()    -- método padre
-mathis:attack() -- método hijo (polimorfismo)`
+michi:attack() -- método hijo (polimorfismo)`
         },
         studio: {
           where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
@@ -2314,7 +2314,7 @@ const UI = {
     placeholder: "Une question ? Superpapa répond !",
     tip: "Astuce de Superpapa", codeTitle: "Code Lua",
     listenBtn: "🔊 Écouter", stopBtn: "⏹ Stop",
-    celebTitle: "Bravo Mathis !", nextLesson: "Leçon suivante →",
+    celebTitle: "Bravo Michi !", nextLesson: "Leçon suivante →",
     celebMsg: ["Super travail !", "Continue comme ça !", "Tu es un vrai codeur !", "Impressionnant !", "Je suis fier de toi !"],
     xpGained: "+50 XP", lessons: "leçons",
     studioTitle: "📺 Dans Roblox Studio",
@@ -2336,7 +2336,7 @@ Module : ${mod || "général"}. ${lesson ? `Leçon : "${lesson.title?.fr}". Conc
     placeholder: "Got a question? Superpapa answers!",
     tip: "Superpapa's tip", codeTitle: "Lua Code",
     listenBtn: "🔊 Listen", stopBtn: "⏹ Stop",
-    celebTitle: "Well done Mathis!", nextLesson: "Next lesson →",
+    celebTitle: "Well done Michi!", nextLesson: "Next lesson →",
     celebMsg: ["Great work!", "Keep it up!", "You're a real coder!", "Impressive!", "I'm proud of you!"],
     xpGained: "+50 XP", lessons: "lessons",
     studioTitle: "📺 In Roblox Studio",
@@ -2358,7 +2358,7 @@ Module: ${mod || "general"}. ${lesson ? `Lesson: "${lesson.title?.en}". Concept:
     placeholder: "¿Una pregunta? ¡Superpapa responde!",
     tip: "Consejo de Superpapa", codeTitle: "Código Lua",
     listenBtn: "🔊 Escuchar", stopBtn: "⏹ Parar",
-    celebTitle: "¡Bravo Mathis!", nextLesson: "Siguiente lección →",
+    celebTitle: "¡Bravo Michi!", nextLesson: "Siguiente lección →",
     celebMsg: ["¡Gran trabajo!", "¡Sigue así!", "¡Eres un programador de verdad!", "¡Impresionante!", "¡Estoy orgulloso de ti!"],
     xpGained: "+50 XP", lessons: "lecciones",
     studioTitle: "📺 En Roblox Studio",
@@ -2822,7 +2822,7 @@ function StudioGuide({ lang, ui, onDone }) {
     <div style={{ padding:16 }}>
       <div style={{ background:"#1a1a2e",borderRadius:20,padding:24,marginBottom:16,textAlign:"center" }}>
         <div style={{ display:"flex",justifyContent:"center",gap:16,marginBottom:16,alignItems:"flex-end" }}>
-          <SuperpapaAvatar size={110} animate={true} />
+          <SuperpapaAvatar size={75} animate={true} />
           <MathisAvatar size={55} />
         </div>
         <div style={{ fontSize:20,fontWeight:800,color:"#fff",marginBottom:4 }}>{c.title}</div>
@@ -2937,13 +2937,13 @@ export default function Home() {
               </div>
               <div style={{ display:"flex",gap:20,alignItems:"flex-end",marginBottom:28 }}>
                 <div style={{ textAlign:"center" }}>
-                  <SuperpapaAvatar size={160} animate={true} />
+                  <SuperpapaAvatar size={105} animate={true} />
                   <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Superpapa973</div>
                   <div style={{ fontSize:10,color:"#718096" }}>Ton professeur</div>
                 </div>
                 <div style={{ textAlign:"center" }}>
-                  <MathisAvatar size={80} />
-                  <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Mathis</div>
+                  <MathisAvatar size={75} />
+                  <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Michi</div>
                   <div style={{ fontSize:10,color:"#718096" }}>Toi !</div>
                 </div>
               </div>
@@ -2971,8 +2971,8 @@ export default function Home() {
           {/* MAP */}
           {view==="map" && (
             <div>
-              <div style={{ background:"#1a1a2e",borderRadius:16,padding:"16px 18px",marginBottom:16,display:"flex",alignItems:"center",gap:14 }}>
-                <SuperpapaAvatar size={75} animate={true} />
+              <div style={{ background:"#1a1a2e",borderRadius:16,padding:"16px 18px",marginBottom:16,display:"flex",alignItems:"flex-end",gap:14 }}>
+                <SuperpapaAvatar size={58} animate={true} />
                 <div style={{ flex:1 }}>
                   <div style={{ fontSize:14,fontWeight:600,color:"#fff",marginBottom:2 }}>
                     {lang==="fr"&&"Choisis ton module, partenaire !"}
@@ -2981,7 +2981,7 @@ export default function Home() {
                   </div>
                   <div style={{ fontSize:12,color:"#a0aec0" }}>{completed.size}/{totalLessons} {ui.lessons} • {prog}% • {xp} XP</div>
                 </div>
-                <MathisAvatar size={45} />
+                <MathisAvatar size={42} />
               </div>
               <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
                 {MODULES.map((mod,idx)=>{
