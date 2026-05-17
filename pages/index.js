@@ -2416,9 +2416,17 @@ function highlightLua(code) {
   const kw = ["local","function","if","then","elseif","else","end","while","do","for","return","true","false","not","and","or","nil","repeat","until","break","in"];
   // Step 1: HTML-escape
   let h = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  // Step 2: Extract comments and strings first (replace with placeholders), so they aren't re-processed
+  // Step 2: Extract comments and strings first (replace with ALPHABETIC placeholders to avoid number-regex conflict)
   const tokens = [];
-  const placeholder = (val) => { tokens.push(val); return `\x00${tokens.length-1}\x00`; };
+  const toAlpha = (n) => {
+    let s = ''; n = n + 1;
+    while (n > 0) { n--; s = String.fromCharCode(97 + (n % 26)) + s; n = Math.floor(n / 26); }
+    return s;
+  };
+  const placeholder = (val) => {
+    tokens.push(val);
+    return `\x00${toAlpha(tokens.length - 1)}\x00`;
+  };
   // Comments (multi-line then single-line)
   h = h.replace(/--\[\[[\s\S]*?\]\]/g, m => placeholder('<span style="color:#6272a4;font-style:italic">'+m+'</span>'));
   h = h.replace(/--[^\n]*/g, m => placeholder('<span style="color:#6272a4;font-style:italic">'+m+'</span>'));
@@ -2430,8 +2438,14 @@ function highlightLua(code) {
   kw.forEach(k => { h = h.replace(new RegExp(`\\b(${k})\\b`,"g"),'<span style="color:#ff79c6;font-weight:500">$1</span>'); });
   // Capitalized identifiers (like Players, Vector3, Instance)
   h = h.replace(/\b([A-Z][a-zA-Z]+)(?=[:.])/g,'<span style="color:#8be9fd">$1</span>');
-  // Restore placeholders
-  h = h.replace(/\x00(\d+)\x00/g, (_, i) => tokens[parseInt(i,10)]);
+  // Restore placeholders (alphabetic IDs)
+  h = h.replace(/\x00([a-z]+)\x00/g, (_, id) => {
+    let n = 0;
+    for (let i = 0; i < id.length; i++) {
+      n = n * 26 + (id.charCodeAt(i) - 97 + 1);
+    }
+    return tokens[n - 1];
+  });
   return h;
 }
 
@@ -2570,7 +2584,9 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
         })
       });
       const data = await res.json();
-      const reply = data.reply || data.error || fallback[lang];
+      // Never show raw API errors to user - log to console for debugging, show friendly fallback
+      if (data.error) console.error("Chat API error:", data.error);
+      const reply = data.reply || fallback[lang];
       setMessages(prev=>[...prev,{role:"assistant",content:reply}]);
     } catch {
       setMessages(prev=>[...prev,{role:"assistant",content:networkErr[lang]}]);
