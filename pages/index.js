@@ -1538,41 +1538,42 @@ Módulo: ${mod || "general"}. ${lesson ? `Lección: "${lesson.title?.es}". Conce
   }
 };
 
-// ─── AUDIO ───────────────────────────────────────────────────────────────────
+// ─── AUDIO — OpenAI TTS voix masculine "onyx" ────────────────────────────────
 
-let selectedVoice = null;
+let currentAudio = null;
 
-function initVoice(lang) {
-  if (typeof window === "undefined") return;
-  const voices = window.speechSynthesis.getVoices();
-  const langCode = lang === "fr" ? "fr" : lang === "es" ? "es" : "en";
-  // Prefer male voices
-  const maleNames = { fr: ["Thomas", "Eddy", "Olivier", "Nicolas"], en: ["Daniel", "Alex", "Fred", "Gordon", "Reed"], es: ["Jorge", "Juan", "Diego", "Enrique", "Carlos"] };
-  const preferred = maleNames[langCode] || [];
-  let voice = null;
-  for (const name of preferred) {
-    voice = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()) && v.lang.startsWith(langCode));
-    if (voice) break;
+async function speak(text, lang, onEnd) {
+  stopSpeak();
+  try {
+    const res = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, lang }),
+    });
+    if (!res.ok) throw new Error("TTS error");
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    currentAudio = new Audio(url);
+    currentAudio.onended = () => { onEnd && onEnd(); URL.revokeObjectURL(url); };
+    currentAudio.onerror = () => { onEnd && onEnd(); };
+    await currentAudio.play();
+    return currentAudio;
+  } catch (e) {
+    console.error("TTS:", e);
+    onEnd && onEnd();
+    return null;
   }
-  if (!voice) voice = voices.find(v => v.lang.startsWith(langCode));
-  selectedVoice = voice || null;
-}
-
-function speak(text, lang) {
-  if (typeof window === "undefined" || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = lang === "fr" ? "fr-FR" : lang === "es" ? "es-ES" : "en-US";
-  utt.rate = 0.85;
-  utt.pitch = 0.85; // slightly lower = more masculine
-  if (selectedVoice) utt.voice = selectedVoice;
-  window.speechSynthesis.speak(utt);
-  return utt;
 }
 
 function stopSpeak() {
-  if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
 }
+
+// initVoice n'est plus nécessaire avec OpenAI TTS
+function initVoice() {}
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 
@@ -1705,13 +1706,11 @@ function LessonView({ lesson, module, ui, lang, onBack, completed, onComplete, o
   const [showCelebration, setShowCelebration] = useState(false);
   const done = completed.has(lesson.id);
 
-  const handleListen = () => {
+  const handleListen = async () => {
     if (speaking) { stopSpeak(); setSpeaking(false); return; }
-    initVoice(lang);
     const text = `${t(lesson.superpapa,lang)}. ${t(lesson.explanation,lang)}. ${t(lesson.tip,lang)}`;
-    const utt = speak(text, lang);
     setSpeaking(true);
-    if (utt) utt.onend = () => setSpeaking(false);
+    await speak(text, lang, () => setSpeaking(false));
   };
 
   const handleDone = () => { if (!done) { onComplete(lesson.id); setShowCelebration(true); } };
@@ -1908,9 +1907,6 @@ export default function Home() {
     if (typeof window!=="undefined") { try { return new Set(JSON.parse(localStorage.getItem("robolua_v3")||"[]")); } catch {} }
     return new Set();
   });
-
-  useEffect(()=>{ if (typeof window!=="undefined") initVoice(lang); }, [lang]);
-  useEffect(()=>{ if (typeof window!=="undefined") window.speechSynthesis.onvoiceschanged=()=>initVoice(lang); }, [lang]);
 
   const ui = UI[lang];
   const totalLessons = MODULES.reduce((s,m)=>s+m.lessons.length,0);
