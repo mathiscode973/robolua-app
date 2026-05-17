@@ -2937,14 +2937,22 @@ export default function Home() {
               </div>
               <div style={{ display:"flex",gap:20,alignItems:"flex-end",marginBottom:28 }}>
                 <div style={{ textAlign:"center" }}>
-                  <SuperpapaAvatar size={105} animate={true} />
+                  <SuperpapaAvatar size={90} animate={true} />
                   <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Superpapa973</div>
-                  <div style={{ fontSize:10,color:"#718096" }}>Ton professeur</div>
+                  <div style={{ fontSize:10,color:"#718096" }}>
+                    {lang==="fr"&&"Ton professeur"}
+                    {lang==="en"&&"Your teacher"}
+                    {lang==="es"&&"Tu profesor"}
+                  </div>
                 </div>
                 <div style={{ textAlign:"center" }}>
-                  <MathisAvatar size={75} />
+                  <MathisAvatar size={70} />
                   <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Michi</div>
-                  <div style={{ fontSize:10,color:"#718096" }}>Toi !</div>
+                  <div style={{ fontSize:10,color:"#718096" }}>
+                    {lang==="fr"&&"Toi !"}
+                    {lang==="en"&&"You!"}
+                    {lang==="es"&&"¡Tú!"}
+                  </div>
                 </div>
               </div>
               <div style={{ fontSize:34,fontWeight:800,color:"#fff",textAlign:"center",marginBottom:8,letterSpacing:-1 }}>
@@ -2956,7 +2964,7 @@ export default function Home() {
                 {lang==="es"&&"Aprende a crear tu propio juego Roblox"}
               </div>
               <div style={{ fontSize:13,color:"#4CBE72",textAlign:"center",marginBottom:28 }}>
-                {totalLessons} leçons • 6 modules • FR / EN / ES
+                {totalLessons} {ui.lessons} • 6 {lang==="fr"?"modules":lang==="es"?"módulos":"modules"} • FR / EN / ES
               </div>
               <button onClick={()=>setView("studio-guide")}
                 style={{ background:"#4C9BE8",color:"#fff",border:"none",borderRadius:14,padding:"16px 40px",fontSize:17,fontWeight:700,cursor:"pointer",letterSpacing:0.3 }}>
