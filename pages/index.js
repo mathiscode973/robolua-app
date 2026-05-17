@@ -1,113 +1,163 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Head from "next/head";
 
-// ─── SVG AVATARS ─────────────────────────────────────────────────────────────
+// ─── AVATARS SVG ─────────────────────────────────────────────────────────────
 
 function SuperpapaAvatar({ size = 120, animate = false }) {
   return (
-    <svg width={size} height={size * 1.4} viewBox="0 0 100 140" className={animate ? "pulse" : ""}>
-      {/* Chapeau cowboy */}
-      <ellipse cx="50" cy="38" rx="30" ry="5" fill="#c8a96e" />
-      <rect x="28" y="18" width="44" height="22" rx="4" fill="#d4b483" />
-      <ellipse cx="50" cy="18" rx="22" ry="5" fill="#c8a96e" />
-      <rect x="35" y="14" width="30" height="8" rx="4" fill="#b8945a" />
+    <svg width={size} height={size * 1.45} viewBox="0 0 100 145" style={animate ? { animation: "pulse 2s ease-in-out infinite" } : {}}>
+      {/* Bord chapeau */}
+      <ellipse cx="50" cy="42" rx="32" ry="6" fill="#b8945a" />
+      {/* Corps chapeau */}
+      <rect x="30" y="18" width="40" height="26" rx="4" fill="#c8a96e" />
+      {/* Bande chapeau */}
+      <rect x="30" y="36" width="40" height="5" fill="#8B6914" />
+      {/* Sommet chapeau arrondi */}
+      <ellipse cx="50" cy="18" rx="20" ry="5" fill="#b8945a" />
+      {/* ✝ CROIX sur le chapeau */}
+      <rect x="47.5" y="20" width="5" height="14" rx="1" fill="#5a3a1a" />
+      <rect x="42" y="24" width="16" height="4" rx="1" fill="#5a3a1a" />
+      {/* Cheveux blancs sur les côtés */}
+      <rect x="29" y="44" width="8" height="10" rx="3" fill="#e0e0e0" />
+      <rect x="63" y="44" width="8" height="10" rx="3" fill="#e0e0e0" />
       {/* Tête */}
-      <rect x="32" y="38" width="36" height="32" rx="4" fill="#f5d5b8" />
+      <rect x="31" y="44" width="38" height="34" rx="5" fill="#f5d5b8" />
+      {/* Sourcils gris */}
+      <rect x="36" y="50" width="10" height="3" rx="1.5" fill="#aaa" />
+      <rect x="54" y="50" width="10" height="3" rx="1.5" fill="#aaa" />
       {/* Yeux */}
-      <rect x="39" y="46" width="7" height="7" rx="1" fill="#fff" />
-      <rect x="54" y="46" width="7" height="7" rx="1" fill="#fff" />
-      <rect x="41" y="48" width="4" height="4" rx="1" fill="#2d3748" />
-      <rect x="56" y="48" width="4" height="4" rx="1" fill="#2d3748" />
-      {/* Clin d'oeil */}
-      <line x1="54" y1="49" x2="61" y2="49" stroke="#2d3748" strokeWidth="2.5" strokeLinecap="round" />
+      <rect x="36" y="54" width="10" height="9" rx="2" fill="#fff" />
+      <rect x="54" y="54" width="10" height="9" rx="2" fill="#fff" />
+      <rect x="38" y="56" width="6" height="6" rx="1.5" fill="#3d2b1f" />
+      <rect x="56" y="56" width="6" height="6" rx="1.5" fill="#3d2b1f" />
+      <rect x="40" y="57" width="2" height="2" fill="#fff" />
+      {/* Clin d'oeil droit */}
+      <path d="M54 58 Q59 56 64 58" stroke="#3d2b1f" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      {/* Moustache blanche */}
+      <path d="M40 70 Q50 75 60 70" stroke="#ddd" strokeWidth="3" fill="none" strokeLinecap="round" />
       {/* Sourire */}
-      <path d="M 40 62 Q 50 70 60 62" stroke="#2d3748" strokeWidth="2" fill="none" strokeLinecap="round" />
-      {/* Corps - veste flammes */}
-      <rect x="26" y="70" width="48" height="42" rx="3" fill="#1a1a1a" />
-      {/* Flammes gauche */}
-      <path d="M26 112 Q24 100 28 90 Q30 85 27 78 Q32 86 30 95 Q35 88 33 78 Q38 88 35 100 Q32 108 26 112Z" fill="#e84c4c" />
-      <path d="M26 112 Q25 102 29 93 Q31 88 29 82 Q33 90 31 98 Q34 92 33 83 Q37 92 35 103 Q32 109 26 112Z" fill="#f6ad55" />
-      <path d="M28 112 Q27 104 31 96 Q32 91 31 86 Q34 93 33 100 Q35 95 34 88 Q37 95 36 105 Q33 110 28 112Z" fill="#ffd700" />
-      {/* Flammes droite */}
-      <path d="M74 112 Q76 100 72 90 Q70 85 73 78 Q68 86 70 95 Q65 88 67 78 Q62 88 65 100 Q68 108 74 112Z" fill="#e84c4c" />
-      <path d="M74 112 Q75 102 71 93 Q69 88 71 82 Q67 90 69 98 Q66 92 67 83 Q63 92 65 103 Q68 109 74 112Z" fill="#f6ad55" />
-      <path d="M72 112 Q73 104 69 96 Q68 91 69 86 Q66 93 67 100 Q65 95 66 88 Q63 95 64 105 Q67 110 72 112Z" fill="#ffd700" />
-      {/* Chemise blanche */}
-      <rect x="40" y="70" width="20" height="42" fill="#f0f0f0" />
+      <path d="M42 73 Q50 80 58 73" stroke="#c0835a" strokeWidth="2" fill="none" strokeLinecap="round" />
+      {/* Cou */}
+      <rect x="44" y="78" width="12" height="6" fill="#f5d5b8" />
+      {/* Corps veste noire */}
+      <rect x="24" y="84" width="52" height="44" rx="4" fill="#1a1a1a" />
+      {/* Chemise blanche centre */}
+      <rect x="42" y="84" width="16" height="44" fill="#f0f0f0" />
+      {/* Flammes bras gauche */}
+      <path d="M24 128 Q20 112 25 98 Q28 90 24 82 Q30 92 28 104 Q33 94 31 82 Q37 94 34 108 Q30 118 24 128Z" fill="#cc2200" />
+      <path d="M24 128 Q21 114 26 102 Q29 95 26 88 Q31 97 30 108 Q34 100 33 90 Q38 100 36 112 Q32 120 24 128Z" fill="#f6601a" />
+      <path d="M26 128 Q23 116 28 106 Q30 100 29 94 Q33 102 32 111 Q35 104 34 96 Q39 105 37 115 Q34 122 26 128Z" fill="#ffd700" />
+      {/* Flammes bras droit */}
+      <path d="M76 128 Q80 112 75 98 Q72 90 76 82 Q70 92 72 104 Q67 94 69 82 Q63 94 66 108 Q70 118 76 128Z" fill="#cc2200" />
+      <path d="M76 128 Q79 114 74 102 Q71 95 74 88 Q69 97 70 108 Q66 100 67 90 Q62 100 64 112 Q68 120 76 128Z" fill="#f6601a" />
+      <path d="M74 128 Q77 116 72 106 Q70 100 71 94 Q67 102 68 111 Q65 104 66 96 Q61 105 63 115 Q66 122 74 128Z" fill="#ffd700" />
       {/* Mains */}
-      <rect x="14" y="72" width="12" height="10" rx="3" fill="#f5d5b8" />
-      <rect x="74" y="72" width="12" height="10" rx="3" fill="#f5d5b8" />
+      <rect x="12" y="86" width="13" height="12" rx="4" fill="#f5d5b8" />
+      <rect x="75" y="86" width="13" height="12" rx="4" fill="#f5d5b8" />
       {/* Pantalon */}
-      <rect x="26" y="112" width="20" height="22" rx="2" fill="#2d3748" />
-      <rect x="54" y="112" width="20" height="22" rx="2" fill="#2d3748" />
+      <rect x="24" y="128" width="22" height="14" rx="3" fill="#2d3748" />
+      <rect x="54" y="128" width="22" height="14" rx="3" fill="#2d3748" />
       {/* Chaussures */}
-      <rect x="24" y="130" width="24" height="8" rx="3" fill="#1a1a1a" />
-      <rect x="52" y="130" width="24" height="8" rx="3" fill="#1a1a1a" />
+      <rect x="22" y="138" width="26" height="7" rx="3" fill="#111" />
+      <rect x="52" y="138" width="26" height="7" rx="3" fill="#111" />
     </svg>
   );
 }
 
 function MathisAvatar({ size = 100, celebrating = false }) {
   return (
-    <svg width={size} height={size * 1.4} viewBox="0 0 100 140" className={celebrating ? "pop-in" : ""}>
-      {/* Cheveux roux */}
-      <rect x="28" y="24" width="44" height="18" rx="6" fill="#c0392b" />
-      <rect x="28" y="28" width="8" height="12" rx="2" fill="#c0392b" />
-      <rect x="64" y="28" width="8" height="12" rx="2" fill="#c0392b" />
+    <svg width={size} height={size * 1.45} viewBox="0 0 100 145"
+      style={celebrating ? { animation: "popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards" } : {}}>
+      {/* Cheveux roux - plusieurs couches pour effet naturel */}
+      <ellipse cx="50" cy="30" rx="22" ry="8" fill="#a93226" />
+      <rect x="28" y="28" width="44" height="14" rx="3" fill="#c0392b" />
+      <rect x="28" y="32" width="8" height="14" rx="2" fill="#a93226" />
+      <rect x="64" y="32" width="8" height="14" rx="2" fill="#a93226" />
+      {/* Mèches */}
+      <path d="M34 28 Q36 20 40 24" stroke="#c0392b" strokeWidth="4" fill="none" strokeLinecap="round" />
+      <path d="M50 26 Q52 18 56 22" stroke="#a93226" strokeWidth="4" fill="none" strokeLinecap="round" />
       {/* Tête */}
-      <rect x="30" y="32" width="40" height="34" rx="4" fill="#f5d5b8" />
-      {/* Yeux - expression excitée */}
-      <rect x="36" y="40" width="9" height="9" rx="2" fill="#fff" />
-      <rect x="55" y="40" width="9" height="9" rx="2" fill="#fff" />
-      <rect x="38" y="42" width="5" height="5" rx="1" fill="#2d3748" />
-      <rect x="57" y="42" width="5" height="5" rx="1" fill="#2d3748" />
-      {/* Reflets yeux */}
-      <rect x="41" y="43" width="2" height="2" fill="#fff" />
-      <rect x="60" y="43" width="2" height="2" fill="#fff" />
-      {/* Sourire grand */}
-      <path d="M 36 56 Q 50 66 64 56" stroke="#2d3748" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <rect x="29" y="36" width="42" height="36" rx="5" fill="#f5d5b8" />
+      {/* Yeux grands - expression enthousiaste */}
+      <rect x="34" y="44" width="12" height="12" rx="3" fill="#fff" />
+      <rect x="54" y="44" width="12" height="12" rx="3" fill="#fff" />
+      <rect x="36" y="46" width="8" height="8" rx="2" fill="#2d1a0e" />
+      <rect x="56" y="46" width="8" height="8" rx="2" fill="#2d1a0e" />
+      <rect x="38" y="47" width="3" height="3" fill="#fff" />
+      <rect x="58" y="47" width="3" height="3" fill="#fff" />
+      {/* Sourcils hauts (surpris/enthousiaste) */}
+      <rect x="34" y="41" width="12" height="3" rx="1.5" fill="#8B2500" />
+      <rect x="54" y="41" width="12" height="3" rx="1.5" fill="#8B2500" />
+      {/* Grand sourire */}
+      <path d="M35 62 Q50 74 65 62" stroke="#2d1a0e" strokeWidth="2.5" fill="#f0a0a0" strokeLinecap="round" />
+      {/* Dents */}
+      <path d="M38 64 Q50 72 62 64" fill="#fff" />
+      {/* Joues roses */}
+      <ellipse cx="35" cy="64" rx="5" ry="3" fill="#f4a0a0" opacity="0.5" />
+      <ellipse cx="65" cy="64" rx="5" ry="3" fill="#f4a0a0" opacity="0.5" />
+      {/* Cou */}
+      <rect x="43" y="72" width="14" height="8" fill="#f5d5b8" />
       {/* Corps */}
-      <rect x="25" y="66" width="50" height="44" rx="3" fill="#1a1a1a" />
+      <rect x="24" y="80" width="52" height="46" rx="4" fill="#1a1a1a" />
+      {/* Chemise blanche */}
+      <rect x="40" y="80" width="20" height="46" fill="#f0f0f0" />
       {/* Flammes gauche */}
-      <path d="M25 110 Q23 98 27 88 Q29 82 26 75 Q31 84 29 93 Q34 86 32 76 Q37 86 34 98 Q31 106 25 110Z" fill="#e84c4c" />
-      <path d="M27 110 Q26 100 30 92 Q31 87 30 81 Q34 89 32 97 Q35 91 34 84 Q38 92 36 103 Q33 108 27 110Z" fill="#ffd700" />
+      <path d="M24 126 Q20 110 25 96 Q28 88 24 80 Q30 90 28 102 Q33 92 31 80 Q37 92 34 106 Q30 116 24 126Z" fill="#cc2200" />
+      <path d="M25 126 Q22 112 27 102 Q30 96 28 90 Q32 98 31 108 Q34 101 33 93 Q38 101 36 113 Q33 121 25 126Z" fill="#f6601a" />
+      <path d="M27 126 Q25 116 29 108 Q31 103 30 98 Q33 104 32 113 Q34 107 33 100 Q37 108 36 118 Q33 123 27 126Z" fill="#ffd700" />
       {/* Flammes droite */}
-      <path d="M75 110 Q77 98 73 88 Q71 82 74 75 Q69 84 71 93 Q66 86 68 76 Q63 86 66 98 Q69 106 75 110Z" fill="#e84c4c" />
-      <path d="M73 110 Q74 100 70 92 Q69 87 70 81 Q66 89 68 97 Q65 91 66 84 Q62 92 64 103 Q67 108 73 110Z" fill="#ffd700" />
-      {/* Chemise */}
-      <rect x="38" y="66" width="24" height="44" fill="#f0f0f0" />
+      <path d="M76 126 Q80 110 75 96 Q72 88 76 80 Q70 90 72 102 Q67 92 69 80 Q63 92 66 106 Q70 116 76 126Z" fill="#cc2200" />
+      <path d="M75 126 Q78 112 73 102 Q70 96 72 90 Q68 98 69 108 Q66 101 67 93 Q62 101 64 113 Q67 121 75 126Z" fill="#f6601a" />
       {/* Bras gauche normal */}
-      <rect x="13" y="68" width="12" height="10" rx="3" fill="#f5d5b8" />
-      {/* Bras droit levé */}
-      <rect x="75" y="52" width="10" height="22" rx="3" fill="#1a1a1a" />
-      <rect x="74" y="46" width="12" height="10" rx="3" fill="#f5d5b8" />
-      {/* Flammes bras droit */}
-      <path d="M75 74 Q73 66 76 60 Q77 57 75 53 Q78 58 77 64 Q79 60 78 54 Q81 60 80 68 Q78 72 75 74Z" fill="#f6ad55" />
+      <rect x="11" y="82" width="13" height="12" rx="4" fill="#f5d5b8" />
+      {/* Bras droit LEVÉ - victoire */}
+      <rect x="76" y="60" width="12" height="26" rx="4" fill="#1a1a1a" />
+      {/* Flammes bras levé */}
+      <path d="M76 86 Q73 76 77 68 Q79 63 77 58 Q80 65 79 73 Q82 67 81 60 Q84 67 83 77 Q80 82 76 86Z" fill="#f6601a" />
+      {/* Main levée */}
+      <rect x="74" y="50" width="14" height="12" rx="4" fill="#f5d5b8" />
       {/* Pantalon */}
-      <rect x="25" y="110" width="21" height="24" rx="2" fill="#2d3748" />
-      <rect x="54" y="110" width="21" height="24" rx="2" fill="#2d3748" />
+      <rect x="24" y="126" width="22" height="16" rx="3" fill="#2d3748" />
+      <rect x="54" y="126" width="22" height="16" rx="3" fill="#2d3748" />
       {/* Chaussures */}
-      <rect x="23" y="128" width="25" height="9" rx="3" fill="#1a1a1a" />
-      <rect x="52" y="128" width="25" height="9" rx="3" fill="#1a1a1a" />
+      <rect x="22" y="136" width="26" height="8" rx="3" fill="#111" />
+      <rect x="52" y="136" width="26" height="8" rx="3" fill="#111" />
     </svg>
   );
 }
 
-// ─── CURRICULUM DATA ──────────────────────────────────────────────────────────
+// ─── CURRICULUM ───────────────────────────────────────────────────────────────
 
 const MODULES = [
   {
     id: 1, icon: "🚀", color: "#4C9BE8",
-    title: "Premiers Pas",
-    sub: "Heures 1-3 • Scripts, Variables, Fonctions",
-    intro: "Howdy ! Je suis Superpapa973, ton guide dans cette aventure du code. On commence par les bases : comment parler à Roblox !",
+    title: { fr: "Premiers Pas", en: "First Steps", es: "Primeros Pasos" },
+    sub: { fr: "Heures 1-3 • Scripts, Variables, Fonctions", en: "Hours 1-3 • Scripts, Variables, Functions", es: "Horas 1-3 • Scripts, Variables, Funciones" },
+    intro: {
+      fr: "Howdy ! Je suis Superpapa973, ton guide. On commence par apprendre à parler à Roblox Studio !",
+      en: "Howdy! I'm Superpapa973, your guide. Let's start by learning how to talk to Roblox Studio!",
+      es: "¡Howdy! Soy Superpapa973, tu guía. ¡Empezamos aprendiendo a hablar con Roblox Studio!"
+    },
     lessons: [
       {
-        id: "1-1", title: "Ton premier script",
-        concept: "print() et commentaires",
-        superpapa: "Tout grand jeu commence par une seule ligne de code. La tienne, c'est aujourd'hui !",
-        explanation: "Un script, c'est comme une recette que tu donnes à l'ordinateur. Il suit tes instructions une par une, dans l'ordre ! La fonction print() affiche un message dans la console — c'est ton premier outil de développeur.",
-        tip: "Les lignes qui commencent par -- sont des commentaires. Roblox les ignore complètement — c'est juste pour toi et tes amis qui liront ton code.",
+        id: "1-1",
+        title: { fr: "Ton premier script", en: "Your first script", es: "Tu primer script" },
+        concept: { fr: "print() et commentaires", en: "print() and comments", es: "print() y comentarios" },
+        superpapa: {
+          fr: "Tout grand jeu a commencé par une seule ligne de code. La tienne commence aujourd'hui !",
+          en: "Every great game started with a single line of code. Yours starts today!",
+          es: "¡Todo gran juego empezó con una sola línea de código. El tuyo empieza hoy!"
+        },
+        explanation: {
+          fr: "Un script, c'est une liste d'instructions que tu donnes à Roblox. Il les suit une par une, dans l'ordre ! La fonction print() affiche un message dans la fenêtre Output — c'est ton premier outil de développeur.",
+          en: "A script is a list of instructions you give to Roblox. It follows them one by one, in order! The print() function shows a message in the Output window — it's your first developer tool.",
+          es: "Un script es una lista de instrucciones que le das a Roblox. ¡Las sigue una por una, en orden! La función print() muestra un mensaje en la ventana Output — es tu primera herramienta de desarrollador."
+        },
+        tip: {
+          fr: "Les lignes qui commencent par -- sont des commentaires. Roblox les ignore — c'est juste pour expliquer ton code !",
+          en: "Lines starting with -- are comments. Roblox ignores them — they're just to explain your code!",
+          es: "Las líneas que empiezan con -- son comentarios. ¡Roblox los ignora — solo sirven para explicar tu código!"
+        },
         code: `-- Mon premier script Roblox !
 -- Les commentaires expliquent le code
 
@@ -115,76 +165,181 @@ print("Bonjour le monde !")
 print("Je m'appelle Mathis")
 print("Je code dans Roblox !")
 
--- Tu peux imprimer des nombres aussi
+-- On peut aussi afficher des nombres
 print(42)
-print(100 + 200)`
+print(100 + 200)`,
+        studio: {
+          where: { fr: "ServerScriptService", en: "ServerScriptService", es: "ServerScriptService" },
+          steps: {
+            fr: [
+              "Ouvre Roblox Studio et clique 'New' pour créer un projet vide",
+              "Dans le panneau 'Explorer' à droite, trouve 'ServerScriptService'",
+              "Clic droit sur ServerScriptService → 'Insert Object' → 'Script'",
+              "Double-clique sur le nouveau 'Script' pour l'ouvrir",
+              "Efface tout le texte existant (Ctrl+A puis Suppr)",
+              "Tape ou colle le code ci-dessus",
+              "Clique le bouton ▶ Play en haut (ou appuie F5)",
+              "Regarde la fenêtre 'Output' en bas — tes messages apparaissent !"
+            ],
+            en: [
+              "Open Roblox Studio and click 'New' to create an empty project",
+              "In the 'Explorer' panel on the right, find 'ServerScriptService'",
+              "Right-click ServerScriptService → 'Insert Object' → 'Script'",
+              "Double-click the new 'Script' to open it",
+              "Select all existing text (Ctrl+A) and delete it",
+              "Type or paste the code above",
+              "Click the ▶ Play button at the top (or press F5)",
+              "Look at the 'Output' window at the bottom — your messages appear!"
+            ],
+            es: [
+              "Abre Roblox Studio y haz clic en 'New' para crear un proyecto vacío",
+              "En el panel 'Explorer' a la derecha, encuentra 'ServerScriptService'",
+              "Clic derecho en ServerScriptService → 'Insert Object' → 'Script'",
+              "Doble clic en el nuevo 'Script' para abrirlo",
+              "Selecciona todo el texto existente (Ctrl+A) y bórralo",
+              "Escribe o pega el código de arriba",
+              "Haz clic en el botón ▶ Play arriba (o presiona F5)",
+              "¡Mira la ventana 'Output' abajo — tus mensajes aparecen!"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Ton défi : Modifie le code pour afficher TON prénom, TON âge, et le résultat de 7 × 8. Est-ce que tu vois tes 3 messages dans Output ?",
+            en: "🎯 Your challenge: Modify the code to display YOUR name, YOUR age, and the result of 7 × 8. Can you see your 3 messages in Output?",
+            es: "🎯 Tu reto: Modifica el código para mostrar TU nombre, TU edad, y el resultado de 7 × 8. ¿Ves tus 3 mensajes en Output?"
+          }
+        }
       },
       {
-        id: "1-2", title: "Variables — tes boîtes magiques",
-        concept: "local, types : string, number, boolean",
-        superpapa: "Les variables, c'est comme ton inventaire dans un jeu RPG. Tu ranges des choses et tu les retrouves quand tu en as besoin !",
-        explanation: "Une variable est une boîte avec un nom. Tu y mets une valeur, et tu peux la récupérer ou la changer plus tard. Il existe trois types principaux : les textes (string), les nombres (number) et les vrais/faux (boolean).",
-        tip: "Utilise toujours le mot 'local' devant tes variables. Ça les garde bien rangées dans ton script et évite les bugs !",
-        code: `-- Les trois types de variables
-local monPrenom = "Mathis"        -- texte (string)
-local monAge = 11                  -- nombre (number)
-local jaimeCoder = true            -- vrai/faux (boolean)
+        id: "1-2",
+        title: { fr: "Variables — tes boîtes magiques", en: "Variables — your magic boxes", es: "Variables — tus cajas mágicas" },
+        concept: { fr: "local, string, number, boolean", en: "local, string, number, boolean", es: "local, string, number, boolean" },
+        superpapa: {
+          fr: "Les variables, c'est comme ton inventaire dans un RPG. Tu ranges des infos et tu les retrouves quand tu en as besoin !",
+          en: "Variables are like your inventory in an RPG. You store info and find it when you need it!",
+          es: "¡Las variables son como tu inventario en un RPG. Guardas info y la encuentras cuando la necesitas!"
+        },
+        explanation: {
+          fr: "Une variable est une boîte avec un nom. Tu y mets une valeur et tu peux la changer plus tard. Il y a 3 types : le texte (string), les nombres (number) et vrai/faux (boolean).",
+          en: "A variable is a box with a name. You put a value in it and can change it later. There are 3 types: text (string), numbers (number) and true/false (boolean).",
+          es: "Una variable es una caja con nombre. Pones un valor y puedes cambiarlo después. Hay 3 tipos: texto (string), números (number) y verdadero/falso (boolean)."
+        },
+        tip: {
+          fr: "Utilise toujours 'local' devant tes variables ! Ça les garde bien rangées dans ton script et évite les bugs mystérieux.",
+          en: "Always use 'local' before your variables! It keeps them tidy in your script and avoids mysterious bugs.",
+          es: "¡Usa siempre 'local' antes de tus variables! Las mantiene ordenadas en tu script y evita bugs misteriosos."
+        },
+        code: `local monPrenom = "Mathis"      -- texte
+local monAge = 11               -- nombre
+local jaimeCoder = true         -- vrai/faux
 
-print("Bonjour, je suis " .. monPrenom)
+print("Salut, je suis " .. monPrenom)
 print("J'ai " .. monAge .. " ans")
 
 -- On peut changer la valeur !
 monAge = 12
 print("Maintenant j'ai " .. monAge .. " ans")
 
--- Maths avec les variables
+-- Calculs avec les variables
 local points = 100
 local bonus = 50
-local total = points + bonus
-print("Score total : " .. total)`
+print("Score total : " .. points + bonus)`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Dans ton Script de tout à l'heure, efface tout", "Tape le code ci-dessus", "Lance avec ▶ Play et regarde Output"],
+            en: ["In your Script from before, clear everything", "Type the code above", "Run with ▶ Play and watch Output"],
+            es: ["En tu Script anterior, borra todo", "Escribe el código de arriba", "Ejecuta con ▶ Play y mira Output"]
+          },
+          exercise: {
+            fr: "🎯 Crée des variables pour : ton jeu préféré (texte), ton score (nombre), tu aimes Roblox (vrai/faux). Affiche tout dans Output !",
+            en: "🎯 Create variables for: your favorite game (text), your score (number), you like Roblox (true/false). Display everything in Output!",
+            es: "🎯 Crea variables para: tu juego favorito (texto), tu puntuación (número), te gusta Roblox (verdadero/falso). ¡Muestra todo en Output!"
+          }
+        }
       },
       {
-        id: "1-3", title: "Fonctions — tes super-pouvoirs",
-        concept: "Créer, nommer et appeler des fonctions",
-        superpapa: "Une fonction, c'est comme une attaque spéciale dans un jeu de combat. Tu la crées une fois, et tu peux l'utiliser quand tu veux !",
-        explanation: "Une fonction regroupe plusieurs instructions sous un seul nom. Au lieu de réécrire le même code 10 fois, tu l'écris une fois dans une fonction et tu l'appelles autant que tu veux. C'est ça qui rend les développeurs efficaces !",
-        tip: "Choisis des noms de fonctions clairs et descriptifs. 'faireSauter()' est bien mieux que 'f1()' — dans 6 mois tu sauras encore ce que ça fait !",
+        id: "1-3",
+        title: { fr: "Fonctions — tes super-pouvoirs", en: "Functions — your superpowers", es: "Funciones — tus superpoderes" },
+        concept: { fr: "Créer, nommer et appeler des fonctions", en: "Create, name and call functions", es: "Crear, nombrar y llamar funciones" },
+        superpapa: {
+          fr: "Une fonction, c'est une attaque spéciale dans un jeu de combat. Tu la crées une fois et tu l'utilises quand tu veux !",
+          en: "A function is a special move in a fighting game. You create it once and use it whenever you want!",
+          es: "¡Una función es un movimiento especial en un juego de lucha. ¡La creas una vez y la usas cuando quieras!"
+        },
+        explanation: {
+          fr: "Une fonction regroupe plusieurs instructions sous un seul nom. Au lieu de réécrire le même code 10 fois, tu l'écris une fois dans une fonction et tu l'appelles autant que tu veux. C'est ça qui rend les développeurs efficaces !",
+          en: "A function groups several instructions under one name. Instead of rewriting the same code 10 times, you write it once in a function and call it as many times as you want. That's what makes developers efficient!",
+          es: "Una función agrupa varias instrucciones bajo un nombre. En lugar de reescribir el mismo código 10 veces, lo escribes una vez en una función y la llamas tantas veces como quieras. ¡Eso es lo que hace eficientes a los desarrolladores!"
+        },
+        tip: {
+          fr: "Choisis des noms clairs pour tes fonctions. 'faireSauter()' est bien mieux que 'f1()' — dans 6 mois tu sauras encore ce que ça fait !",
+          en: "Choose clear names for your functions. 'makeJump()' is much better than 'f1()' — in 6 months you'll still know what it does!",
+          es: "Elige nombres claros para tus funciones. '¡hacerSaltar()' es mucho mejor que 'f1()' — ¡en 6 meses seguirás sabiendo qué hace!"
+        },
         code: `-- Définir une fonction
 local function direBonjour()
     print("Salut tout le monde !")
     print("Bienvenue dans mon jeu !")
 end
 
--- Appeler la fonction (l'utiliser)
+-- Appeler la fonction
 direBonjour()
-direBonjour()
-direBonjour()  -- On peut l'appeler autant de fois qu'on veut !
+direBonjour()  -- encore !
 
--- Fonction qui fait un calcul
+-- Fonction avec un calcul
 local function afficherScore()
     local score = 9001
-    print("TON SCORE : " .. score)
+    print("Ton score : " .. score)
     print("C'est OVER 9000 !!!")
 end
 
-afficherScore()`
+afficherScore()`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Efface ton ancien script", "Tape le code ci-dessus", "Lance et regarde Output", "Essaie d'appeler direBonjour() 5 fois !"],
+            en: ["Clear your old script", "Type the code above", "Run and watch Output", "Try calling sayHello() 5 times!"],
+            es: ["Borra tu script anterior", "Escribe el código de arriba", "Ejecuta y mira Output", "¡Intenta llamar a decirHola() 5 veces!"]
+          },
+          exercise: {
+            fr: "🎯 Crée ta propre fonction appelée 'maFonction' qui affiche 3 messages de ton choix. Appelle-la 3 fois. Vois-tu 9 messages dans Output ?",
+            en: "🎯 Create your own function called 'myFunction' that shows 3 messages of your choice. Call it 3 times. Do you see 9 messages in Output?",
+            es: "🎯 Crea tu propia función llamada 'miFuncion' que muestre 3 mensajes a tu elección. Llámala 3 veces. ¿Ves 9 mensajes en Output?"
+          }
+        }
       }
     ]
   },
   {
     id: 2, icon: "⚙️", color: "#E8874C",
-    title: "Logique de Jeu",
-    sub: "Heures 4-8 • Paramètres, Conditions, Boucles",
-    intro: "Maintenant qu'on sait écrire du code, on va apprendre à lui donner de l'intelligence — pour qu'il prenne des décisions comme un vrai cerveau de jeu !",
+    title: { fr: "Logique de Jeu", en: "Game Logic", es: "Lógica de Juego" },
+    sub: { fr: "Heures 4-8 • Paramètres, Conditions, Boucles", en: "Hours 4-8 • Parameters, Conditions, Loops", es: "Horas 4-8 • Parámetros, Condiciones, Bucles" },
+    intro: {
+      fr: "Maintenant qu'on sait écrire du code, on lui donne de l'intelligence — pour qu'il prenne des décisions comme un vrai cerveau de jeu !",
+      en: "Now that we can write code, let's give it intelligence — so it makes decisions like a real game brain!",
+      es: "¡Ahora que sabemos escribir código, le damos inteligencia — para que tome decisiones como un cerebro de juego real!"
+    },
     lessons: [
       {
-        id: "2-1", title: "Paramètres — personnalise tes fonctions",
-        concept: "Arguments, paramètres, valeurs de retour",
-        superpapa: "Les paramètres, c'est comme les ingrédients d'une recette. Même fonction, ingrédients différents — résultat différent !",
-        explanation: "Les paramètres permettent d'envoyer des informations à une fonction. Au lieu d'une fonction qui fait toujours la même chose, elle peut s'adapter selon ce qu'on lui donne. La valeur 'return' permet à la fonction de te rendre un résultat.",
-        tip: "Une fonction peut recevoir plusieurs paramètres séparés par des virgules, et elle peut aussi retourner plusieurs valeurs !",
-        code: `-- Fonction avec paramètres
-local function accueillir(prenom, score)
+        id: "2-1",
+        title: { fr: "Paramètres — personnalise tes fonctions", en: "Parameters — customize your functions", es: "Parámetros — personaliza tus funciones" },
+        concept: { fr: "Arguments, paramètres, valeurs de retour", en: "Arguments, parameters, return values", es: "Argumentos, parámetros, valores de retorno" },
+        superpapa: {
+          fr: "Les paramètres, c'est comme les ingrédients d'une recette. Même fonction, ingrédients différents — résultat différent !",
+          en: "Parameters are like recipe ingredients. Same function, different ingredients — different result!",
+          es: "¡Los parámetros son como los ingredientes de una receta. ¡Misma función, ingredientes diferentes — resultado diferente!"
+        },
+        explanation: {
+          fr: "Les paramètres envoient des informations à une fonction. Au lieu de faire toujours la même chose, elle s'adapte selon ce qu'on lui donne. 'return' permet à la fonction de te rendre un résultat.",
+          en: "Parameters send information to a function. Instead of always doing the same thing, it adapts based on what you give it. 'return' lets the function give you a result back.",
+          es: "Los parámetros envían información a una función. En lugar de hacer siempre lo mismo, se adapta según lo que le damos. 'return' permite que la función te devuelva un resultado."
+        },
+        tip: {
+          fr: "Une fonction peut recevoir plusieurs paramètres séparés par des virgules, et retourner plusieurs valeurs aussi !",
+          en: "A function can receive multiple parameters separated by commas, and return multiple values too!",
+          es: "¡Una función puede recibir varios parámetros separados por comas, y también devolver varios valores!"
+        },
+        code: `local function accueillir(prenom, score)
     print("Bienvenue " .. prenom .. " !")
     print("Ton score : " .. score .. " points")
 end
@@ -193,136 +348,207 @@ accueillir("Mathis", 1500)
 accueillir("Lucas", 800)
 
 -- Fonction qui retourne une valeur
-local function calculerBonus(score, multiplicateur)
-    local bonus = score * multiplicateur
-    return bonus
+local function calculerBonus(score, multi)
+    return score * multi
 end
 
 local monBonus = calculerBonus(100, 3)
-print("Bonus gagné : " .. monBonus)  -- 300
-
--- Retourner plusieurs valeurs
-local function minMax(a, b)
-    return math.min(a, b), math.max(a, b)
-end
-
-local petit, grand = minMax(42, 17)
-print("Min: " .. petit .. ", Max: " .. grand)`
+print("Bonus : " .. monBonus)  -- 300`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Tape le code dans ton Script", "Lance avec ▶ et regarde Output", "Essaie d'appeler accueillir() avec ton prénom !"],
+            en: ["Type the code in your Script", "Run with ▶ and watch Output", "Try calling greet() with your own name!"],
+            es: ["Escribe el código en tu Script", "Ejecuta con ▶ y mira Output", "¡Intenta llamar a saludar() con tu nombre!"]
+          },
+          exercise: {
+            fr: "🎯 Crée une fonction 'calculerVie' qui prend la vie actuelle et les dégâts reçus, et retourne la vie restante. Teste avec vie=100 et dégâts=35.",
+            en: "🎯 Create a 'calculateHealth' function that takes current health and damage received, and returns remaining health. Test with health=100 and damage=35.",
+            es: "🎯 Crea una función 'calcularVida' que tome la vida actual y el daño recibido, y devuelva la vida restante. Prueba con vida=100 y daño=35."
+          }
+        }
       },
       {
-        id: "2-2", title: "Conditions — ton jeu prend des décisions",
-        concept: "if / elseif / else / opérateurs logiques",
-        superpapa: "C'est la ligne de vie d'un jeu ! Si le joueur touche un ennemi, il perd de la vie. Sinon, il continue. Tout ça avec 'if' !",
-        explanation: "Les conditions permettent à ton code d'exécuter différentes actions selon la situation. C'est le cerveau de ton jeu : il observe ce qui se passe et réagit intelligemment. Tu peux combiner des conditions avec 'and' et 'or'.",
-        tip: "== teste si deux choses sont égales. = assigne une valeur. Confondre les deux est le bug numéro 1 des débutants !",
+        id: "2-2",
+        title: { fr: "Conditions — ton jeu prend des décisions", en: "Conditions — your game makes decisions", es: "Condiciones — tu juego toma decisiones" },
+        concept: { fr: "if / elseif / else / and / or", en: "if / elseif / else / and / or", es: "if / elseif / else / and / or" },
+        superpapa: {
+          fr: "C'est la ligne de vie d'un jeu ! Si le joueur touche un ennemi, il perd de la vie. Sinon, il continue. Tout ça avec 'if' !",
+          en: "This is a game's lifeline! If the player touches an enemy, they lose health. Otherwise, they continue. All with 'if'!",
+          es: "¡Esta es la línea de vida de un juego! Si el jugador toca un enemigo, pierde vida. De lo contrario, continúa. ¡Todo con 'if'!"
+        },
+        explanation: {
+          fr: "Les conditions permettent à ton code d'exécuter différentes actions selon la situation. C'est le cerveau de ton jeu : il observe et réagit. Tu combines les conditions avec 'and' et 'or'.",
+          en: "Conditions let your code do different things depending on the situation. It's your game's brain: it observes and reacts. You combine conditions with 'and' and 'or'.",
+          es: "Las condiciones permiten que tu código haga cosas diferentes según la situación. Es el cerebro de tu juego: observa y reacciona. Combinas condiciones con 'and' y 'or'."
+        },
+        tip: {
+          fr: "== teste si deux choses sont égales. = assigne une valeur. Confondre les deux est l'erreur numéro 1 des débutants !",
+          en: "== tests if two things are equal. = assigns a value. Confusing the two is the #1 beginner mistake!",
+          es: "== comprueba si dos cosas son iguales. = asigna un valor. ¡Confundirlos es el error #1 de los principiantes!"
+        },
         code: `local vie = 65
 local bouclier = true
 
--- if simple
 if vie <= 0 then
     print("GAME OVER !")
 elseif vie <= 25 then
     print("DANGER ! Fuis !")
 elseif vie <= 50 then
-    print("Attention, tu es blessé")
+    print("Tu es blessé...")
 else
     print("Tu es en pleine forme !")
 end
 
--- Opérateurs logiques : and, or, not
+-- Combiner les conditions
 if vie > 30 and bouclier == true then
     print("Tu peux attaquer !")
 end
 
 if vie <= 10 or not bouclier then
     print("Utilise une potion !")
-end
-
--- Comparer des textes
-local arme = "épée"
-if arme == "épée" then
-    print("Dégâts : 50")
-elseif arme == "arc" then
-    print("Dégâts : 30 à distance")
-end`
+end`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie le code dans ton Script", "Change la valeur de 'vie' (0, 20, 40, 80)", "Lance à chaque fois — tu vois le message changer ?"],
+            en: ["Copy the code to your Script", "Change the value of 'health' (0, 20, 40, 80)", "Run each time — do you see the message change?"],
+            es: ["Copia el código en tu Script", "Cambia el valor de 'vida' (0, 20, 40, 80)", "Ejecuta cada vez — ¿ves el mensaje cambiar?"]
+          },
+          exercise: {
+            fr: "🎯 Crée un système de niveau : si score < 100 → 'Niveau 1', si score < 500 → 'Niveau 2', si score < 1000 → 'Niveau 3', sinon → 'Niveau MAX !'. Teste avec différents scores.",
+            en: "🎯 Create a level system: if score < 100 → 'Level 1', if score < 500 → 'Level 2', if score < 1000 → 'Level 3', else → 'MAX Level!'. Test with different scores.",
+            es: "🎯 Crea un sistema de niveles: si puntuación < 100 → 'Nivel 1', si puntuación < 500 → 'Nivel 2', si puntuación < 1000 → 'Nivel 3', si no → '¡Nivel MAX!'. Prueba con diferentes puntuaciones."
+          }
+        }
       },
       {
-        id: "2-3", title: "Déboguer — trouver et corriger les bugs",
-        concept: "Debouncing, print debugging, pcall",
-        superpapa: "Tout développeur fait des bugs — même les pros ! La différence, c'est qu'on sait les trouver. C'est une compétence à part entière.",
-        explanation: "Le débogage, c'est l'art de trouver pourquoi ton code ne fait pas ce que tu veux. Le 'debouncing' évite qu'une action se déclenche 100 fois d'un coup. Avec pcall, ton jeu ne plante pas quand il y a une erreur.",
-        tip: "Ajoute des print() partout pour voir ce qui se passe dans ton code. C'est la technique la plus simple et la plus efficace !",
-        code: `-- Debouncing : éviter de déclencher trop vite
+        id: "2-3",
+        title: { fr: "Déboguer — trouver les bugs", en: "Debugging — finding bugs", es: "Depuración — encontrar bugs" },
+        concept: { fr: "Debouncing, print debugging, pcall", en: "Debouncing, print debugging, pcall", es: "Debouncing, print debugging, pcall" },
+        superpapa: {
+          fr: "Tout développeur fait des bugs — même les pros ! La différence c'est qu'on sait les trouver. C'est une compétence à part entière !",
+          en: "Every developer makes bugs — even pros! The difference is knowing how to find them. It's a skill in itself!",
+          es: "¡Todo desarrollador comete bugs — ¡incluso los pros! ¡La diferencia es saber encontrarlos. ¡Es una habilidad en sí misma!"
+        },
+        explanation: {
+          fr: "Le débogage, c'est l'art de trouver pourquoi ton code ne fait pas ce que tu veux. Le 'debouncing' évite qu'une action se déclenche 100 fois d'un coup. pcall protège ton jeu contre les erreurs.",
+          en: "Debugging is the art of finding why your code doesn't do what you want. 'Debouncing' prevents an action from triggering 100 times at once. pcall protects your game from errors.",
+          es: "Depurar es el arte de encontrar por qué tu código no hace lo que quieres. El 'debouncing' evita que una acción se dispare 100 veces de golpe. pcall protege tu juego de errores."
+        },
+        tip: {
+          fr: "Ajoute des print() partout pour voir ce qui se passe. C'est la technique la plus simple et la plus efficace — même les pros l'utilisent !",
+          en: "Add print() everywhere to see what's happening. It's the simplest and most effective technique — even pros use it!",
+          es: "¡Añade print() en todas partes para ver qué pasa. ¡Es la técnica más simple y efectiva — ¡incluso los pros la usan!"
+        },
+        code: `-- Debouncing : éviter trop de déclenchements
 local peutSauter = true
 
 local function sauter()
-    if not peutSauter then return end  -- sort si déjà en train de sauter
-    
+    if not peutSauter then return end
     peutSauter = false
     print("Saut !")
-    
-    task.wait(0.5)  -- attend 0.5 seconde
+    task.wait(0.5)
     peutSauter = true
-    print("Prêt à sauter à nouveau")
 end
 
--- Appels rapides : seul le premier compte
 sauter()
-sauter()  -- ignoré (peutSauter = false)
+sauter()  -- ignoré
 
--- pcall : exécuter sans planter le jeu
+-- pcall : attraper les erreurs sans planter
 local succes, erreur = pcall(function()
     local x = nil
-    print(x.valeur)  -- causerait un bug !
+    print(x.valeur)  -- bug !
 end)
 
 if not succes then
-    print("Erreur attrapée : " .. erreur)
-    print("Le jeu continue quand même !")
-end`
+    print("Erreur : " .. erreur)
+    print("Le jeu continue !")
+end`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie le code dans Studio", "Lance et regarde Output", "La console rouge montre les erreurs — c'est normal avec pcall !"],
+            en: ["Copy the code to Studio", "Run and watch Output", "Red console shows errors — that's normal with pcall!"],
+            es: ["Copia el código en Studio", "Ejecuta y mira Output", "¡La consola roja muestra errores — eso es normal con pcall!"]
+          },
+          exercise: {
+            fr: "🎯 Écris un script avec une erreur volontaire (divise par zéro : 5/0 ou accède à nil.quelquechose). Entoure-le avec pcall et affiche un message d'erreur sympa dans Output.",
+            en: "🎯 Write a script with an intentional error (divide by zero: 5/0 or access nil.something). Wrap it with pcall and display a friendly error message in Output.",
+            es: "🎯 Escribe un script con un error intencional (divide por cero: 5/0 o accede a nil.algo). Envuélvelo con pcall y muestra un mensaje de error amigable en Output."
+          }
+        }
       },
       {
-        id: "2-4", title: "Boucle while — répéter tant que",
-        concept: "while / repeat-until / task.wait()",
-        superpapa: "Imagine devoir compter 1000 ennemis à la main... La boucle while fait ça pour toi en un clin d'oeil !",
-        explanation: "La boucle while répète un bloc de code tant qu'une condition est vraie. C'est parfait pour faire des compteurs, des minuteries, ou tout ce qui doit se répéter indéfiniment dans un jeu. task.wait() est essentiel pour ne pas bloquer le jeu.",
-        tip: "Fais toujours attention à ce que ta condition devienne fausse un jour — sinon tu crées une boucle infinie qui bloque tout !",
-        code: `-- Compte à rebours avant le départ
+        id: "2-4",
+        title: { fr: "Boucle while — répéter tant que", en: "while loop — repeat while", es: "Bucle while — repetir mientras" },
+        concept: { fr: "while / repeat-until / task.wait()", en: "while / repeat-until / task.wait()", es: "while / repeat-until / task.wait()" },
+        superpapa: {
+          fr: "Imagine devoir compter 1000 ennemis à la main... La boucle while fait ça pour toi en un instant !",
+          en: "Imagine counting 1000 enemies by hand... The while loop does that for you in an instant!",
+          es: "¡Imagina contar 1000 enemigos a mano... ¡El bucle while lo hace por ti en un instante!"
+        },
+        explanation: {
+          fr: "La boucle while répète un bloc de code tant qu'une condition est vraie. task.wait() est essentiel pour ne pas bloquer le jeu — il fait une pause avant la prochaine répétition.",
+          en: "The while loop repeats a block of code as long as a condition is true. task.wait() is essential to not freeze the game — it pauses before the next repetition.",
+          es: "El bucle while repite un bloque de código mientras una condición sea verdadera. task.wait() es esencial para no bloquear el juego — hace una pausa antes de la siguiente repetición."
+        },
+        tip: {
+          fr: "Fais toujours attention que ta condition devienne fausse un jour — sinon tu crées une boucle infinie qui bloque tout !",
+          en: "Always make sure your condition becomes false eventually — otherwise you create an infinite loop that freezes everything!",
+          es: "¡Asegúrate siempre de que tu condición se vuelva falsa algún día — de lo contrario creas un bucle infinito que bloquea todo!"
+        },
+        code: `-- Compte à rebours
 local temps = 5
-
 while temps > 0 do
     print("Départ dans : " .. temps)
-    task.wait(1)  -- attend 1 seconde
+    task.wait(1)
     temps = temps - 1
 end
-
 print("C'EST PARTI !")
 
--- Régénération de vie automatique
+-- Régénération de vie
 local vie = 30
 local vieMax = 100
-
 while vie < vieMax do
     vie = vie + 10
-    print("Vie régénérée : " .. vie .. "/" .. vieMax)
+    print("Vie : " .. vie .. "/" .. vieMax)
     task.wait(2)
 end
-
-print("Vie au maximum !")
-
--- repeat-until : s'exécute au moins une fois
-local tentatives = 0
-repeat
-    tentatives = tentatives + 1
-    print("Tentative " .. tentatives)
-until tentatives >= 3`
+print("Vie au maximum !")`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie le code dans Studio", "Lance avec ▶ Play", "Regarde Output — tu vois le compte à rebours en temps réel !"],
+            en: ["Copy the code to Studio", "Run with ▶ Play", "Watch Output — you see the countdown in real time!"],
+            es: ["Copia el código en Studio", "Ejecuta con ▶ Play", "¡Mira Output — ves la cuenta regresiva en tiempo real!"]
+          },
+          exercise: {
+            fr: "🎯 Crée une minuterie de jeu : affiche 'Temps : 10', puis 'Temps : 9'... jusqu'à 0, puis affiche 'GAME OVER !'. Le compte doit se faire avec task.wait(1).",
+            en: "🎯 Create a game timer: display 'Time: 10', then 'Time: 9'... down to 0, then show 'GAME OVER!'. The countdown must use task.wait(1).",
+            es: "🎯 Crea un temporizador de juego: muestra 'Tiempo: 10', luego 'Tiempo: 9'... hasta 0, luego muestra '¡GAME OVER!'. La cuenta debe usar task.wait(1)."
+          }
+        }
       },
       {
-        id: "2-5", title: "Boucle for — répéter un nombre précis de fois",
-        concept: "for numérique / for générique / break / continue",
-        superpapa: "La boucle for est ta meilleure amie pour créer des vagues d'ennemis, des récompenses, des niveaux — tout ce qui se répète un nombre précis de fois !",
-        explanation: "La boucle for numériquepermet de répéter exactement N fois avec un compteur automatique. Tu peux aussi aller à l'envers, ou sauter de 2 en 2. Le mot 'break' permet de sortir d'une boucle avant la fin.",
-        tip: "Utilise 'for' quand tu sais exactement combien de fois répéter. Utilise 'while' quand tu ne sais pas à l'avance.",
+        id: "2-5",
+        title: { fr: "Boucle for — répéter exactement N fois", en: "for loop — repeat exactly N times", es: "Bucle for — repetir exactamente N veces" },
+        concept: { fr: "for numérique, break, boucles imbriquées", en: "numeric for, break, nested loops", es: "for numérico, break, bucles anidados" },
+        superpapa: {
+          fr: "La boucle for est ta meilleure amie pour créer des vagues d'ennemis, des récompenses, des niveaux — tout ce qui se répète un nombre précis de fois !",
+          en: "The for loop is your best friend for creating enemy waves, rewards, levels — anything that repeats an exact number of times!",
+          es: "¡El bucle for es tu mejor amigo para crear oleadas de enemigos, recompensas, niveles — ¡todo lo que se repite un número exacto de veces!"
+        },
+        explanation: {
+          fr: "La boucle for numériquepermet de répéter exactement N fois avec un compteur automatique. Tu peux aussi aller à l'envers ou sauter de 2 en 2. 'break' permet de sortir de la boucle avant la fin.",
+          en: "The numeric for loop repeats exactly N times with an automatic counter. You can also count backwards or skip by 2. 'break' lets you exit the loop early.",
+          es: "El bucle for numérico repite exactamente N veces con un contador automático. También puedes contar hacia atrás o saltar de 2 en 2. 'break' te permite salir del bucle antes de tiempo."
+        },
+        tip: {
+          fr: "Utilise 'for' quand tu sais exactement combien de fois répéter. Utilise 'while' quand tu ne sais pas à l'avance.",
+          en: "Use 'for' when you know exactly how many times to repeat. Use 'while' when you don't know in advance.",
+          es: "Usa 'for' cuando sepas exactamente cuántas veces repetir. Usa 'while' cuando no lo sepas de antemano."
+        },
         code: `-- Boucle for de base
 for i = 1, 5 do
     print("Tour " .. i)
@@ -330,206 +556,242 @@ end
 
 -- Compter à l'envers
 for i = 10, 1, -1 do
-    print("Compte à rebours : " .. i)
+    print("Compte : " .. i)
 end
 
--- Sauter de 2 en 2
-for i = 0, 20, 2 do
-    print("Nombre pair : " .. i)
-end
-
--- Créer 10 pièces d'or
-for i = 1, 10 do
-    print("Pièce " .. i .. " créée !")
+-- Créer 5 ennemis
+for i = 1, 5 do
+    print("Ennemi " .. i .. " créé !")
 end
 
 -- Break : sortir de la boucle
 for i = 1, 100 do
     if i == 7 then
-        print("Trouvé le chiffre magique !")
-        break  -- on sort immédiatement
+        print("Chiffre magique trouvé !")
+        break
     end
-    print("Cherche... " .. i)
-end
-
--- Boucles imbriquées (grille)
-for ligne = 1, 3 do
-    for colonne = 1, 3 do
-        print("Case [" .. ligne .. "," .. colonne .. "]")
-    end
-end`
+end`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie le code", "Lance et observe Output", "Change le nombre d'ennemis de 5 à 10"],
+            en: ["Copy the code", "Run and observe Output", "Change enemy count from 5 to 10"],
+            es: ["Copia el código", "Ejecuta y observa Output", "Cambia el número de enemigos de 5 a 10"]
+          },
+          exercise: {
+            fr: "🎯 Crée une table de multiplication de 7 : affiche '7 x 1 = 7', '7 x 2 = 14'... jusqu'à '7 x 10 = 70'. Utilise une boucle for !",
+            en: "🎯 Create a multiplication table of 7: display '7 x 1 = 7', '7 x 2 = 14'... up to '7 x 10 = 70'. Use a for loop!",
+            es: "🎯 Crea la tabla de multiplicar del 7: muestra '7 x 1 = 7', '7 x 2 = 14'... hasta '7 x 10 = 70'. ¡Usa un bucle for!"
+          }
+        }
       }
     ]
   },
   {
     id: 3, icon: "📦", color: "#4CBE72",
-    title: "Stocker les Données",
-    sub: "Heures 9-10 • Tableaux et Dictionnaires",
-    intro: "Un jeu, c'est plein de données : inventaires, scores, noms de joueurs... On apprend à tout organiser proprement !",
+    title: { fr: "Stocker les Données", en: "Storing Data", es: "Almacenar Datos" },
+    sub: { fr: "Heures 9-10 • Tableaux et Dictionnaires", en: "Hours 9-10 • Arrays and Dictionaries", es: "Horas 9-10 • Arrays y Diccionarios" },
+    intro: {
+      fr: "Un jeu, c'est plein de données : inventaires, scores, personnages... On apprend à tout organiser !",
+      en: "A game is full of data: inventories, scores, characters... Let's learn to organize everything!",
+      es: "¡Un juego está lleno de datos: inventarios, puntuaciones, personajes... ¡Aprendamos a organizarlo todo!"
+    },
     lessons: [
       {
-        id: "3-1", title: "Tableaux — ton inventaire de jeu",
-        concept: "Arrays, table.insert, table.remove, ipairs",
-        superpapa: "Ton inventaire dans un RPG ? C'est un tableau ! Une liste d'objets numérotés que tu peux modifier à volonté.",
-        explanation: "Un tableau (array) stocke une liste d'éléments dans l'ordre, numérotés à partir de 1. Tu peux ajouter, supprimer, et parcourir les éléments facilement. C'est la structure de données la plus utilisée dans les jeux.",
-        tip: "Dans Lua, les tableaux commencent à l'index 1, pas 0 comme dans d'autres langages. # donne la taille du tableau.",
-        code: `-- Créer un tableau
-local inventaire = {"Épée", "Bouclier", "Potion de vie", "Torche"}
+        id: "3-1",
+        title: { fr: "Tableaux — ton inventaire de jeu", en: "Arrays — your game inventory", es: "Arrays — tu inventario de juego" },
+        concept: { fr: "table.insert, table.remove, ipairs, #", en: "table.insert, table.remove, ipairs, #", es: "table.insert, table.remove, ipairs, #" },
+        superpapa: {
+          fr: "Ton inventaire dans un RPG ? C'est un tableau ! Une liste d'objets numérotés que tu peux modifier à volonté.",
+          en: "Your inventory in an RPG? That's an array! A numbered list of items you can modify as you wish.",
+          es: "¿Tu inventario en un RPG? ¡Eso es un array! Una lista numerada de objetos que puedes modificar a voluntad."
+        },
+        explanation: {
+          fr: "Un tableau stocke une liste d'éléments dans l'ordre, numérotés à partir de 1. Tu peux ajouter, supprimer et parcourir les éléments facilement. C'est la structure de données la plus utilisée dans les jeux.",
+          en: "An array stores a list of elements in order, numbered from 1. You can add, remove and browse elements easily. It's the most used data structure in games.",
+          es: "Un array almacena una lista de elementos en orden, numerados desde 1. Puedes añadir, eliminar y recorrer elementos fácilmente. Es la estructura de datos más usada en los juegos."
+        },
+        tip: {
+          fr: "Dans Lua, les tableaux commencent à l'index 1, pas 0 comme dans d'autres langages. # donne la taille du tableau.",
+          en: "In Lua, arrays start at index 1, not 0 like other languages. # gives the size of the array.",
+          es: "En Lua, los arrays empiezan en el índice 1, no en 0 como otros lenguajes. # da el tamaño del array."
+        },
+        code: `local inventaire = {"Épée", "Bouclier", "Potion"}
 
--- Accéder à un élément (commence à 1 !)
 print(inventaire[1])   -- Épée
-print(inventaire[3])   -- Potion de vie
+print(inventaire[3])   -- Potion
+print("Taille : " .. #inventaire)  -- 3
 
--- Taille du tableau
-print("Objets : " .. #inventaire)  -- 4
-
--- Ajouter à la fin
+-- Ajouter
 table.insert(inventaire, "Arc")
-print("Après ajout : " .. #inventaire)  -- 5
+print("Après ajout : " .. #inventaire)  -- 4
 
--- Insérer à une position précise
-table.insert(inventaire, 2, "Dague")
-print(inventaire[2])  -- Dague
+-- Supprimer
+table.remove(inventaire, 1)  -- enlève Épée
 
--- Supprimer un élément
-table.remove(inventaire, 1)  -- enlève l'Épée
-
--- Parcourir avec ipairs
-print("=== Inventaire complet ===")
+-- Parcourir
 for index, objet in ipairs(inventaire) do
     print(index .. ". " .. objet)
-end
-
--- Tableau de nombres
-local scores = {1500, 2300, 800, 4200, 1100}
-local total = 0
-for _, score in ipairs(scores) do
-    total = total + score
-end
-print("Score moyen : " .. total / #scores)`
+end`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie le code", "Lance et regarde Output", "Ajoute un 5ème objet à l'inventaire"],
+            en: ["Copy the code", "Run and watch Output", "Add a 5th item to the inventory"],
+            es: ["Copia el código", "Ejecuta y mira Output", "Añade un 5to objeto al inventario"]
+          },
+          exercise: {
+            fr: "🎯 Crée un tableau avec 5 noms de tes jeux préférés. Affiche-les avec leur numéro. Puis ajoute un 6ème jeu et enlève le premier.",
+            en: "🎯 Create an array with 5 names of your favorite games. Display them with their number. Then add a 6th game and remove the first.",
+            es: "🎯 Crea un array con 5 nombres de tus juegos favoritos. Muéstralos con su número. Luego añade un 6to juego y elimina el primero."
+          }
+        }
       },
       {
-        id: "3-2", title: "Dictionnaires — fiches de personnage",
-        concept: "Tables clé/valeur, pairs(), tables imbriquées",
-        superpapa: "La fiche d'identité d'un personnage — nom, vie, force, niveau — c'est un dictionnaire. Chaque info a un nom précis !",
-        explanation: "Un dictionnaire associe des clés (noms) à des valeurs. Contrairement aux tableaux, l'ordre n'a pas d'importance — on accède aux valeurs par leur nom. C'est parfait pour stocker les caractéristiques d'un personnage ou d'un objet.",
-        tip: "On peut imbriquer des tables dans des tables — par exemple un joueur qui a un inventaire (tableau) dans sa fiche (dictionnaire).",
-        code: `-- Créer un dictionnaire
-local joueur = {
+        id: "3-2",
+        title: { fr: "Dictionnaires — fiches de personnage", en: "Dictionaries — character sheets", es: "Diccionarios — fichas de personaje" },
+        concept: { fr: "Tables clé/valeur, pairs(), tables imbriquées", en: "Key/value tables, pairs(), nested tables", es: "Tablas clave/valor, pairs(), tablas anidadas" },
+        superpapa: {
+          fr: "La fiche d'identité d'un personnage — nom, vie, force, niveau — c'est un dictionnaire. Chaque info a un nom précis !",
+          en: "A character's ID card — name, health, strength, level — that's a dictionary. Each piece of info has a precise name!",
+          es: "¡La ficha de identidad de un personaje — nombre, vida, fuerza, nivel — eso es un diccionario. ¡Cada información tiene un nombre preciso!"
+        },
+        explanation: {
+          fr: "Un dictionnaire associe des clés (noms) à des valeurs. On accède aux valeurs par leur nom, pas par un numéro. Parfait pour les caractéristiques d'un personnage ou d'un objet.",
+          en: "A dictionary links keys (names) to values. You access values by their name, not a number. Perfect for character or object attributes.",
+          es: "Un diccionario vincula claves (nombres) a valores. Accedes a los valores por su nombre, no por un número. Perfecto para atributos de personajes u objetos."
+        },
+        tip: {
+          fr: "On peut imbriquer des tables dans des tables — un joueur avec un inventaire (tableau) dans sa fiche (dictionnaire). Les jeux l'utilisent tout le temps !",
+          en: "You can nest tables inside tables — a player with an inventory (array) inside their profile (dictionary). Games use this all the time!",
+          es: "¡Puedes anidar tablas dentro de tablas — un jugador con un inventario (array) dentro de su ficha (diccionario). ¡Los juegos lo usan todo el tiempo!"
+        },
+        code: `local joueur = {
     nom = "Mathis",
     vie = 100,
-    vieMax = 100,
     force = 45,
-    defense = 30,
     niveau = 7,
     estVivant = true
 }
 
--- Lire les valeurs
 print("Joueur : " .. joueur.nom)
 print("Niveau " .. joueur.niveau)
-print("Vie : " .. joueur.vie .. "/" .. joueur.vieMax)
 
--- Modifier une valeur
+-- Modifier
 joueur.vie = joueur.vie - 25
-print("Après dégâts : " .. joueur.vie)
-
--- Ajouter une nouvelle clé
-joueur.experience = 2500
-print("XP : " .. joueur.experience)
+print("Vie : " .. joueur.vie)
 
 -- Parcourir avec pairs()
-print("=== Fiche complète ===")
 for cle, valeur in pairs(joueur) do
-    print(cle .. " : " .. tostring(valeur))
-end
-
--- Tables imbriquées
-local equipe = {
-    {nom = "Mathis", role = "Guerrier", niveau = 7},
-    {nom = "Lucas", role = "Mage", niveau = 5},
-    {nom = "Emma", role = "Archer", niveau = 6},
-}
-
-for _, membre in ipairs(equipe) do
-    print(membre.nom .. " - " .. membre.role .. " niv." .. membre.niveau)
-end`
+    print(cle .. " = " .. tostring(valeur))
+end`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie et lance le code", "Ajoute une clé 'arme' à ton joueur", "Affiche toutes les infos avec pairs()"],
+            en: ["Copy and run the code", "Add a 'weapon' key to your player", "Display all info with pairs()"],
+            es: ["Copia y ejecuta el código", "Añade una clave 'arma' a tu jugador", "Muestra toda la info con pairs()"]
+          },
+          exercise: {
+            fr: "🎯 Crée un dictionnaire pour TON personnage avec au moins 6 caractéristiques (nom, vie, force, vitesse, arme, classe). Affiche sa 'fiche de stats' dans Output.",
+            en: "🎯 Create a dictionary for YOUR character with at least 6 attributes (name, health, strength, speed, weapon, class). Display its 'stat sheet' in Output.",
+            es: "🎯 Crea un diccionario para TU personaje con al menos 6 características (nombre, vida, fuerza, velocidad, arma, clase). Muestra su 'ficha de estadísticas' en Output."
+          }
+        }
       },
       {
-        id: "3-3", title: "Trier et chercher dans les données",
-        concept: "table.sort, recherche, algorithmes basiques",
-        superpapa: "Un classement de meilleurs scores ? Il faut trier ! Voilà comment les algorithmes entrent dans un jeu réel.",
-        explanation: "Trier une liste est une opération fondamentale dans les jeux — classements, inventaires par valeur, ennemis par distance... Lua a table.sort() qui fait ça automatiquement, et on peut lui dire comment trier.",
-        tip: "table.sort modifie le tableau original. Si tu veux garder l'original intact, copie-le d'abord avec une boucle for.",
-        code: `-- Tableau de scores
-local scores = {
+        id: "3-3",
+        title: { fr: "Trier et chercher les données", en: "Sorting and searching data", es: "Ordenar y buscar datos" },
+        concept: { fr: "table.sort, recherche linéaire, filtres", en: "table.sort, linear search, filters", es: "table.sort, búsqueda lineal, filtros" },
+        superpapa: {
+          fr: "Un classement de meilleurs scores ? Il faut trier ! Voilà comment les algorithmes entrent dans un jeu réel.",
+          en: "A high score leaderboard? You need sorting! This is how algorithms enter a real game.",
+          es: "¿Una tabla de récords? ¡Necesitas ordenar! Así es como los algoritmos entran en un juego real."
+        },
+        explanation: {
+          fr: "Trier une liste est fondamental dans les jeux — classements, inventaires par valeur, ennemis par distance. table.sort() fait ça automatiquement avec une fonction de comparaison personnalisée.",
+          en: "Sorting a list is fundamental in games — leaderboards, inventory by value, enemies by distance. table.sort() does this automatically with a custom comparison function.",
+          es: "Ordenar una lista es fundamental en los juegos — clasificaciones, inventario por valor, enemigos por distancia. table.sort() lo hace automáticamente con una función de comparación personalizada."
+        },
+        tip: {
+          fr: "table.sort modifie le tableau original. Si tu veux garder l'original intact, copie-le d'abord dans un nouveau tableau.",
+          en: "table.sort modifies the original array. If you want to keep the original intact, copy it first into a new array.",
+          es: "table.sort modifica el array original. Si quieres mantener el original intacto, cópialo primero en un nuevo array."
+        },
+        code: `local scores = {
     {nom = "Mathis", score = 4200},
     {nom = "Lucas", score = 1800},
     {nom = "Emma", score = 5500},
     {nom = "Noah", score = 3100},
 }
 
--- Trier du plus grand au plus petit
+-- Trier du meilleur au moins bon
 table.sort(scores, function(a, b)
     return a.score > b.score
 end)
 
--- Afficher le classement
 print("=== CLASSEMENT ===")
-for position, joueur in ipairs(scores) do
-    print(position .. ". " .. joueur.nom .. " - " .. joueur.score .. " pts")
+for pos, j in ipairs(scores) do
+    print(pos .. ". " .. j.nom .. " - " .. j.score)
 end
 
--- Chercher un élément dans un tableau
-local inventaire = {"Épée", "Potion", "Arc", "Bouclier", "Torche"}
-local objet_cherche = "Arc"
-local trouve = false
-
-for index, objet in ipairs(inventaire) do
-    if objet == objet_cherche then
-        print("'" .. objet_cherche .. "' trouvé à l'index " .. index)
-        trouve = true
-        break
+-- Chercher un joueur
+for i, j in ipairs(scores) do
+    if j.nom == "Emma" then
+        print("Emma est en position " .. i)
     end
-end
-
-if not trouve then
-    print("Objet non trouvé !")
-end
-
--- Filtrer : garder seulement les scores > 2000
-local bons_scores = {}
-for _, joueur in ipairs(scores) do
-    if joueur.score > 2000 then
-        table.insert(bons_scores, joueur.nom)
-    end
-end
-print("Joueurs qualifiés : " .. #bons_scores)`
+end`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie et lance le code", "Ajoute-toi dans la liste avec un score", "Change le tri pour aller du moins bon au meilleur"],
+            en: ["Copy and run the code", "Add yourself to the list with a score", "Change sorting to go from worst to best"],
+            es: ["Copia y ejecuta el código", "Añádete a la lista con una puntuación", "Cambia el orden de peor a mejor"]
+          },
+          exercise: {
+            fr: "🎯 Crée un classement de 5 amis avec leurs scores. Trie-les du meilleur au pire. Affiche une médaille 🥇🥈🥉 pour le top 3.",
+            en: "🎯 Create a leaderboard of 5 friends with their scores. Sort them best to worst. Display a medal 🥇🥈🥉 for the top 3.",
+            es: "🎯 Crea una clasificación de 5 amigos con sus puntuaciones. Ordénalos de mejor a peor. Muestra una medalla 🥇🥈🥉 para el top 3."
+          }
+        }
       }
     ]
   },
   {
     id: 4, icon: "🏗️", color: "#9B4CE8",
-    title: "Architecture Roblox",
-    sub: "Heures 11-13 • Client, Serveur, Modules",
-    intro: "C'est ici que ça devient sérieux ! Roblox a une architecture spéciale — il faut comprendre qui fait quoi pour créer des jeux multijoueur robustes.",
+    title: { fr: "Architecture Roblox", en: "Roblox Architecture", es: "Arquitectura Roblox" },
+    sub: { fr: "Heures 11-13 • Client, Serveur, Modules", en: "Hours 11-13 • Client, Server, Modules", es: "Horas 11-13 • Cliente, Servidor, Módulos" },
+    intro: {
+      fr: "C'est ici que ça devient sérieux ! Roblox a une architecture spéciale pour les jeux multijoueur. Comprends ça et tu peux créer n'importe quoi !",
+      en: "This is where it gets serious! Roblox has a special architecture for multiplayer games. Understand this and you can create anything!",
+      es: "¡Aquí es donde se pone serio! Roblox tiene una arquitectura especial para juegos multijugador. ¡Entiende esto y puedes crear cualquier cosa!"
+    },
     lessons: [
       {
-        id: "4-1", title: "Client vs Serveur — deux mondes",
-        concept: "LocalScript, Script, workspace, ReplicatedStorage",
-        superpapa: "Le serveur, c'est le juge arbitre du jeu. Le client, c'est ce que toi tu vois sur ton écran. Ils doivent se parler !",
-        explanation: "Dans Roblox, il y a deux côtés : le Serveur (qui gère la réalité du jeu pour tous) et le Client (ce que chaque joueur voit). Les Scripts s'exécutent côté serveur. Les LocalScripts côté client. Confondre les deux cause des bugs terribles !",
-        tip: "La règle d'or : tout ce qui touche à la vie, aux points, aux dégâts → Serveur. Tout ce qui concerne l'interface, la caméra → Client.",
-        code: `--[[ SCRIPT (côté serveur) ]]
-
--- Le serveur voit et contrôle TOUT
+        id: "4-1",
+        title: { fr: "Client vs Serveur — deux mondes", en: "Client vs Server — two worlds", es: "Cliente vs Servidor — dos mundos" },
+        concept: { fr: "LocalScript vs Script, Services Roblox", en: "LocalScript vs Script, Roblox Services", es: "LocalScript vs Script, Servicios Roblox" },
+        superpapa: {
+          fr: "Le serveur c'est le juge arbitre — il voit tout et décide de la réalité du jeu. Le client c'est ce que toi tu vois sur ton écran !",
+          en: "The server is the referee — it sees everything and decides the game's reality. The client is what you see on your screen!",
+          es: "¡El servidor es el árbitro — ve todo y decide la realidad del juego. ¡El cliente es lo que tú ves en tu pantalla!"
+        },
+        explanation: {
+          fr: "Dans Roblox, il y a deux côtés : le Serveur (gère la réalité pour tous) et le Client (ce que chaque joueur voit). Les Scripts s'exécutent côté serveur. Les LocalScripts côté client. Confondre les deux = bugs garantis !",
+          en: "In Roblox, there are two sides: the Server (manages reality for everyone) and the Client (what each player sees). Scripts run server-side. LocalScripts run client-side. Mix them up = guaranteed bugs!",
+          es: "En Roblox, hay dos lados: el Servidor (gestiona la realidad para todos) y el Cliente (lo que cada jugador ve). Los Scripts se ejecutan en el servidor. Los LocalScripts en el cliente. ¡Mezclarlos = bugs garantizados!"
+        },
+        tip: {
+          fr: "Règle d'or : vie, dégâts, scores → Serveur. Interface, caméra, effets visuels → Client.",
+          en: "Golden rule: health, damage, scores → Server. Interface, camera, visual effects → Client.",
+          es: "Regla de oro: vida, daño, puntuaciones → Servidor. Interfaz, cámara, efectos visuales → Cliente."
+        },
+        code: `--[[ SCRIPT (côté serveur - ServerScriptService) ]]
 local Players = game:GetService("Players")
 
--- Quand un joueur rejoint
 Players.PlayerAdded:Connect(function(player)
     print("Joueur connecté : " .. player.Name)
     
-    -- Créer le leaderstats (tableau de scores)
     local leaderstats = Instance.new("Folder")
     leaderstats.Name = "leaderstats"
     leaderstats.Parent = player
@@ -540,502 +802,672 @@ Players.PlayerAdded:Connect(function(player)
     coins.Parent = leaderstats
 end)
 
-Players.PlayerRemoving:Connect(function(player)
-    print("Joueur déconnecté : " .. player.Name)
-end)
-
---[[ LOCAL SCRIPT (côté client) ]]
-
--- Le client gère l'interface du JOUEUR local
+--[[ LOCAL SCRIPT (côté client - StarterPlayerScripts) ]]
 local player = game.Players.LocalPlayer
-print("Bonjour " .. player.Name)
-
--- Accéder à la caméra (uniquement côté client)
-local camera = workspace.CurrentCamera
-camera.FieldOfView = 90`
+print("Bonjour " .. player.Name)`,
+        studio: {
+          where: { fr: "ServerScriptService (Script) + StarterPlayerScripts (LocalScript)", en: "ServerScriptService (Script) + StarterPlayerScripts (LocalScript)", es: "ServerScriptService (Script) + StarterPlayerScripts (LocalScript)" },
+          steps: {
+            fr: [
+              "Crée un Script dans ServerScriptService avec le code serveur",
+              "Dans Explorer, trouve StarterPlayer → StarterPlayerScripts",
+              "Clic droit → Insert Object → LocalScript",
+              "Mets le code client dans le LocalScript",
+              "Lance le jeu — tu vois un compteur 'Pièces' dans le leaderboard !"
+            ],
+            en: [
+              "Create a Script in ServerScriptService with the server code",
+              "In Explorer, find StarterPlayer → StarterPlayerScripts",
+              "Right-click → Insert Object → LocalScript",
+              "Put the client code in the LocalScript",
+              "Run the game — you see a 'Coins' counter in the leaderboard!"
+            ],
+            es: [
+              "Crea un Script en ServerScriptService con el código del servidor",
+              "En Explorer, encuentra StarterPlayer → StarterPlayerScripts",
+              "Clic derecho → Insert Object → LocalScript",
+              "Pon el código del cliente en el LocalScript",
+              "¡Ejecuta el juego — ves un contador 'Monedas' en el leaderboard!"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Ajoute un deuxième IntValue 'Niveau' dans le leaderstats, commençant à 1. Lance le jeu et vérifie que tu vois 'Pièces : 0' et 'Niveau : 1' dans le leaderboard.",
+            en: "🎯 Add a second IntValue 'Level' to leaderstats, starting at 1. Run the game and check that you see 'Coins: 0' and 'Level: 1' in the leaderboard.",
+            es: "🎯 Añade un segundo IntValue 'Nivel' en leaderstats, empezando en 1. Ejecuta el juego y comprueba que ves 'Monedas: 0' y 'Nivel: 1' en el leaderboard."
+          }
+        }
       },
       {
-        id: "4-2", title: "RemoteEvents — faire communiquer client et serveur",
-        concept: "RemoteEvent, FireServer, OnServerEvent, FireClient",
-        superpapa: "Le client et le serveur ne peuvent pas se parler directement — ils utilisent des RemoteEvents, comme envoyer un message dans une bouteille !",
-        explanation: "Les RemoteEvents sont le système de messagerie de Roblox entre le client et le serveur. Le client 'fire' (envoie) un événement, le serveur l'écoute et réagit. C'est obligatoire pour créer des actions multijoueur sécurisées.",
-        tip: "Ne fais JAMAIS confiance aux données envoyées par le client — un joueur malveillant peut les modifier. Toujours valider côté serveur !",
-        code: `--[[ Dans ReplicatedStorage : créer un RemoteEvent nommé "AcheterObjet" ]]
+        id: "4-2",
+        title: { fr: "RemoteEvents — client ↔ serveur", en: "RemoteEvents — client ↔ server", es: "RemoteEvents — cliente ↔ servidor" },
+        concept: { fr: "FireServer, OnServerEvent, FireClient", en: "FireServer, OnServerEvent, FireClient", es: "FireServer, OnServerEvent, FireClient" },
+        superpapa: {
+          fr: "Le client et le serveur ne peuvent pas se parler directement — ils utilisent des RemoteEvents, comme envoyer un message dans une bouteille !",
+          en: "Client and server can't talk directly — they use RemoteEvents, like sending a message in a bottle!",
+          es: "¡El cliente y el servidor no pueden comunicarse directamente — usan RemoteEvents, ¡como enviar un mensaje en una botella!"
+        },
+        explanation: {
+          fr: "Les RemoteEvents sont le système de messagerie entre client et serveur. Le client 'fire' un événement, le serveur l'écoute et réagit. C'est obligatoire pour créer des actions multijoueur sécurisées.",
+          en: "RemoteEvents are the messaging system between client and server. The client 'fires' an event, the server listens and reacts. This is mandatory for creating secure multiplayer actions.",
+          es: "Los RemoteEvents son el sistema de mensajería entre cliente y servidor. El cliente 'dispara' un evento, el servidor escucha y reacciona. Esto es obligatorio para crear acciones multijugador seguras."
+        },
+        tip: {
+          fr: "Ne fais JAMAIS confiance aux données envoyées par le client — un joueur malveillant peut les modifier. Toujours valider côté serveur !",
+          en: "NEVER trust data sent by the client — a malicious player can modify it. Always validate server-side!",
+          es: "¡NUNCA confíes en los datos enviados por el cliente — un jugador malicioso puede modificarlos. ¡Siempre valida en el servidor!"
+        },
+        code: `--[[ Dans ReplicatedStorage : crée un RemoteEvent "AcheterObjet" ]]
 
---[[ LOCAL SCRIPT (client) : quand le joueur clique "Acheter" ]]
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
+--[[ LOCAL SCRIPT (client) ]]
+local RS = game:GetService("ReplicatedStorage")
+local remote = RS:WaitForChild("AcheterObjet")
 
-local remoteAcheter = ReplicatedStorage:WaitForChild("AcheterObjet")
-local player = Players.LocalPlayer
-
--- Bouton d'achat (simplifié)
-local function clicAcheter()
-    local objetVoulu = "Épée de feu"
-    local prix = 500
-    
-    -- Envoyer la demande au serveur
-    remoteAcheter:FireServer(objetVoulu, prix)
-    print("Demande d'achat envoyée...")
+-- Le joueur clique "Acheter"
+local function acheter()
+    remote:FireServer("Épée de feu", 500)
+    print("Demande envoyée au serveur...")
 end
+acheter()
 
---[[ SCRIPT (serveur) : traiter la demande ]]
-local remoteAcheter = ReplicatedStorage:WaitForChild("AcheterObjet")
-
-remoteAcheter.OnServerEvent:Connect(function(player, objetVoulu, prix)
-    -- Vérifier que le joueur a assez d'argent (côté serveur, sécurisé)
+--[[ SCRIPT (serveur) ]]
+local remote = RS:WaitForChild("AcheterObjet")
+remote.OnServerEvent:Connect(function(player, objet, prix)
     local coins = player.leaderstats.Pièces
-    
     if coins.Value >= prix then
         coins.Value = coins.Value - prix
-        print(player.Name .. " a acheté : " .. objetVoulu)
-        -- Donner l'objet au joueur...
+        print(player.Name .. " a acheté : " .. objet)
     else
-        print(player.Name .. " n'a pas assez de pièces !")
+        print("Pas assez de pièces !")
     end
-end)`
+end)`,
+        studio: {
+          where: { fr: "ReplicatedStorage + ServerScriptService + StarterPlayerScripts", en: "ReplicatedStorage + ServerScriptService + StarterPlayerScripts", es: "ReplicatedStorage + ServerScriptService + StarterPlayerScripts" },
+          steps: {
+            fr: [
+              "Dans ReplicatedStorage, clic droit → Insert Object → RemoteEvent, nomme-le 'AcheterObjet'",
+              "Crée un Script dans ServerScriptService avec le code serveur",
+              "Crée un LocalScript dans StarterPlayerScripts avec le code client",
+              "Lance le jeu et regarde Output des deux côtés"
+            ],
+            en: [
+              "In ReplicatedStorage, right-click → Insert Object → RemoteEvent, name it 'BuyItem'",
+              "Create a Script in ServerScriptService with the server code",
+              "Create a LocalScript in StarterPlayerScripts with the client code",
+              "Run the game and watch Output from both sides"
+            ],
+            es: [
+              "En ReplicatedStorage, clic derecho → Insert Object → RemoteEvent, nómbralo 'ComprarObjeto'",
+              "Crea un Script en ServerScriptService con el código del servidor",
+              "Crea un LocalScript en StarterPlayerScripts con el código del cliente",
+              "Ejecuta el juego y mira Output de ambos lados"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Crée un RemoteEvent 'GagnerPieces'. Quand le client l'appelle avec un nombre, le serveur ajoute ce nombre aux pièces du joueur dans leaderstats.",
+            en: "🎯 Create a RemoteEvent 'EarnCoins'. When the client calls it with a number, the server adds that number to the player's coins in leaderstats.",
+            es: "🎯 Crea un RemoteEvent 'GanarMonedas'. Cuando el cliente lo llama con un número, el servidor suma ese número a las monedas del jugador en leaderstats."
+          }
+        }
       },
       {
-        id: "4-3", title: "ModuleScripts — organiser son code",
-        concept: "require(), modules réutilisables, DRY principle",
-        superpapa: "Quand ton jeu grandit, le code devient énorme. Les ModuleScripts, c'est comme ranger sa chambre — chaque chose à sa place !",
-        explanation: "Les ModuleScripts permettent d'écrire du code réutilisable qu'on peut importer partout avec require(). C'est le principe DRY : Don't Repeat Yourself (Ne te répète pas). Un bug corrigé dans le module est corrigé partout à la fois.",
-        tip: "Place tes ModuleScripts dans ReplicatedStorage s'ils sont utilisés côté client ET serveur, ou dans ServerScriptService s'ils ne servent que côté serveur.",
-        code: `--[[ MODULE : MathJeu (dans ReplicatedStorage) ]]
+        id: "4-3",
+        title: { fr: "ModuleScripts — organiser son code", en: "ModuleScripts — organizing code", es: "ModuleScripts — organizar el código" },
+        concept: { fr: "require(), DRY principle, modules réutilisables", en: "require(), DRY principle, reusable modules", es: "require(), principio DRY, módulos reutilizables" },
+        superpapa: {
+          fr: "Quand ton jeu grandit, le code devient énorme. Les ModuleScripts, c'est comme ranger sa chambre — chaque chose à sa place !",
+          en: "As your game grows, the code gets huge. ModuleScripts are like tidying your room — everything in its place!",
+          es: "¡A medida que tu juego crece, el código se vuelve enorme. ¡Los ModuleScripts son como ordenar tu habitación — ¡cada cosa en su lugar!"
+        },
+        explanation: {
+          fr: "Les ModuleScripts permettent d'écrire du code réutilisable importable partout avec require(). C'est le principe DRY : Don't Repeat Yourself. Un bug corrigé dans le module est corrigé partout à la fois.",
+          en: "ModuleScripts let you write reusable code importable anywhere with require(). It's the DRY principle: Don't Repeat Yourself. A bug fixed in the module is fixed everywhere at once.",
+          es: "Los ModuleScripts te permiten escribir código reutilizable importable en cualquier lugar con require(). Es el principio DRY: Don't Repeat Yourself. Un bug corregido en el módulo se corrige en todas partes a la vez."
+        },
+        tip: {
+          fr: "Place tes ModuleScripts dans ReplicatedStorage s'ils sont utilisés côté client ET serveur. Dans ServerScriptService si côté serveur seulement.",
+          en: "Place ModuleScripts in ReplicatedStorage if used both client AND server side. In ServerScriptService if server side only.",
+          es: "Coloca los ModuleScripts en ReplicatedStorage si se usan en el lado del cliente Y del servidor. En ServerScriptService si solo en el lado del servidor."
+        },
+        code: `--[[ MODULE MathJeu (dans ReplicatedStorage) ]]
 local MathJeu = {}
 
--- Calculer les dégâts avec marge aléatoire
 function MathJeu.calculerDegats(force, defense)
     local base = math.max(0, force - defense)
-    local variation = math.random(-10, 10)
-    return base + variation
+    return base + math.random(-5, 5)
 end
 
--- Calculer l'expérience gagnée
 function MathJeu.xpPourNiveau(niveau)
     return niveau * niveau * 100
 end
 
--- Vérifier si un niveau est suffisant
-function MathJeu.peutAcceder(niveauJoueur, niveauRequis)
-    return niveauJoueur >= niveauRequis
-end
+return MathJeu  -- OBLIGATOIRE !
 
-return MathJeu  -- OBLIGATOIRE à la fin du module
+--[[ Dans ton Script : utiliser le module ]]
+local RS = game:GetService("ReplicatedStorage")
+local MathJeu = require(RS:WaitForChild("MathJeu"))
 
---[[ SCRIPT : utiliser le module ]]
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local MathJeu = require(ReplicatedStorage:WaitForChild("MathJeu"))
-
--- Utiliser les fonctions du module
 local degats = MathJeu.calculerDegats(80, 30)
-print("Dégâts infligés : " .. degats)
+print("Dégâts : " .. degats)
 
-local xpNeeded = MathJeu.xpPourNiveau(5)
-print("XP pour niveau 5 : " .. xpNeeded)
-
-if MathJeu.peutAcceder(7, 5) then
-    print("Accès au donjon autorisé !")
-end`
+local xp = MathJeu.xpPourNiveau(5)
+print("XP niveau 5 : " .. xp)`,
+        studio: {
+          where: { fr: "ReplicatedStorage (ModuleScript) + ServerScriptService (Script)", en: "ReplicatedStorage (ModuleScript) + ServerScriptService (Script)", es: "ReplicatedStorage (ModuleScript) + ServerScriptService (Script)" },
+          steps: {
+            fr: [
+              "Dans ReplicatedStorage, clic droit → Insert Object → ModuleScript, nomme-le 'MathJeu'",
+              "Copie le code du module dedans (remplace le code existant)",
+              "Dans ServerScriptService, crée un Script avec le code d'utilisation",
+              "Lance et regarde Output"
+            ],
+            en: [
+              "In ReplicatedStorage, right-click → Insert Object → ModuleScript, name it 'GameMath'",
+              "Copy the module code inside (replace existing code)",
+              "In ServerScriptService, create a Script with the usage code",
+              "Run and watch Output"
+            ],
+            es: [
+              "En ReplicatedStorage, clic derecho → Insert Object → ModuleScript, nómbralo 'MatJuego'",
+              "Copia el código del módulo dentro (reemplaza el código existente)",
+              "En ServerScriptService, crea un Script con el código de uso",
+              "Ejecuta y mira Output"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Ajoute une fonction 'MathJeu.calculerVie(vieActuelle, degats, armure)' au module qui retourne la nouvelle vie après défense. Utilise-la dans ton Script.",
+            en: "🎯 Add a function 'GameMath.calculateHealth(currentHealth, damage, armor)' to the module that returns the new health after defense. Use it in your Script.",
+            es: "🎯 Añade una función 'MatJuego.calcularVida(vidaActual, dano, armadura)' al módulo que devuelva la nueva vida tras la defensa. Úsala en tu Script."
+          }
+        }
       }
     ]
   },
   {
     id: 5, icon: "🌍", color: "#E8874C",
-    title: "Monde 3D",
-    sub: "Heures 14-15 • Coordonnées, CFrame, Animations",
-    intro: "On entre dans la troisième dimension ! Ici tu vas apprendre à déplacer, faire pivoter et animer n'importe quel objet dans ton monde Roblox.",
+    title: { fr: "Monde 3D", en: "3D World", es: "Mundo 3D" },
+    sub: { fr: "Heures 14-15 • Coordonnées, CFrame, Animations", en: "Hours 14-15 • Coordinates, CFrame, Animations", es: "Horas 14-15 • Coordenadas, CFrame, Animaciones" },
+    intro: {
+      fr: "On entre dans la troisième dimension ! Tu vas apprendre à déplacer, faire pivoter et animer n'importe quel objet dans ton monde Roblox.",
+      en: "We're entering the third dimension! You'll learn to move, rotate and animate any object in your Roblox world.",
+      es: "¡Entramos en la tercera dimensión! Aprenderás a mover, rotar y animar cualquier objeto en tu mundo Roblox."
+    },
     lessons: [
       {
-        id: "5-1", title: "Coordonnées X, Y, Z — GPS du jeu",
-        concept: "Vector3, Position, workspace, math.abs",
-        superpapa: "X c'est gauche/droite, Y c'est haut/bas, Z c'est avant/arrière. Maîtrise ça et tu contrôles tout l'espace 3D !",
-        explanation: "Dans Roblox, chaque objet existe en 3 dimensions. Vector3 est le type de donnée pour représenter une position ou une direction dans cet espace. Avec Position et Size, tu places et redimensionnes tout ce que tu veux.",
-        tip: "workspace.CurrentCamera.Focus.Position donne la position actuelle de la caméra — pratique pour trouver où tu te trouves dans le jeu !",
-        code: `-- Accéder à une pièce dans le workspace
-local part = workspace.MaBrique
+        id: "5-1",
+        title: { fr: "Coordonnées X, Y, Z — GPS du jeu", en: "X, Y, Z Coordinates — game GPS", es: "Coordenadas X, Y, Z — GPS del juego" },
+        concept: { fr: "Vector3, Position, Instance.new(), Magnitude", en: "Vector3, Position, Instance.new(), Magnitude", es: "Vector3, Position, Instance.new(), Magnitude" },
+        superpapa: {
+          fr: "X c'est gauche/droite, Y c'est haut/bas, Z c'est avant/arrière. Maîtrise ça et tu contrôles tout l'espace 3D !",
+          en: "X is left/right, Y is up/down, Z is forward/back. Master this and you control all 3D space!",
+          es: "¡X es izquierda/derecha, Y es arriba/abajo, Z es adelante/atrás. ¡Domina esto y controlas todo el espacio 3D!"
+        },
+        explanation: {
+          fr: "Dans Roblox, chaque objet existe en 3 dimensions. Vector3 représente une position ou une direction dans cet espace. Avec Instance.new() tu crées des objets par code — sans les glisser-déposer !",
+          en: "In Roblox, every object exists in 3 dimensions. Vector3 represents a position or direction in that space. With Instance.new() you create objects by code — no drag and drop!",
+          es: "En Roblox, cada objeto existe en 3 dimensiones. Vector3 representa una posición o dirección en ese espacio. ¡Con Instance.new() creas objetos por código — ¡sin arrastrar y soltar!"
+        },
+        tip: {
+          fr: "(pointA - pointB).Magnitude donne la distance entre deux points — super utile pour les systèmes de détection d'ennemis !",
+          en: "(pointA - pointB).Magnitude gives the distance between two points — super useful for enemy detection systems!",
+          es: "¡(puntoA - puntoB).Magnitude da la distancia entre dos puntos — ¡super útil para sistemas de detección de enemigos!"
+        },
+        code: `-- Créer une brique par code
+local brique = Instance.new("Part")
+brique.Size = Vector3.new(4, 2, 4)
+brique.Position = Vector3.new(0, 10, 0)
+brique.BrickColor = BrickColor.new("Bright red")
+brique.Anchored = true
+brique.Parent = workspace
 
--- Lire la position actuelle
-local pos = part.Position
-print("X: " .. pos.X .. " Y: " .. pos.Y .. " Z: " .. pos.Z)
+-- Déplacer la brique
+brique.Position = Vector3.new(10, 5, 0)
 
--- Déplacer la pièce
-part.Position = Vector3.new(10, 5, 0)
-
--- Créer une nouvelle pièce par code
-local nouvellePiece = Instance.new("Part")
-nouvellePiece.Size = Vector3.new(4, 1, 4)
-nouvellePiece.Position = Vector3.new(0, 10, 0)
-nouvellePiece.BrickColor = BrickColor.new("Bright red")
-nouvellePiece.Anchored = true
-nouvellePiece.Parent = workspace
-
--- Calculer la distance entre deux points
-local pointA = Vector3.new(0, 0, 0)
-local pointB = Vector3.new(10, 0, 10)
-local distance = (pointA - pointB).Magnitude
-print("Distance : " .. math.floor(distance) .. " unités")
-
--- Téléporter le joueur
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local character = player.Character
-
-if character then
-    local hrp = character:FindFirstChild("HumanoidRootPart")
-    if hrp then
-        hrp.CFrame = CFrame.new(0, 50, 0)  -- téléporte en hauteur
-    end
-end`
+-- Calculer une distance
+local A = Vector3.new(0, 0, 0)
+local B = Vector3.new(10, 0, 10)
+local dist = (A - B).Magnitude
+print("Distance : " .. math.floor(dist))`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: [
+              "Copie le code dans un Script (ServerScriptService)",
+              "Lance le jeu avec ▶",
+              "Tu vois une brique rouge apparaître dans le jeu !",
+              "Modifie la Position et la couleur pour voir les changements"
+            ],
+            en: [
+              "Copy the code into a Script (ServerScriptService)",
+              "Run the game with ▶",
+              "You see a red brick appear in the game!",
+              "Modify Position and color to see changes"
+            ],
+            es: [
+              "Copia el código en un Script (ServerScriptService)",
+              "Ejecuta el juego con ▶",
+              "¡Ves un ladrillo rojo aparecer en el juego!",
+              "Modifica Position y color para ver los cambios"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Crée 5 briques de couleurs différentes et les place en ligne (X: 0, 5, 10, 15, 20) à la même hauteur. Elles doivent apparaître en lançant le jeu !",
+            en: "🎯 Create 5 bricks of different colors and place them in a line (X: 0, 5, 10, 15, 20) at the same height. They must appear when running the game!",
+            es: "🎯 Crea 5 ladrillos de colores diferentes y colócalos en línea (X: 0, 5, 10, 15, 20) a la misma altura. ¡Deben aparecer al ejecutar el juego!"
+          }
+        }
       },
       {
-        id: "5-2", title: "CFrame — position ET rotation",
-        concept: "CFrame, angles, lookAt, multiplication de CFrames",
-        superpapa: "CFrame, c'est la clé du placement précis dans Roblox. Position + rotation en un seul objet — indispensable !",
-        explanation: "CFrame (Coordinate Frame) contient à la fois la position ET la rotation d'un objet. C'est beaucoup plus puissant que Position seul. La multiplication de CFrames permet d'enchaîner des transformations.",
-        tip: "CFrame.lookAt(origin, target) crée un CFrame qui regarde vers un point cible — super utile pour les caméras et les ennemis qui suivent le joueur !",
-        code: `local part = workspace.MaBrique
+        id: "5-2",
+        title: { fr: "CFrame — position ET rotation", en: "CFrame — position AND rotation", es: "CFrame — posición Y rotación" },
+        concept: { fr: "CFrame.new, CFrame.Angles, lookAt, math.rad", en: "CFrame.new, CFrame.Angles, lookAt, math.rad", es: "CFrame.new, CFrame.Angles, lookAt, math.rad" },
+        superpapa: {
+          fr: "CFrame, c'est la clé du placement précis dans Roblox. Position + rotation en un seul objet — indispensable !",
+          en: "CFrame is the key to precise placement in Roblox. Position + rotation in a single object — essential!",
+          es: "¡CFrame es la clave para la colocación precisa en Roblox. ¡Posición + rotación en un solo objeto — ¡indispensable!"
+        },
+        explanation: {
+          fr: "CFrame contient à la fois la position ET la rotation d'un objet. La multiplication de CFrames permet d'enchaîner des transformations. math.rad convertit les degrés en radians.",
+          en: "CFrame contains both the position AND rotation of an object. Multiplying CFrames chains transformations. math.rad converts degrees to radians.",
+          es: "CFrame contiene tanto la posición COMO la rotación de un objeto. Multiplicar CFrames encadena transformaciones. math.rad convierte grados a radianes."
+        },
+        tip: {
+          fr: "CFrame.lookAt(origine, cible) crée un CFrame qui regarde vers un point — parfait pour les ennemis qui suivent le joueur !",
+          en: "CFrame.lookAt(origin, target) creates a CFrame that looks toward a point — perfect for enemies following the player!",
+          es: "¡CFrame.lookAt(origen, objetivo) crea un CFrame que mira hacia un punto — perfecto para enemigos que siguen al jugador!"
+        },
+        code: `local brique = workspace.MaBrique
 
--- CFrame basique : position seulement
-part.CFrame = CFrame.new(10, 5, 0)
-
--- CFrame avec rotation (en radians)
-part.CFrame = CFrame.new(10, 5, 0)
-    * CFrame.Angles(0, math.rad(45), 0)  -- tourné de 45° sur Y
-
--- math.rad convertit degrés → radians
-local angle45 = math.rad(45)    -- 0.785...
-local angle90 = math.rad(90)    -- 1.570...
-local angle180 = math.rad(180)  -- 3.141...
-
--- Faire regarder un objet vers un autre
-local cible = workspace.Ennemi.Position
-part.CFrame = CFrame.lookAt(part.Position, cible)
-
--- Décaler depuis la position actuelle
-part.CFrame = part.CFrame * CFrame.new(0, 5, 0)  -- +5 en hauteur
+-- Position + rotation (45 degrés)
+brique.CFrame = CFrame.new(10, 5, 0)
+    * CFrame.Angles(0, math.rad(45), 0)
 
 -- Faire tourner progressivement
-for angle = 0, 360, 10 do
-    part.CFrame = CFrame.new(0, 5, 0)
+for angle = 0, 360, 5 do
+    brique.CFrame = CFrame.new(0, 5, 0)
         * CFrame.Angles(0, math.rad(angle), 0)
     task.wait(0.05)
 end
 
--- CFrame pour attacher un objet à un autre
-local epee = workspace.Epee
-local mainDroite = workspace.Personnage["Right Arm"]
-epee.CFrame = mainDroite.CFrame * CFrame.new(0, -1.5, 0)`
+-- Regarder vers un point
+local cible = Vector3.new(20, 5, 0)
+brique.CFrame = CFrame.lookAt(
+    brique.Position, cible
+)`,
+        studio: {
+          where: { fr: "Workspace (Part nommée 'MaBrique') + ServerScriptService (Script)", en: "Workspace (Part named 'MaBrique') + ServerScriptService (Script)", es: "Workspace (Part llamada 'MaBrique') + ServerScriptService (Script)" },
+          steps: {
+            fr: [
+              "Dans le Workspace, place une Part (clic droit → Insert Object → Part)",
+              "Renomme-la 'MaBrique' dans les propriétés",
+              "Crée le Script dans ServerScriptService",
+              "Lance et regarde ta brique tourner !"
+            ],
+            en: [
+              "In the Workspace, place a Part (right-click → Insert Object → Part)",
+              "Rename it 'MaBrique' in properties",
+              "Create the Script in ServerScriptService",
+              "Run and watch your brick spin!"
+            ],
+            es: [
+              "En el Workspace, coloca una Part (clic derecho → Insert Object → Part)",
+              "Renómbrala 'MiBrique' en propiedades",
+              "Crea el Script en ServerScriptService",
+              "¡Ejecuta y mira girar tu ladrillo!"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Crée une brique qui tourne sur elle-même EN BOUCLE (utilise while true do). Elle doit tourner indéfiniment sans s'arrêter.",
+            en: "🎯 Create a brick that spins on itself IN A LOOP (use while true do). It must rotate indefinitely without stopping.",
+            es: "🎯 Crea un ladrillo que gire sobre sí mismo EN BUCLE (usa while true do). Debe rotar indefinidamente sin detenerse."
+          }
+        }
       },
       {
-        id: "5-3", title: "Tweens — animations fluides",
-        concept: "TweenService, TweenInfo, EasingStyle, chaîner les tweens",
-        superpapa: "Un jeu sans animations, c'est comme un film sans musique. Les Tweens, c'est ce qui rend tout beau et fluide !",
-        explanation: "TweenService anime la transition entre deux états d'un objet — position, rotation, couleur, taille, transparence. EasingStyle contrôle la courbe d'accélération : Bounce, Elastic, Sine... chacun crée une sensation différente.",
-        tip: "Tween:Completed:Wait() permet d'attendre qu'une animation soit terminée avant de passer à la suivante — essentiel pour enchaîner des animations !",
+        id: "5-3",
+        title: { fr: "Tweens — animations fluides", en: "Tweens — smooth animations", es: "Tweens — animaciones suaves" },
+        concept: { fr: "TweenService, TweenInfo, EasingStyle, Completed", en: "TweenService, TweenInfo, EasingStyle, Completed", es: "TweenService, TweenInfo, EasingStyle, Completed" },
+        superpapa: {
+          fr: "Un jeu sans animations, c'est comme un film sans musique. Les Tweens, c'est ce qui rend tout beau et fluide !",
+          en: "A game without animations is like a movie without music. Tweens are what makes everything beautiful and smooth!",
+          es: "¡Un juego sin animaciones es como una película sin música. ¡Los Tweens son lo que hace todo bello y fluido!"
+        },
+        explanation: {
+          fr: "TweenService anime la transition entre deux états d'un objet — position, couleur, taille, transparence. EasingStyle contrôle la courbe : Bounce, Elastic, Sine... chacun crée une sensation différente.",
+          en: "TweenService animates the transition between two states of an object — position, color, size, transparency. EasingStyle controls the curve: Bounce, Elastic, Sine... each creates a different feel.",
+          es: "TweenService anima la transición entre dos estados de un objeto — posición, color, tamaño, transparencia. EasingStyle controla la curva: Bounce, Elastic, Sine... cada uno crea una sensación diferente."
+        },
+        tip: {
+          fr: "tween.Completed:Wait() attend que l'animation soit terminée avant de continuer — essentiel pour enchaîner plusieurs animations !",
+          en: "tween.Completed:Wait() waits for the animation to finish before continuing — essential for chaining multiple animations!",
+          es: "¡tween.Completed:Wait() espera a que la animación termine antes de continuar — esencial para encadenar varias animaciones!"
+        },
         code: `local TweenService = game:GetService("TweenService")
-local part = workspace.MaBrique
+local brique = workspace.MaBrique
 
--- Tween basique : déplacer en 2 secondes
-local infos = TweenInfo.new(
-    2,                          -- durée en secondes
-    Enum.EasingStyle.Sine,      -- style : Sine, Bounce, Elastic...
-    Enum.EasingDirection.InOut, -- direction : In, Out, InOut
-    0,                          -- répétitions (0 = pas de répétition)
-    false,                      -- inverser ?
-    0                           -- délai avant départ
+-- Tween : déplacer en 2 secondes avec rebond
+local info = TweenInfo.new(2,
+    Enum.EasingStyle.Bounce,
+    Enum.EasingDirection.Out
 )
 
-local objectif = {Position = Vector3.new(20, 10, 0)}
-local tween1 = TweenService:Create(part, infos, objectif)
-tween1:Play()
+local t1 = TweenService:Create(brique, info,
+    {Position = Vector3.new(20, 10, 0)})
+t1:Play()
 
--- Attendre la fin et enchaîner
-tween1.Completed:Wait()
-
--- Animation retour avec Bounce !
-local infosRebond = TweenInfo.new(1, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out)
-local retour = {Position = Vector3.new(0, 0, 0)}
-local tween2 = TweenService:Create(part, infosRebond, retour)
-tween2:Play()
-
--- Animer la couleur ET la taille en même temps
-local infosGlow = TweenInfo.new(0.5, Enum.EasingStyle.Elastic)
-local effetGlow = {
-    Size = Vector3.new(6, 6, 6),
-    Color = Color3.fromRGB(255, 200, 0)
-}
-local tweenGlow = TweenService:Create(part, infosGlow, effetGlow)
-tweenGlow:Play()`
+-- Attendre la fin et animer la couleur
+t1.Completed:Wait()
+local t2 = TweenService:Create(brique,
+    TweenInfo.new(0.5, Enum.EasingStyle.Elastic),
+    {Color = Color3.fromRGB(255, 200, 0)})
+t2:Play()`,
+        studio: {
+          where: { fr: "Workspace (Part 'MaBrique' Anchored=true) + ServerScriptService (Script)", en: "Workspace (Part 'MaBrique' Anchored=true) + ServerScriptService (Script)", es: "Workspace (Part 'MaBrique' Anchored=true) + ServerScriptService (Script)" },
+          steps: {
+            fr: [
+              "Place une Part anchored dans le Workspace, nomme-la 'MaBrique'",
+              "Copie le code dans un Script (ServerScriptService)",
+              "Lance et regarde ta brique se déplacer avec un rebond !",
+              "Essaie d'autres EasingStyle : Sine, Elastic, Quad"
+            ],
+            en: [
+              "Place an anchored Part in the Workspace, name it 'MaBrique'",
+              "Copy the code into a Script (ServerScriptService)",
+              "Run and watch your brick move with a bounce!",
+              "Try other EasingStyles: Sine, Elastic, Quad"
+            ],
+            es: [
+              "Coloca una Part anclada en el Workspace, nómbrala 'MaBrique'",
+              "Copia el código en un Script (ServerScriptService)",
+              "¡Ejecuta y mira tu ladrillo moverse con un rebote!",
+              "Prueba otros EasingStyle: Sine, Elastic, Quad"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Crée une animation en 3 étapes : la brique monte (Y+10), change de couleur en rouge, puis redescend à sa position originale. Utilise Completed:Wait() entre chaque étape.",
+            en: "🎯 Create a 3-step animation: the brick goes up (Y+10), changes color to red, then comes back down to its original position. Use Completed:Wait() between each step.",
+            es: "🎯 Crea una animación de 3 pasos: el ladrillo sube (Y+10), cambia de color a rojo, luego baja de vuelta a su posición original. Usa Completed:Wait() entre cada paso."
+          }
+        }
       }
     ]
   },
   {
     id: 6, icon: "👑", color: "#E84C4C",
-    title: "Créer son Jeu",
-    sub: "Heures 16-21 • GameLoop, DataStore, POO, Héritage",
-    intro: "Le niveau final ! Ici on assemble tout ce qu'on a appris pour construire un vrai jeu avec sauvegarde, personnages et logique complète.",
+    title: { fr: "Créer son Jeu", en: "Create your Game", es: "Crea tu Juego" },
+    sub: { fr: "Heures 16-21 • GameLoop, DataStore, POO, Héritage", en: "Hours 16-21 • GameLoop, DataStore, OOP, Inheritance", es: "Horas 16-21 • GameLoop, DataStore, POO, Herencia" },
+    intro: {
+      fr: "Le niveau final ! On assemble tout ce qu'on a appris pour construire un vrai jeu avec sauvegarde, personnages et logique complète.",
+      en: "The final level! We put together everything we've learned to build a real game with saving, characters and complete logic.",
+      es: "¡El nivel final! Juntamos todo lo que hemos aprendido para construir un juego real con guardado, personajes y lógica completa."
+    },
     lessons: [
       {
-        id: "6-1", title: "Game Loop — le cœur de ton jeu",
-        concept: "Boucle de jeu, états, RunService, BindableEvents",
-        superpapa: "Tout jeu vidéo tourne en boucle : mise à jour → affichage → mise à jour → affichage... C'est le battement de coeur de ton jeu !",
-        explanation: "Le Game Loop est la boucle principale qui fait tourner un jeu. À chaque frame (image), le jeu met à jour l'état de tous les objets. RunService.Heartbeat se déclenche à chaque frame — parfait pour les mises à jour continues.",
-        tip: "Heartbeat reçoit 'dt' (delta time) : le temps écoulé depuis la dernière frame. Utilise-le pour des mouvements indépendants de la vitesse de l'ordinateur !",
+        id: "6-1",
+        title: { fr: "Game Loop — le cœur de ton jeu", en: "Game Loop — your game's heart", es: "Game Loop — el corazón de tu juego" },
+        concept: { fr: "RunService.Heartbeat, états du jeu, task.spawn", en: "RunService.Heartbeat, game states, task.spawn", es: "RunService.Heartbeat, estados del juego, task.spawn" },
+        superpapa: {
+          fr: "Tout jeu vidéo tourne en boucle : mise à jour → affichage → mise à jour... C'est le battement de cœur de ton jeu !",
+          en: "Every video game runs in a loop: update → display → update... That's your game's heartbeat!",
+          es: "¡Todo videojuego funciona en bucle: actualizar → mostrar → actualizar... ¡Ese es el latido de tu juego!"
+        },
+        explanation: {
+          fr: "Le Game Loop est la boucle principale qui fait tourner un jeu. RunService.Heartbeat se déclenche à chaque frame (image par image). Le paramètre 'dt' indique le temps écoulé depuis la dernière image.",
+          en: "The Game Loop is the main loop that runs a game. RunService.Heartbeat fires every frame (image by image). The 'dt' parameter indicates the time elapsed since the last frame.",
+          es: "El Game Loop es el bucle principal que ejecuta un juego. RunService.Heartbeat se dispara en cada frame (imagen por imagen). El parámetro 'dt' indica el tiempo transcurrido desde el último frame."
+        },
+        tip: {
+          fr: "Utilise 'dt' (delta time) pour des mouvements indépendants de la vitesse de l'ordinateur. Sans dt, le jeu va plus vite sur un bon PC !",
+          en: "Use 'dt' (delta time) for movements independent of computer speed. Without dt, the game runs faster on a good PC!",
+          es: "¡Usa 'dt' (delta time) para movimientos independientes de la velocidad del ordenador. ¡Sin dt, el juego va más rápido en un buen PC!"
+        },
         code: `local RunService = game:GetService("RunService")
 
--- État du jeu
 local jeu = {
     enCours = false,
     score = 0,
-    tempsRestant = 60,
-    niveau = 1
+    tempsRestant = 60
 }
 
--- Démarrer le jeu
-local function demarrerJeu()
+local function demarrer()
     jeu.enCours = true
     jeu.score = 0
     jeu.tempsRestant = 60
     print("=== JEU DÉMARRÉ ===")
 end
 
--- Terminer le jeu
-local function terminerJeu()
-    jeu.enCours = false
-    print("=== GAME OVER ===")
-    print("Score final : " .. jeu.score)
-end
-
--- Boucle principale (chaque frame)
 local connexion
 connexion = RunService.Heartbeat:Connect(function(dt)
     if not jeu.enCours then return end
-    
-    -- Mettre à jour le temps
     jeu.tempsRestant = jeu.tempsRestant - dt
-    
-    -- Vérifier la fin
     if jeu.tempsRestant <= 0 then
-        terminerJeu()
-        connexion:Disconnect()  -- arrêter la boucle
+        jeu.enCours = false
+        print("GAME OVER ! Score : " .. jeu.score)
+        connexion:Disconnect()
     end
 end)
 
--- Timer séparé pour les événements
 task.spawn(function()
-    demarrerJeu()
+    demarrer()
     while jeu.enCours do
         task.wait(5)
         jeu.score = jeu.score + 100
         print("Score : " .. jeu.score)
     end
-end)`
+end)`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie le code dans un Script", "Lance le jeu", "Regarde Output — le score monte toutes les 5 secondes et le jeu s'arrête à 60s"],
+            en: ["Copy the code into a Script", "Run the game", "Watch Output — score rises every 5 seconds and game stops at 60s"],
+            es: ["Copia el código en un Script", "Ejecuta el juego", "Mira Output — la puntuación sube cada 5 segundos y el juego se detiene a los 60s"]
+          },
+          exercise: {
+            fr: "🎯 Modifie le jeu pour que le score augmente de 10 toutes les secondes (pas toutes les 5s). Ajoute un message 'MI-TEMPS !' quand il reste 30 secondes.",
+            en: "🎯 Modify the game so the score increases by 10 every second (not every 5s). Add a 'HALF-TIME!' message when 30 seconds remain.",
+            es: "🎯 Modifica el juego para que la puntuación aumente en 10 cada segundo (no cada 5s). Añade un mensaje '¡MEDIO TIEMPO!' cuando queden 30 segundos."
+          }
+        }
       },
       {
-        id: "6-2", title: "DataStore — sauvegarder les données",
-        concept: "DataStoreService, GetAsync, SetAsync, UpdateAsync",
-        superpapa: "Pas de sauvegarde = le joueur perd tout quand il quitte. C'est inadmissible ! Les DataStores gardent les données pour toujours.",
-        explanation: "DataStoreService est le système de sauvegarde persistante de Roblox. Les données sont stockées sur les serveurs Roblox et restent même quand le joueur quitte. Il faut activer l'accès API dans les paramètres du jeu.",
-        tip: "Toujours utiliser pcall() avec les DataStores — la connexion peut échouer, et ça ne doit pas planter ton jeu !",
-        code: `-- IMPORTANT : activer "Enable Studio Access to API Services" dans les paramètres
-local DataStoreService = game:GetService("DataStoreService")
+        id: "6-2",
+        title: { fr: "DataStore — sauvegarder les données", en: "DataStore — saving data", es: "DataStore — guardar datos" },
+        concept: { fr: "GetAsync, SetAsync, pcall, BindToClose", en: "GetAsync, SetAsync, pcall, BindToClose", es: "GetAsync, SetAsync, pcall, BindToClose" },
+        superpapa: {
+          fr: "Pas de sauvegarde = le joueur perd tout quand il quitte. C'est inadmissible ! Les DataStores gardent tout pour toujours.",
+          en: "No saving = player loses everything when they leave. Unacceptable! DataStores keep everything forever.",
+          es: "¡Sin guardado = el jugador pierde todo al salir. ¡Inaceptable! Los DataStores guardan todo para siempre."
+        },
+        explanation: {
+          fr: "DataStoreService est le système de sauvegarde persistante de Roblox. Les données restent même quand le joueur quitte. Il faut activer 'Enable Studio Access to API Services' dans Game Settings.",
+          en: "DataStoreService is Roblox's persistent saving system. Data remains even when the player leaves. You need to enable 'Enable Studio Access to API Services' in Game Settings.",
+          es: "DataStoreService es el sistema de guardado persistente de Roblox. Los datos permanecen incluso cuando el jugador se va. Necesitas activar 'Enable Studio Access to API Services' en Game Settings."
+        },
+        tip: {
+          fr: "Toujours utiliser pcall() avec les DataStores — la connexion peut échouer, et ça ne doit pas planter ton jeu !",
+          en: "Always use pcall() with DataStores — the connection can fail, and that shouldn't crash your game!",
+          es: "¡Usa siempre pcall() con los DataStores — ¡la conexión puede fallar, y no debe bloquear tu juego!"
+        },
+        code: `-- Activer : Game Settings → Security → Enable Studio Access to API Services
+local DSS = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
+local saves = DSS:GetDataStore("SavesMathis_v1")
 
--- Créer/accéder au datastore
-local sauvegardes = DataStoreService:GetDataStore("SauvegardeMathis_v1")
-
--- Sauvegarder les données d'un joueur
 local function sauvegarder(player)
-    local cle = "joueur_" .. player.UserId  -- clé unique par joueur
-    
-    local donnees = {
+    local cle = "p_" .. player.UserId
+    local data = {
         coins = player.leaderstats.Pièces.Value,
         niveau = player.leaderstats.Niveau.Value,
-        xp = player.leaderstats.XP.Value,
-        dateSauvegarde = os.time()
     }
-    
-    local succes, erreur = pcall(function()
-        sauvegardes:SetAsync(cle, donnees)
+    local ok, err = pcall(function()
+        saves:SetAsync(cle, data)
     end)
-    
-    if succes then
-        print("Sauvegarde réussie pour " .. player.Name)
-    else
-        warn("Erreur sauvegarde : " .. erreur)
-    end
+    if ok then print("Sauvegardé !") else warn(err) end
 end
 
--- Charger les données d'un joueur
 local function charger(player)
-    local cle = "joueur_" .. player.UserId
-    
-    local succes, donnees = pcall(function()
-        return sauvegardes:GetAsync(cle)
+    local cle = "p_" .. player.UserId
+    local ok, data = pcall(function()
+        return saves:GetAsync(cle)
     end)
-    
-    if succes and donnees then
-        player.leaderstats.Pièces.Value = donnees.coins or 0
-        player.leaderstats.Niveau.Value = donnees.niveau or 1
-        print("Chargement réussi ! Pièces : " .. donnees.coins)
-    else
-        print("Nouveau joueur - données par défaut")
+    if ok and data then
+        player.leaderstats.Pièces.Value = data.coins or 0
+        print("Chargé ! Pièces : " .. data.coins)
     end
 end
 
--- Connecter aux événements joueur
 Players.PlayerAdded:Connect(charger)
-Players.PlayerRemoving:Connect(sauvegarder)
-game:BindToClose(function()  -- sauvegarde quand le serveur s'arrête
-    for _, player in ipairs(Players:GetPlayers()) do
-        sauvegarder(player)
-    end
-end)`
+Players.PlayerRemoving:Connect(sauvegarder)`,
+        studio: {
+          where: { fr: "Game Settings + ServerScriptService → Script", en: "Game Settings + ServerScriptService → Script", es: "Game Settings + ServerScriptService → Script" },
+          steps: {
+            fr: [
+              "Va dans Game Settings (bouton en haut) → Security",
+              "Active 'Enable Studio Access to API Services'",
+              "Copie le code dans un Script (assure-toi d'avoir les leaderstats du module 4-1)",
+              "Lance, donne des pièces manuellement, arrête, relance — les pièces sont sauvegardées !"
+            ],
+            en: [
+              "Go to Game Settings (top button) → Security",
+              "Enable 'Enable Studio Access to API Services'",
+              "Copy the code into a Script (make sure you have leaderstats from module 4-1)",
+              "Run, manually give coins, stop, rerun — coins are saved!"
+            ],
+            es: [
+              "Ve a Game Settings (botón arriba) → Security",
+              "Activa 'Enable Studio Access to API Services'",
+              "Copia el código en un Script (asegúrate de tener los leaderstats del módulo 4-1)",
+              "Ejecuta, da monedas manualmente, detén, vuelve a ejecutar — ¡las monedas están guardadas!"
+            ]
+          },
+          exercise: {
+            fr: "🎯 Ajoute la sauvegarde du 'Niveau' du joueur au DataStore. Quand il charge, affiche 'Bienvenue ! Tu es au niveau X avec Y pièces.'",
+            en: "🎯 Add saving of the player's 'Level' to the DataStore. When loading, display 'Welcome! You are at level X with Y coins.'",
+            es: "🎯 Añade el guardado del 'Nivel' del jugador al DataStore. Al cargar, muestra '¡Bienvenido! Estás en el nivel X con Y monedas.'"
+          }
+        }
       },
       {
-        id: "6-3", title: "Programmation Orientée Objet",
-        concept: "Classes, instances, méthodes, self, constructeur",
-        superpapa: "La POO, c'est le niveau pro du code. Tu crées des 'moules' pour tes personnages et objets — propre, organisé, réutilisable !",
-        explanation: "La Programmation Orientée Objet (POO) permet de créer des 'classes' — des modèles pour créer des objets avec leurs propres propriétés et comportements. C'est la façon dont tous les grands jeux sont programmés.",
-        tip: "Le ':' dans 'Ennemi:attaquer()' passe automatiquement l'objet lui-même comme premier paramètre 'self'. C'est la magie de la POO en Lua !",
-        code: `-- Classe Ennemi
-local Ennemi = {}
+        id: "6-3",
+        title: { fr: "Programmation Orientée Objet", en: "Object-Oriented Programming", es: "Programación Orientada a Objetos" },
+        concept: { fr: "Classes, instances, méthodes, self, setmetatable", en: "Classes, instances, methods, self, setmetatable", es: "Clases, instancias, métodos, self, setmetatable" },
+        superpapa: {
+          fr: "La POO, c'est le niveau pro du code. Tu crées des 'moules' pour tes personnages — propre, organisé, réutilisable !",
+          en: "OOP is the pro level of coding. You create 'templates' for your characters — clean, organized, reusable!",
+          es: "¡La POO es el nivel pro del código. ¡Creas 'moldes' para tus personajes — limpio, organizado, reutilizable!"
+        },
+        explanation: {
+          fr: "La Programmation Orientée Objet permet de créer des 'classes' — des modèles pour créer des objets avec leurs propres propriétés et comportements. C'est comme ça que tous les grands jeux sont programmés.",
+          en: "Object-Oriented Programming lets you create 'classes' — templates for creating objects with their own properties and behaviors. This is how all major games are programmed.",
+          es: "La Programación Orientada a Objetos permite crear 'clases' — plantillas para crear objetos con sus propias propiedades y comportamientos. Así es como se programan todos los grandes juegos."
+        },
+        tip: {
+          fr: "Le ':' dans 'Ennemi:attaquer()' passe automatiquement l'objet lui-même comme premier paramètre 'self'. C'est la magie de la POO en Lua !",
+          en: "The ':' in 'Enemy:attack()' automatically passes the object itself as the first 'self' parameter. That's the magic of OOP in Lua!",
+          es: "¡El ':' en 'Enemigo:atacar()' pasa automáticamente el objeto mismo como primer parámetro 'self'. ¡Esa es la magia de la POO en Lua!"
+        },
+        code: `local Ennemi = {}
 Ennemi.__index = Ennemi
 
--- Constructeur : crée un nouvel ennemi
 function Ennemi.new(nom, vie, force)
     local self = setmetatable({}, Ennemi)
     self.nom = nom
     self.vie = vie
-    self.vieMax = vie
     self.force = force
     self.estVivant = true
     return self
 end
 
--- Méthode : recevoir des dégâts
 function Ennemi:subirDegats(degats)
     self.vie = math.max(0, self.vie - degats)
-    print(self.nom .. " subit " .. degats .. " dégâts ! Vie : " .. self.vie)
-    
+    print(self.nom .. " : " .. self.vie .. " HP")
     if self.vie <= 0 then
         self.estVivant = false
-        self:mourir()
+        print(self.nom .. " est vaincu !")
     end
 end
 
--- Méthode : attaquer
-function Ennemi:attaquer(cible)
-    if not self.estVivant then return end
-    local degats = self.force + math.random(-5, 5)
-    print(self.nom .. " attaque " .. cible .. " pour " .. degats .. " dégâts !")
-    return degats
+function Ennemi:attaquer()
+    return self.force + math.random(-5, 5)
 end
 
--- Méthode : mourir
-function Ennemi:mourir()
-    print(self.nom .. " est vaincu !")
-end
-
--- Méthode : afficher le statut
-function Ennemi:statut()
-    local pourcentage = math.floor(self.vie / self.vieMax * 100)
-    print(self.nom .. " : " .. self.vie .. "/" .. self.vieMax .. " (" .. pourcentage .. "%)")
-end
-
--- Créer des ennemis
 local goblin = Ennemi.new("Goblin", 50, 15)
-local dragon = Ennemi.new("Dragon Rouge", 500, 80)
-local zombie = Ennemi.new("Zombie", 30, 8)
-
--- Utiliser les méthodes
-goblin:statut()
-goblin:subirDegats(20)
-goblin:subirDegats(35)
-
-dragon:attaquer("Mathis")
-dragon:statut()`
+local dragon = Ennemi.new("Dragon", 500, 80)
+goblin:subirDegats(30)
+goblin:subirDegats(25)
+print("Dragon attaque pour : " .. dragon:attaquer())`,
+        studio: {
+          where: { fr: "ServerScriptService → Script (ou ModuleScript)", en: "ServerScriptService → Script (or ModuleScript)", es: "ServerScriptService → Script (o ModuleScript)" },
+          steps: {
+            fr: ["Copie le code dans un Script", "Lance et regarde le combat dans Output", "Essaie de créer 3 ennemis différents avec new()"],
+            en: ["Copy the code into a Script", "Run and watch the combat in Output", "Try creating 3 different enemies with new()"],
+            es: ["Copia el código en un Script", "Ejecuta y mira el combate en Output", "Intenta crear 3 enemigos diferentes con new()"]
+          },
+          exercise: {
+            fr: "🎯 Ajoute une méthode 'Ennemi:seSoigner(quantite)' qui ajoute de la vie (sans dépasser vieMax). Teste avec goblin:seSoigner(20).",
+            en: "🎯 Add a method 'Enemy:heal(amount)' that adds health (without exceeding maxHealth). Test with goblin:heal(20).",
+            es: "🎯 Añade un método 'Enemigo:curar(cantidad)' que añade vida (sin superar vidaMax). Prueba con goblin:curar(20)."
+          }
+        }
       },
       {
-        id: "6-4", title: "Héritage — spécialiser les classes",
-        concept: "setmetatable, __index, héritage, polymorphisme",
-        superpapa: "Et si ton Goblin Archer faisait TOUT ce que fait un Goblin, plus tirer des flèches ? C'est l'héritage : hériter des capacités d'une classe parente !",
-        explanation: "L'héritage permet de créer une nouvelle classe basée sur une existante, en ajoutant ou modifiant des comportements. C'est comme un enfant qui hérite des traits de ses parents mais a aussi sa propre personnalité.",
-        tip: "Le polymorphisme permet d'appeler la même méthode sur des objets différents — super pratique pour gérer une liste d'ennemis de types différents !",
-        code: `-- Classe de base : Personnage
-local Personnage = {}
+        id: "6-4",
+        title: { fr: "Héritage — spécialiser les classes", en: "Inheritance — specializing classes", es: "Herencia — especializar clases" },
+        concept: { fr: "setmetatable héritage, polymorphisme, super classe", en: "setmetatable inheritance, polymorphism, super class", es: "setmetatable herencia, polimorfismo, superclase" },
+        superpapa: {
+          fr: "Ton Goblin Archer fait TOUT ce que fait un Goblin, PLUS tirer des flèches. C'est l'héritage : hériter des capacités d'une classe parente !",
+          en: "Your Archer Goblin does EVERYTHING a Goblin does, PLUS shoot arrows. That's inheritance: inheriting abilities from a parent class!",
+          es: "¡Tu Goblin Arquero hace TODO lo que hace un Goblin, MÁS disparar flechas. ¡Eso es la herencia: heredar habilidades de una clase padre!"
+        },
+        explanation: {
+          fr: "L'héritage crée une nouvelle classe basée sur une existante, en ajoutant ou modifiant des comportements. Le polymorphisme permet d'appeler la même méthode sur des objets de types différents.",
+          en: "Inheritance creates a new class based on an existing one, adding or modifying behaviors. Polymorphism lets you call the same method on objects of different types.",
+          es: "La herencia crea una nueva clase basada en una existente, añadiendo o modificando comportamientos. El polimorfismo permite llamar al mismo método en objetos de diferentes tipos."
+        },
+        tip: {
+          fr: "Pour appeler la méthode du parent depuis l'enfant, utilise ClasseParente.methode(self, ...) — ça évite la récursion infinie !",
+          en: "To call the parent method from the child, use ParentClass.method(self, ...) — it avoids infinite recursion!",
+          es: "Para llamar al método padre desde el hijo, usa ClasePadre.metodo(self, ...) — ¡evita la recursión infinita!"
+        },
+        code: `local Personnage = {}
 Personnage.__index = Personnage
-
-function Personnage.new(nom, vie, force)
-    local self = setmetatable({}, Personnage)
-    self.nom = nom
-    self.vie = vie
-    self.force = force
-    return self
+function Personnage.new(nom, vie)
+    return setmetatable({nom=nom, vie=vie, force=20}, Personnage)
 end
-
-function Personnage:sePresenter()
-    print("Je suis " .. self.nom .. " avec " .. self.vie .. " points de vie")
-end
-
 function Personnage:attaquer()
-    print(self.nom .. " frappe pour " .. self.force .. " dégâts")
+    print(self.nom .. " frappe pour " .. self.force)
 end
 
--- Classe enfant : Guerrier (hérite de Personnage)
+-- Guerrier hérite de Personnage
 local Guerrier = setmetatable({}, {__index = Personnage})
 Guerrier.__index = Guerrier
-
-function Guerrier.new(nom, vie, force, armure)
-    local self = Personnage.new(nom, vie, force)  -- appel du parent
+function Guerrier.new(nom, vie, armure)
+    local self = Personnage.new(nom, vie)
     setmetatable(self, Guerrier)
     self.armure = armure
+    self.force = 40  -- plus fort !
     return self
 end
-
--- Surcharge de la méthode attaquer
-function Guerrier:attaquer()
-    local degats = self.force * 1.5  -- 50% de bonus
-    print(self.nom .. " frappe FORT pour " .. degats .. " dégâts !")
+function Guerrier:attaquer()  -- redéfini !
+    print(self.nom .. " FRAPPE FORT pour " .. self.force * 1.5)
 end
 
-function Guerrier:bloquer()
-    print(self.nom .. " bloque avec son armure de " .. self.armure .. " !")
-end
-
--- Classe enfant : Mage (hérite de Personnage)
-local Mage = setmetatable({}, {__index = Personnage})
-Mage.__index = Mage
-
-function Mage.new(nom, vie, force, mana)
-    local self = Personnage.new(nom, vie, force)
-    setmetatable(self, Mage)
-    self.mana = mana
-    return self
-end
-
-function Mage:attaquer()  -- polymorphisme !
-    if self.mana >= 20 then
-        self.mana = self.mana - 20
-        print(self.nom .. " lance un sort pour " .. self.force * 2 .. " dégâts !")
-    else
-        print(self.nom .. " n'a plus de mana !")
-    end
-end
-
--- Test du polymorphisme
-local equipe = {
-    Guerrier.new("Mathis le Brave", 150, 50, 30),
-    Mage.new("Emma la Sage", 80, 70, 100),
-    Personnage.new("Villageois Bob", 40, 10),
-}
-
-for _, membre in ipairs(equipe) do
-    membre:sePresenter()
-    membre:attaquer()  -- chacun attaque à sa façon !
-    print("---")
-end`
+local bob = Personnage.new("Bob", 100)
+local mathis = Guerrier.new("Mathis", 150, 50)
+bob:attaquer()    -- méthode parent
+mathis:attaquer() -- méthode enfant (polymorphisme)`,
+        studio: {
+          where: { fr: "ServerScriptService → Script", en: "ServerScriptService → Script", es: "ServerScriptService → Script" },
+          steps: {
+            fr: ["Copie et lance le code", "Observe que bob et mathis attaquent différemment", "Crée un Mage qui hérite aussi de Personnage"],
+            en: ["Copy and run the code", "Observe that bob and mathis attack differently", "Create a Mage that also inherits from Character"],
+            es: ["Copia y ejecuta el código", "Observa que bob y mathis atacan diferente", "Crea un Mago que también herede de Personaje"]
+          },
+          exercise: {
+            fr: "🎯 Crée une classe 'Archer' qui hérite de Personnage avec une méthode tirerFleche() qui fait des dégâts à distance. Crée un tableau avec 1 Guerrier, 1 Archer, 1 Personnage et fais-les tous attaquer avec une boucle for.",
+            en: "🎯 Create an 'Archer' class that inherits from Character with a shootArrow() method that deals ranged damage. Create an array with 1 Warrior, 1 Archer, 1 Character and make them all attack with a for loop.",
+            es: "🎯 Crea una clase 'Arquero' que herede de Personaje con un método dispararFlecha() que cause daño a distancia. Crea un array con 1 Guerrero, 1 Arquero, 1 Personaje y hazlos atacar a todos con un bucle for."
+          }
+        }
       }
     ]
   }
@@ -1045,99 +1477,85 @@ end`
 
 const UI = {
   fr: {
-    appName: "RoboLua",
-    welcome: "Bienvenue !",
-    welcomeSub: "Apprends à créer ton propre jeu Roblox",
-    start: "Commencer l'aventure →",
-    modules: "leçons",
-    back: "← Retour",
-    nextLesson: "Leçon suivante →",
-    markDone: "✓ J'ai compris, leçon suivante !",
-    completed: "✓ Terminé",
-    askSuperpapa: "Demander à Superpapa",
+    back: "← Retour", markDone: "✓ J'ai compris, leçon suivante !",
+    completed: "✓ Terminé", askSuperpapa: "Demander à Superpapa",
     placeholder: "Une question ? Superpapa répond !",
-    locked: "Termine le module précédent pour débloquer",
-    tip: "Astuce de Superpapa",
-    codeTitle: "Code Lua",
-    listenBtn: "🔊 Écouter",
-    stopBtn: "⏹ Stop",
-    celebTitle: "Bravo Mathis !",
+    tip: "Astuce de Superpapa", codeTitle: "Code Lua",
+    listenBtn: "🔊 Écouter", stopBtn: "⏹ Stop",
+    celebTitle: "Bravo Mathis !", nextLesson: "Leçon suivante →",
     celebMsg: ["Super travail !", "Continue comme ça !", "Tu es un vrai codeur !", "Impressionnant !", "Je suis fier de toi !"],
-    xpGained: "+50 XP",
-    progress: "Progression",
-    systemPrompt: (lesson, module) =>
-      `Tu es Superpapa973, un professeur de code passionné et bienveillant pour les enfants de 8-13 ans qui apprennent Lua pour Roblox. Tu parles en français, de façon simple et encourageante. Tu utilises des analogies avec les jeux vidéo. Tes réponses font maximum 3-4 phrases courtes. Tu t'appelles Superpapa973, tu portes une veste à flammes et un chapeau de cowboy, et tu es très fier de tes élèves.
-Module actuel : ${module || "général"}.
-${lesson ? `Leçon : "${lesson.title}". Concept : ${lesson.concept}. Explication : ${lesson.explanation}` : ""}`
+    xpGained: "+50 XP", lessons: "leçons",
+    studioTitle: "📺 Dans Roblox Studio",
+    studioWhere: "Où écrire ce code :",
+    studioSteps: "Étapes :",
+    exerciseTitle: "Mini-défi Studio",
+    start: "Commencer l'aventure →",
+    studioGuideTitle: "Comment ça marche ?",
+    studioGuideBtn: "C'est compris, allons-y ! →",
+    systemPrompt: (lesson, mod) =>
+      `Tu es Superpapa973, professeur de code passionné pour enfants de 8-13 ans apprenant Lua pour Roblox. Réponds en français, simplement et avec encouragement. Analogies jeux vidéo. Max 3-4 phrases courtes. Tu portes une veste à flammes et un chapeau cowboy avec une croix.
+Module : ${mod || "général"}. ${lesson ? `Leçon : "${lesson.title?.fr}". Concept : ${lesson.concept?.fr}.` : ""}`
   },
   en: {
-    appName: "RoboLua",
-    welcome: "Welcome!",
-    welcomeSub: "Learn to create your own Roblox game",
-    start: "Start the adventure →",
-    modules: "lessons",
-    back: "← Back",
-    nextLesson: "Next lesson →",
-    markDone: "✓ Got it, next lesson!",
-    completed: "✓ Done",
-    askSuperpapa: "Ask Superpapa",
+    back: "← Back", markDone: "✓ Got it, next lesson!",
+    completed: "✓ Done", askSuperpapa: "Ask Superpapa",
     placeholder: "Got a question? Superpapa answers!",
-    locked: "Complete the previous module to unlock",
-    tip: "Superpapa's tip",
-    codeTitle: "Lua Code",
-    listenBtn: "🔊 Listen",
-    stopBtn: "⏹ Stop",
-    celebTitle: "Well done Mathis!",
+    tip: "Superpapa's tip", codeTitle: "Lua Code",
+    listenBtn: "🔊 Listen", stopBtn: "⏹ Stop",
+    celebTitle: "Well done Mathis!", nextLesson: "Next lesson →",
     celebMsg: ["Great work!", "Keep it up!", "You're a real coder!", "Impressive!", "I'm proud of you!"],
-    xpGained: "+50 XP",
-    progress: "Progress",
-    systemPrompt: (lesson, module) =>
-      `You are Superpapa973, a passionate and caring coding teacher for kids aged 8-13 learning Lua for Roblox. Reply in English, simply and encouragingly. Use video game analogies. Maximum 3-4 short sentences. You are called Superpapa973, you wear a flame jacket and a cowboy hat, and you are very proud of your students.
-Current module: ${module || "general"}.
-${lesson ? `Lesson: "${lesson.title}". Concept: ${lesson.concept}.` : ""}`
+    xpGained: "+50 XP", lessons: "lessons",
+    studioTitle: "📺 In Roblox Studio",
+    studioWhere: "Where to write this code:",
+    studioSteps: "Steps:",
+    exerciseTitle: "Studio Mini-Challenge",
+    start: "Start the adventure →",
+    studioGuideTitle: "How does it work?",
+    studioGuideBtn: "Got it, let's go! →",
+    systemPrompt: (lesson, mod) =>
+      `You are Superpapa973, a passionate coding teacher for kids 8-13 learning Lua for Roblox. Reply in English, simply and encouragingly. Video game analogies. Max 3-4 short sentences. You wear a flame jacket and cowboy hat with a cross.
+Module: ${mod || "general"}. ${lesson ? `Lesson: "${lesson.title?.en}". Concept: ${lesson.concept?.en}.` : ""}`
   },
   es: {
-    appName: "RoboLua",
-    welcome: "¡Bienvenido!",
-    welcomeSub: "Aprende a crear tu propio juego de Roblox",
-    start: "Comenzar la aventura →",
-    modules: "lecciones",
-    back: "← Volver",
-    nextLesson: "Siguiente lección →",
-    markDone: "✓ ¡Entendido, siguiente lección!",
-    completed: "✓ Completado",
-    askSuperpapa: "Preguntar a Superpapa",
+    back: "← Volver", markDone: "✓ ¡Entendido, siguiente lección!",
+    completed: "✓ Completado", askSuperpapa: "Preguntar a Superpapa",
     placeholder: "¿Una pregunta? ¡Superpapa responde!",
-    locked: "Completa el módulo anterior para desbloquear",
-    tip: "Consejo de Superpapa",
-    codeTitle: "Código Lua",
-    listenBtn: "🔊 Escuchar",
-    stopBtn: "⏹ Parar",
-    celebTitle: "¡Bravo Mathis!",
-    celebMsg: ["¡Gran trabajo!", "¡Sigue así!", "¡Eres un verdadero programador!", "¡Impresionante!", "¡Estoy orgulloso de ti!"],
-    xpGained: "+50 XP",
-    progress: "Progreso",
-    systemPrompt: (lesson, module) =>
-      `Eres Superpapa973, un profesor de código apasionado y amable para niños de 8-13 años que aprenden Lua para Roblox. Responde en español, de forma sencilla y alentadora. Usa analogías de videojuegos. Máximo 3-4 frases cortas. Te llamas Superpapa973, llevas una chaqueta de llamas y un sombrero de vaquero, y estás muy orgulloso de tus alumnos.
-Módulo actual: ${module || "general"}.
-${lesson ? `Lección: "${lesson.title}". Concepto: ${lesson.concept}.` : ""}`
+    tip: "Consejo de Superpapa", codeTitle: "Código Lua",
+    listenBtn: "🔊 Escuchar", stopBtn: "⏹ Parar",
+    celebTitle: "¡Bravo Mathis!", nextLesson: "Siguiente lección →",
+    celebMsg: ["¡Gran trabajo!", "¡Sigue así!", "¡Eres un programador de verdad!", "¡Impresionante!", "¡Estoy orgulloso de ti!"],
+    xpGained: "+50 XP", lessons: "lecciones",
+    studioTitle: "📺 En Roblox Studio",
+    studioWhere: "Dónde escribir este código:",
+    studioSteps: "Pasos:",
+    exerciseTitle: "Mini-reto Studio",
+    start: "¡Comenzar la aventura →",
+    studioGuideTitle: "¿Cómo funciona?",
+    studioGuideBtn: "¡Entendido, vamos! →",
+    systemPrompt: (lesson, mod) =>
+      `Eres Superpapa973, un profesor de código apasionado para niños de 8-13 años que aprenden Lua para Roblox. Responde en español, de forma sencilla y alentadora. Analogías de videojuegos. Máximo 3-4 frases cortas. Llevas una chaqueta de llamas y sombrero vaquero con una cruz.
+Módulo: ${mod || "general"}. ${lesson ? `Lección: "${lesson.title?.es}". Concepto: ${lesson.concept?.es}.` : ""}`
   }
 };
 
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
+// ─── AUDIO ───────────────────────────────────────────────────────────────────
 
-function highlightLua(code) {
-  const kw = ["local","function","if","then","elseif","else","end","while","do","for","return","true","false","not","and","or","nil","repeat","until","break","in"];
-  let h = code
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/(--\[\[[\s\S]*?\]\]|--[^\n]*)/g, '<span style="color:#6272a4;font-style:italic">$1</span>')
-    .replace(/"([^"]*)"/g, '<span style="color:#50fa7b">"$1"</span>')
-    .replace(/\b(\d+(?:\.\d+)?)\b/g, '<span style="color:#bd93f9">$1</span>');
-  kw.forEach(k => {
-    h = h.replace(new RegExp(`\\b(${k})\\b`, "g"), '<span style="color:#ff79c6;font-weight:500">$1</span>');
-  });
-  h = h.replace(/\b([A-Z][a-zA-Z]+)(?=[:.])/g, '<span style="color:#8be9fd">$1</span>');
-  return h;
+let selectedVoice = null;
+
+function initVoice(lang) {
+  if (typeof window === "undefined") return;
+  const voices = window.speechSynthesis.getVoices();
+  const langCode = lang === "fr" ? "fr" : lang === "es" ? "es" : "en";
+  // Prefer male voices
+  const maleNames = { fr: ["Thomas", "Eddy", "Olivier", "Nicolas"], en: ["Daniel", "Alex", "Fred", "Gordon", "Reed"], es: ["Jorge", "Juan", "Diego", "Enrique", "Carlos"] };
+  const preferred = maleNames[langCode] || [];
+  let voice = null;
+  for (const name of preferred) {
+    voice = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()) && v.lang.startsWith(langCode));
+    if (voice) break;
+  }
+  if (!voice) voice = voices.find(v => v.lang.startsWith(langCode));
+  selectedVoice = voice || null;
 }
 
 function speak(text, lang) {
@@ -1145,37 +1563,87 @@ function speak(text, lang) {
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
   utt.lang = lang === "fr" ? "fr-FR" : lang === "es" ? "es-ES" : "en-US";
-  utt.rate = 0.88;
-  utt.pitch = 1.0;
+  utt.rate = 0.85;
+  utt.pitch = 0.85; // slightly lower = more masculine
+  if (selectedVoice) utt.voice = selectedVoice;
   window.speechSynthesis.speak(utt);
+  return utt;
 }
 
 function stopSpeak() {
-  if (typeof window !== "undefined" && window.speechSynthesis) {
-    window.speechSynthesis.cancel();
-  }
+  if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+
+function t(obj, lang) { return obj?.[lang] || obj?.fr || obj || ""; }
+
+function highlightLua(code) {
+  const kw = ["local","function","if","then","elseif","else","end","while","do","for","return","true","false","not","and","or","nil","repeat","until","break","in"];
+  let h = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/(--\[\[[\s\S]*?\]\]|--[^\n]*)/g,'<span style="color:#6272a4;font-style:italic">$1</span>')
+    .replace(/"([^"]*)"/g,'<span style="color:#50fa7b">"$1"</span>')
+    .replace(/\b(\d+(?:\.\d+)?)\b/g,'<span style="color:#bd93f9">$1</span>');
+  kw.forEach(k => { h = h.replace(new RegExp(`\\b(${k})\\b`,"g"),'<span style="color:#ff79c6;font-weight:500">$1</span>'); });
+  h = h.replace(/\b([A-Z][a-zA-Z]+)(?=[:.])/g,'<span style="color:#8be9fd">$1</span>');
+  return h;
 }
 
 // ─── COMPONENTS ─────────────────────────────────────────────────────────────
 
-function CelebrationModal({ ui, onClose, lessonTitle }) {
+function CelebrationModal({ ui, lang, onClose, lessonTitle }) {
   const msg = ui.celebMsg[Math.floor(Math.random() * ui.celebMsg.length)];
   return (
-    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}
-      onClick={onClose}>
-      <div className="pop-in" style={{ background: "#fff", borderRadius: 20, padding: "32px 24px", textAlign: "center", maxWidth: 320, margin: "0 16px" }}
-        onClick={e => e.stopPropagation()}>
-        <div style={{ marginBottom: 8 }}>
-          <MathisAvatar size={120} celebrating={true} />
-        </div>
-        <div style={{ fontSize: 28, fontWeight: 700, color: "#4CBE72", marginBottom: 8 }}>{ui.celebTitle}</div>
-        <div style={{ fontSize: 18, color: "#2d3748", marginBottom: 4 }}>{msg}</div>
-        <div style={{ fontSize: 14, color: "#718096", marginBottom: 20 }}>"{lessonTitle}"</div>
-        <div style={{ fontSize: 20, fontWeight: 700, color: "#f6ad55", marginBottom: 20 }}>{ui.xpGained} ⭐</div>
-        <button onClick={onClose} style={{ background: "#4CBE72", color: "#fff", border: "none", borderRadius: 12, padding: "12px 32px", fontSize: 16, fontWeight: 600, cursor: "pointer" }}>
+    <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.75)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:1000 }} onClick={onClose}>
+      <div style={{ background:"#fff",borderRadius:24,padding:"28px 24px",textAlign:"center",maxWidth:320,margin:"0 16px",animation:"popIn 0.5s cubic-bezier(0.34,1.56,0.64,1)" }} onClick={e=>e.stopPropagation()}>
+        <MathisAvatar size={110} celebrating={true} />
+        <div style={{ fontSize:26,fontWeight:800,color:"#4CBE72",margin:"10px 0 6px" }}>{ui.celebTitle}</div>
+        <div style={{ fontSize:17,color:"#2d3748",marginBottom:4 }}>{msg}</div>
+        <div style={{ fontSize:13,color:"#718096",marginBottom:16 }}>"{lessonTitle}"</div>
+        <div style={{ fontSize:22,fontWeight:800,color:"#f6ad55",marginBottom:20 }}>{ui.xpGained} ⭐</div>
+        <button onClick={onClose} style={{ background:"#4CBE72",color:"#fff",border:"none",borderRadius:14,padding:"12px 32px",fontSize:16,fontWeight:700,cursor:"pointer" }}>
           {ui.nextLesson}
         </button>
       </div>
+    </div>
+  );
+}
+
+function StudioSection({ lesson, lang, ui }) {
+  const [open, setOpen] = useState(false);
+  const s = lesson.studio;
+  if (!s) return null;
+  const steps = s.steps?.[lang] || s.steps?.fr || [];
+  return (
+    <div style={{ borderRadius:14,overflow:"hidden",border:"2px solid #f6ad55" }}>
+      <div onClick={()=>setOpen(!open)} style={{ background:"#fffbeb",padding:"12px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:10 }}>
+        <span style={{ fontSize:18 }}>🖥️</span>
+        <div style={{ flex:1 }}>
+          <div style={{ fontWeight:700,color:"#92400e",fontSize:14 }}>{ui.studioTitle}</div>
+          <div style={{ fontSize:12,color:"#b45309" }}>{open ? "▲ Fermer" : "▼ Ouvrir les instructions Studio"}</div>
+        </div>
+      </div>
+      {open && (
+        <div style={{ background:"#fffbeb",padding:"0 16px 16px",borderTop:"1px solid #fde68a" }}>
+          <div style={{ fontSize:12,color:"#92400e",fontWeight:600,marginBottom:4 }}>{ui.studioWhere}</div>
+          <div style={{ background:"#1a1a2e",borderRadius:8,padding:"8px 12px",fontSize:12,color:"#f6ad55",fontFamily:"monospace",marginBottom:12 }}>
+            {t(s.where, lang)}
+          </div>
+          <div style={{ fontSize:12,color:"#92400e",fontWeight:600,marginBottom:6 }}>{ui.studioSteps}</div>
+          <div style={{ display:"flex",flexDirection:"column",gap:6,marginBottom:14 }}>
+            {steps.map((step, i) => (
+              <div key={i} style={{ display:"flex",gap:10,alignItems:"flex-start" }}>
+                <div style={{ width:22,height:22,borderRadius:"50%",background:"#f59e0b",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0,marginTop:1 }}>{i+1}</div>
+                <div style={{ fontSize:13,color:"#78350f",lineHeight:1.5 }}>{step}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ background:"#fef3c7",borderRadius:10,padding:"10px 14px",border:"1px solid #fcd34d" }}>
+            <div style={{ fontSize:12,fontWeight:700,color:"#92400e",marginBottom:4 }}>🎯 {ui.exerciseTitle}</div>
+            <div style={{ fontSize:13,color:"#78350f",lineHeight:1.6 }}>{t(s.exercise, lang)}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1186,64 +1654,46 @@ function ChatPanel({ ui, lesson, module, lang, onClose }) {
     en: "Howdy partner! I'm Superpapa973 🤠 Ask me anything about this lesson!",
     es: "¡Howdy compañero! Soy Superpapa973 🤠 ¡Pregúntame lo que quieras sobre esta lección!"
   };
-  const [messages, setMessages] = useState([{ role: "assistant", content: greetings[lang] }]);
+  const [messages, setMessages] = useState([{ role:"assistant", content:greetings[lang] }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
-
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
+  useEffect(()=>{ bottomRef.current?.scrollIntoView({behavior:"smooth"}); }, [messages, loading]);
 
   const send = async () => {
     if (!input.trim() || loading) return;
-    const q = input.trim();
-    setInput("");
-    const newMessages = [...messages, { role: "user", content: q }];
-    setMessages(newMessages);
-    setLoading(true);
+    const q = input.trim(); setInput("");
+    const newMessages = [...messages, { role:"user", content:q }];
+    setMessages(newMessages); setLoading(true);
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          system: ui.systemPrompt(lesson, module?.title),
-          messages: newMessages.map(m => ({ role: m.role, content: m.content })),
-        }),
-      });
+      const res = await fetch("/api/chat", { method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ system: ui.systemPrompt(lesson, t(module?.title, lang)),
+          messages: newMessages.map(m=>({role:m.role,content:m.content})) }) });
       const data = await res.json();
-      setMessages(prev => [...prev, { role: "assistant", content: data.reply || "Réessaie !" }]);
-    } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "⚠️ Erreur réseau !" }]);
-    }
+      setMessages(prev=>[...prev,{role:"assistant",content:data.reply||"Réessaie !"}]);
+    } catch { setMessages(prev=>[...prev,{role:"assistant",content:"⚠️ Erreur réseau !"}]); }
     setLoading(false);
   };
 
   return (
-    <div style={{ border: "0.5px solid #e2e8f0", borderRadius: 16, overflow: "hidden", marginTop: 12 }}>
-      <div style={{ background: "#1a1a2e", padding: "10px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-        <SuperpapaAvatar size={36} />
-        <div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "#fff" }}>Superpapa973</div>
-          <div style={{ fontSize: 11, color: "#a0aec0" }}>Ton professeur</div>
-        </div>
-        <button onClick={onClose} style={{ marginLeft: "auto", border: "none", background: "rgba(255,255,255,0.1)", cursor: "pointer", color: "#fff", padding: "4px 8px", borderRadius: 6, fontSize: 14 }}>✕</button>
+    <div style={{ border:"0.5px solid #e2e8f0",borderRadius:16,overflow:"hidden",marginTop:12 }}>
+      <div style={{ background:"#1a1a2e",padding:"10px 14px",display:"flex",alignItems:"center",gap:10 }}>
+        <SuperpapaAvatar size={38} />
+        <div><div style={{ fontSize:14,fontWeight:600,color:"#fff" }}>Superpapa973</div><div style={{ fontSize:11,color:"#a0aec0" }}>Ton professeur</div></div>
+        <button onClick={onClose} style={{ marginLeft:"auto",border:"none",background:"rgba(255,255,255,0.1)",cursor:"pointer",color:"#fff",padding:"4px 8px",borderRadius:6,fontSize:14 }}>✕</button>
       </div>
-      <div style={{ height: 200, overflowY: "auto", padding: 12, display: "flex", flexDirection: "column", gap: 8, background: "#f8fafc" }}>
-        {messages.map((m, i) => (
-          <div key={i} style={{ maxWidth: "85%", padding: "8px 12px", borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px", background: m.role === "user" ? "#4C9BE8" : "#fff", color: m.role === "user" ? "#fff" : "#2d3748", alignSelf: m.role === "user" ? "flex-end" : "flex-start", fontSize: 13, lineHeight: 1.6, border: m.role === "assistant" ? "0.5px solid #e2e8f0" : "none" }}>
-            {m.content}
-          </div>
+      <div style={{ height:200,overflowY:"auto",padding:12,display:"flex",flexDirection:"column",gap:8,background:"#f8fafc" }}>
+        {messages.map((m,i)=>(
+          <div key={i} style={{ maxWidth:"85%",padding:"8px 12px",borderRadius:m.role==="user"?"12px 12px 2px 12px":"12px 12px 12px 2px",background:m.role==="user"?"#4C9BE8":"#fff",color:m.role==="user"?"#fff":"#2d3748",alignSelf:m.role==="user"?"flex-end":"flex-start",fontSize:13,lineHeight:1.6,border:m.role==="assistant"?"0.5px solid #e2e8f0":"none" }}>{m.content}</div>
         ))}
-        {loading && <div style={{ padding: "8px 12px", background: "#fff", borderRadius: "12px 12px 12px 2px", color: "#718096", fontSize: 13, alignSelf: "flex-start", border: "0.5px solid #e2e8f0" }}>Superpapa réfléchit...</div>}
+        {loading && <div style={{ padding:"8px 12px",background:"#fff",borderRadius:"12px 12px 12px 2px",color:"#718096",fontSize:13,alignSelf:"flex-start",border:"0.5px solid #e2e8f0" }}>Superpapa réfléchit...</div>}
         <div ref={bottomRef} />
       </div>
-      <div style={{ padding: 10, display: "flex", gap: 8, background: "#fff", borderTop: "0.5px solid #e2e8f0" }}>
-        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()}
-          placeholder={ui.placeholder}
-          style={{ flex: 1, padding: "8px 14px", border: "0.5px solid #cbd5e0", borderRadius: 20, fontSize: 13, outline: "none" }} />
+      <div style={{ padding:10,display:"flex",gap:8,background:"#fff",borderTop:"0.5px solid #e2e8f0" }}>
+        <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder={ui.placeholder}
+          style={{ flex:1,padding:"8px 14px",border:"0.5px solid #cbd5e0",borderRadius:20,fontSize:13,outline:"none" }} />
         <button onClick={send} disabled={loading}
-          style={{ width: 34, height: 34, borderRadius: "50%", background: loading ? "#a0aec0" : "#1a1a2e", border: "none", cursor: loading ? "not-allowed" : "pointer", color: "#fff", fontSize: 15, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          ➤
-        </button>
+          style={{ width:34,height:34,borderRadius:"50%",background:loading?"#a0aec0":"#1a1a2e",border:"none",cursor:loading?"not-allowed":"pointer",color:"#fff",fontSize:15,display:"flex",alignItems:"center",justifyContent:"center" }}>➤</button>
       </div>
     </div>
   );
@@ -1257,143 +1707,192 @@ function LessonView({ lesson, module, ui, lang, onBack, completed, onComplete, o
 
   const handleListen = () => {
     if (speaking) { stopSpeak(); setSpeaking(false); return; }
-    const text = lesson.superpapa + " " + lesson.explanation + " " + ui.tip + " : " + lesson.tip;
-    speak(text, lang);
+    initVoice(lang);
+    const text = `${t(lesson.superpapa,lang)}. ${t(lesson.explanation,lang)}. ${t(lesson.tip,lang)}`;
+    const utt = speak(text, lang);
     setSpeaking(true);
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.onend = () => setSpeaking(false);
+    if (utt) utt.onend = () => setSpeaking(false);
   };
 
-  const handleDone = () => {
-    if (!done) {
-      onComplete(lesson.id);
-      setShowCelebration(true);
-    }
-  };
+  const handleDone = () => { if (!done) { onComplete(lesson.id); setShowCelebration(true); } };
 
   return (
     <div>
-      {showCelebration && (
-        <CelebrationModal ui={ui} lessonTitle={lesson.title} onClose={() => { setShowCelebration(false); if (hasNext) onNext(); else onBack(); }} />
-      )}
-      <button onClick={onBack} style={{ border: "none", background: "none", cursor: "pointer", color: "#718096", fontSize: 13, padding: "6px 0", marginBottom: 14, display: "flex", alignItems: "center", gap: 4 }}>
-        {ui.back}
-      </button>
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {/* Superpapa intro */}
-        <div style={{ background: "#1a1a2e", borderRadius: 16, padding: 16, display: "flex", alignItems: "flex-start", gap: 12 }}>
-          <div style={{ flexShrink: 0 }}>
-            <SuperpapaAvatar size={60} animate={true} />
-          </div>
+      {showCelebration && <CelebrationModal ui={ui} lang={lang} lessonTitle={t(lesson.title,lang)} onClose={()=>{ setShowCelebration(false); if(hasNext) onNext(); else onBack(); }} />}
+      <button onClick={onBack} style={{ border:"none",background:"none",cursor:"pointer",color:"#718096",fontSize:13,padding:"6px 0",marginBottom:14 }}>{ui.back}</button>
+      <div style={{ display:"flex",flexDirection:"column",gap:12 }}>
+        {/* Superpapa */}
+        <div style={{ background:"#1a1a2e",borderRadius:16,padding:16,display:"flex",alignItems:"flex-start",gap:12 }}>
+          <div style={{ flexShrink:0 }}><SuperpapaAvatar size={58} animate={true} /></div>
           <div>
-            <div style={{ fontSize: 13, color: "#a0aec0", marginBottom: 4 }}>Superpapa973</div>
-            <div style={{ fontSize: 14, color: "#e2e8f0", lineHeight: 1.6, fontStyle: "italic" }}>"{lesson.superpapa}"</div>
+            <div style={{ fontSize:12,color:"#a0aec0",marginBottom:4 }}>Superpapa973</div>
+            <div style={{ fontSize:14,color:"#e2e8f0",lineHeight:1.6,fontStyle:"italic" }}>"{t(lesson.superpapa,lang)}"</div>
           </div>
         </div>
-
         {/* Explication */}
-        <div style={{ background: "#fff", borderRadius: 16, border: "0.5px solid #e2e8f0", padding: 18 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+        <div style={{ background:"#fff",borderRadius:16,border:"0.5px solid #e2e8f0",padding:18 }}>
+          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10 }}>
             <div>
-              <div style={{ fontSize: 11, color: "#718096", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 4 }}>{lesson.concept}</div>
-              <div style={{ fontSize: 17, fontWeight: 600, color: "#1a202c" }}>{lesson.title}</div>
+              <div style={{ fontSize:11,color:"#718096",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:4 }}>{t(lesson.concept,lang)}</div>
+              <div style={{ fontSize:17,fontWeight:700,color:"#1a202c" }}>{t(lesson.title,lang)}</div>
             </div>
             <button onClick={handleListen}
-              style={{ padding: "6px 12px", borderRadius: 20, border: "0.5px solid " + (speaking ? "#e84c4c" : "#cbd5e0"), background: speaking ? "#e84c4c" : "transparent", color: speaking ? "#fff" : "#718096", fontSize: 12, cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0, marginLeft: 8 }}>
+              style={{ padding:"6px 12px",borderRadius:20,border:"0.5px solid "+(speaking?"#e84c4c":"#cbd5e0"),background:speaking?"#e84c4c":"transparent",color:speaking?"#fff":"#718096",fontSize:12,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,marginLeft:8 }}>
               {speaking ? ui.stopBtn : ui.listenBtn}
             </button>
           </div>
-          <div style={{ fontSize: 14, color: "#4a5568", lineHeight: 1.75 }}>{lesson.explanation}</div>
-          <div style={{ background: "#fffbeb", border: "0.5px solid #f6e05e", borderRadius: 10, padding: "10px 14px", marginTop: 14, fontSize: 13, color: "#744210", display: "flex", gap: 8, alignItems: "flex-start" }}>
-            <span style={{ flexShrink: 0 }}>💡</span>
-            <span><strong>{ui.tip} :</strong> {lesson.tip}</span>
+          <div style={{ fontSize:14,color:"#4a5568",lineHeight:1.75,marginBottom:12 }}>{t(lesson.explanation,lang)}</div>
+          <div style={{ background:"#fffbeb",border:"0.5px solid #f6e05e",borderRadius:10,padding:"10px 14px",fontSize:13,color:"#744210",display:"flex",gap:8,alignItems:"flex-start" }}>
+            <span style={{ flexShrink:0 }}>💡</span>
+            <span><strong>{ui.tip} :</strong> {t(lesson.tip,lang)}</span>
           </div>
         </div>
-
         {/* Code */}
-        <div style={{ background: "#282a36", borderRadius: 16, padding: 16, overflow: "hidden" }}>
-          <div style={{ fontSize: 11, color: "#6272a4", fontFamily: "monospace", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5555", display: "inline-block" }} />
-            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#f1fa8c", display: "inline-block" }} />
-            <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#50fa7b", display: "inline-block" }} />
-            <span style={{ marginLeft: 4 }}>{ui.codeTitle}</span>
+        <div style={{ background:"#282a36",borderRadius:16,padding:16 }}>
+          <div style={{ fontSize:11,color:"#6272a4",fontFamily:"monospace",marginBottom:10,display:"flex",alignItems:"center",gap:8 }}>
+            <span style={{ width:10,height:10,borderRadius:"50%",background:"#ff5555",display:"inline-block" }} />
+            <span style={{ width:10,height:10,borderRadius:"50%",background:"#f1fa8c",display:"inline-block" }} />
+            <span style={{ width:10,height:10,borderRadius:"50%",background:"#50fa7b",display:"inline-block" }} />
+            <span style={{ marginLeft:4 }}>{ui.codeTitle}</span>
           </div>
-          <pre style={{ fontFamily: "'Courier New', monospace", fontSize: 13, lineHeight: 1.7, color: "#f8f8f2", margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word" }}
-            dangerouslySetInnerHTML={{ __html: highlightLua(lesson.code) }} />
+          <pre style={{ fontFamily:"'Courier New',monospace",fontSize:13,lineHeight:1.7,color:"#f8f8f2",margin:0,whiteSpace:"pre-wrap",wordBreak:"break-word" }}
+            dangerouslySetInnerHTML={{ __html:highlightLua(lesson.code) }} />
         </div>
-
+        {/* Studio */}
+        <StudioSection lesson={lesson} lang={lang} ui={ui} />
         {/* Actions */}
-        <div style={{ display: "flex", gap: 8 }}>
+        <div style={{ display:"flex",gap:8 }}>
           <button onClick={handleDone}
-            style={{ flex: 1, padding: 14, borderRadius: 12, border: "none", background: done ? "#e2e8f0" : "#4CBE72", color: done ? "#718096" : "#fff", fontSize: 15, fontWeight: 600, cursor: done ? "default" : "pointer" }}>
+            style={{ flex:1,padding:14,borderRadius:12,border:"none",background:done?"#e2e8f0":"#4CBE72",color:done?"#718096":"#fff",fontSize:15,fontWeight:600,cursor:done?"default":"pointer" }}>
             {done ? ui.completed : ui.markDone}
           </button>
-          {!chatOpen && (
-            <button onClick={() => setChatOpen(true)}
-              style={{ padding: "14px 16px", borderRadius: 12, border: "0.5px solid #cbd5e0", background: "#fff", color: "#2d3748", fontSize: 14, cursor: "pointer", whiteSpace: "nowrap" }}>
-              🤠 {ui.askSuperpapa}
-            </button>
-          )}
+          {!chatOpen && <button onClick={()=>setChatOpen(true)} style={{ padding:"14px 16px",borderRadius:12,border:"0.5px solid #cbd5e0",background:"#fff",color:"#2d3748",fontSize:14,cursor:"pointer",whiteSpace:"nowrap" }}>🤠 {ui.askSuperpapa}</button>}
         </div>
-        {chatOpen && <ChatPanel ui={ui} lesson={lesson} module={module} lang={lang} onClose={() => setChatOpen(false)} />}
+        {chatOpen && <ChatPanel ui={ui} lesson={lesson} module={module} lang={lang} onClose={()=>setChatOpen(false)} />}
       </div>
     </div>
   );
 }
 
-function ModuleView({ module, ui, lang, onBack, completed, onComplete, onSelectLesson }) {
+function ModuleView({ module, ui, lang, onBack, completed, onSelectLesson }) {
   const [chatOpen, setChatOpen] = useState(false);
-  const doneLessons = module.lessons.filter(l => completed.has(l.id)).length;
-
+  const doneLessons = module.lessons.filter(l=>completed.has(l.id)).length;
   return (
     <div>
-      <button onClick={onBack} style={{ border: "none", background: "none", cursor: "pointer", color: "#718096", fontSize: 13, padding: "6px 0", marginBottom: 14 }}>
-        {ui.back}
-      </button>
-      {/* Module header */}
-      <div style={{ background: module.color, borderRadius: 16, padding: 20, marginBottom: 14, display: "flex", gap: 14, alignItems: "center" }}>
-        <div style={{ fontSize: 40 }}>{module.icon}</div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#fff" }}>{module.title}</div>
-          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>{module.sub}</div>
-          <div style={{ marginTop: 10, height: 6, background: "rgba(255,255,255,0.3)", borderRadius: 3, overflow: "hidden" }}>
-            <div style={{ height: "100%", background: "#fff", width: (doneLessons / module.lessons.length * 100) + "%", transition: "width 0.5s", borderRadius: 3 }} />
+      <button onClick={onBack} style={{ border:"none",background:"none",cursor:"pointer",color:"#718096",fontSize:13,padding:"6px 0",marginBottom:14 }}>{ui.back}</button>
+      <div style={{ background:module.color,borderRadius:16,padding:20,marginBottom:14,display:"flex",gap:14,alignItems:"center" }}>
+        <div style={{ fontSize:40 }}>{module.icon}</div>
+        <div style={{ flex:1 }}>
+          <div style={{ fontSize:18,fontWeight:700,color:"#fff" }}>{t(module.title,lang)}</div>
+          <div style={{ fontSize:12,color:"rgba(255,255,255,0.8)",marginTop:2 }}>{t(module.sub,lang)}</div>
+          <div style={{ marginTop:10,height:6,background:"rgba(255,255,255,0.3)",borderRadius:3,overflow:"hidden" }}>
+            <div style={{ height:"100%",background:"#fff",width:(doneLessons/module.lessons.length*100)+"%",transition:"width 0.5s",borderRadius:3 }} />
           </div>
-          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.8)", marginTop: 4 }}>{doneLessons}/{module.lessons.length} {ui.modules}</div>
+          <div style={{ fontSize:11,color:"rgba(255,255,255,0.8)",marginTop:4 }}>{doneLessons}/{module.lessons.length} {ui.lessons}</div>
         </div>
       </div>
-      {/* Superpapa intro */}
-      <div style={{ background: "#1a1a2e", borderRadius: 14, padding: "12px 16px", marginBottom: 14, display: "flex", gap: 12, alignItems: "flex-start" }}>
+      <div style={{ background:"#1a1a2e",borderRadius:14,padding:"12px 16px",marginBottom:14,display:"flex",gap:12,alignItems:"flex-start" }}>
         <SuperpapaAvatar size={50} />
-        <div style={{ fontSize: 13, color: "#e2e8f0", lineHeight: 1.6, fontStyle: "italic", paddingTop: 8 }}>"{module.intro}"</div>
+        <div style={{ fontSize:13,color:"#e2e8f0",lineHeight:1.6,fontStyle:"italic",paddingTop:8 }}>"{t(module.intro,lang)}"</div>
       </div>
-      {/* Lesson list */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {module.lessons.map((ls, idx) => {
+      <div style={{ display:"flex",flexDirection:"column",gap:8 }}>
+        {module.lessons.map((ls,idx)=>{
           const done = completed.has(ls.id);
           return (
-            <div key={ls.id} onClick={() => onSelectLesson(ls)}
-              style={{ background: "#fff", borderRadius: 12, border: "0.5px solid " + (done ? module.color : "#e2e8f0"), padding: "14px 16px", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, transition: "border-color 0.2s" }}>
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: done ? module.color : "#f7fafc", color: done ? "#fff" : "#718096", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 700, flexShrink: 0 }}>
-                {done ? "✓" : (idx + 1)}
+            <div key={ls.id} onClick={()=>onSelectLesson(ls)}
+              style={{ background:"#fff",borderRadius:12,border:"0.5px solid "+(done?module.color:"#e2e8f0"),padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12 }}>
+              <div style={{ width:32,height:32,borderRadius:"50%",background:done?module.color:"#f7fafc",color:done?"#fff":"#718096",display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,fontWeight:700,flexShrink:0 }}>
+                {done?"✓":(idx+1)}
               </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "#1a202c" }}>{ls.title}</div>
-                <div style={{ fontSize: 12, color: "#718096", marginTop: 2 }}>{ls.concept}</div>
+              <div style={{ flex:1 }}>
+                <div style={{ fontSize:14,fontWeight:600,color:"#1a202c" }}>{t(ls.title,lang)}</div>
+                <div style={{ fontSize:12,color:"#718096",marginTop:2 }}>{t(ls.concept,lang)}</div>
               </div>
-              <span style={{ color: "#a0aec0", fontSize: 18 }}>›</span>
+              <span style={{ color:"#a0aec0",fontSize:18 }}>›</span>
             </div>
           );
         })}
       </div>
       {!chatOpen ? (
-        <button onClick={() => setChatOpen(true)}
-          style={{ marginTop: 14, width: "100%", padding: 12, borderRadius: 12, border: "0.5px solid #e2e8f0", background: "#fff", color: "#2d3748", fontSize: 14, cursor: "pointer" }}>
+        <button onClick={()=>setChatOpen(true)} style={{ marginTop:14,width:"100%",padding:12,borderRadius:12,border:"0.5px solid #e2e8f0",background:"#fff",color:"#2d3748",fontSize:14,cursor:"pointer" }}>
           🤠 {ui.askSuperpapa}
         </button>
-      ) : (
-        <ChatPanel ui={ui} lesson={null} module={module} lang={lang} onClose={() => setChatOpen(false)} />
-      )}
+      ) : <ChatPanel ui={ui} lesson={null} module={module} lang={lang} onClose={()=>setChatOpen(false)} />}
+    </div>
+  );
+}
+
+// ─── STUDIO GUIDE SCREEN ─────────────────────────────────────────────────────
+
+function StudioGuide({ lang, ui, onDone }) {
+  const content = {
+    fr: {
+      title: "RoboLua + Roblox Studio",
+      sub: "Comment ça marche ensemble ?",
+      steps: [
+        { icon: "📱", title: "Lis sur cet écran", desc: "RoboLua t'explique les concepts avec Superpapa973. Tu écoutes, tu comprends." },
+        { icon: "💻", title: "Ouvre Roblox Studio", desc: "Roblox Studio est GRATUIT sur roblox.com/create. C'est là que tu tapes ton vrai code Lua !" },
+        { icon: "✍️", title: "Tape le code", desc: "Chaque leçon te dit exactement où écrire le code dans Studio. Suis les étapes jaunes !" },
+        { icon: "▶️", title: "Lance et teste", desc: "Clique ▶ Play pour voir ton code en action dans le jeu. L'Output montre tes messages." },
+        { icon: "🎯", title: "Fais le défi", desc: "Chaque leçon a un Mini-défi Studio. Complète-le pour vraiment maîtriser le concept !" },
+      ],
+      dl: "📥 Télécharger Roblox Studio (gratuit) →"
+    },
+    en: {
+      title: "RoboLua + Roblox Studio",
+      sub: "How do they work together?",
+      steps: [
+        { icon: "📱", title: "Read on this screen", desc: "RoboLua explains concepts with Superpapa973. You listen and understand." },
+        { icon: "💻", title: "Open Roblox Studio", desc: "Roblox Studio is FREE at roblox.com/create. That's where you type your real Lua code!" },
+        { icon: "✍️", title: "Type the code", desc: "Each lesson tells you exactly where to write the code in Studio. Follow the yellow steps!" },
+        { icon: "▶️", title: "Run and test", desc: "Click ▶ Play to see your code in action in the game. Output shows your messages." },
+        { icon: "🎯", title: "Do the challenge", desc: "Each lesson has a Studio Mini-Challenge. Complete it to truly master the concept!" },
+      ],
+      dl: "📥 Download Roblox Studio (free) →"
+    },
+    es: {
+      title: "RoboLua + Roblox Studio",
+      sub: "¿Cómo funcionan juntos?",
+      steps: [
+        { icon: "📱", title: "Lee en esta pantalla", desc: "RoboLua te explica conceptos con Superpapa973. Escuchas y entiendes." },
+        { icon: "💻", title: "Abre Roblox Studio", desc: "¡Roblox Studio es GRATIS en roblox.com/create. ¡Ahí es donde escribes tu código Lua real!" },
+        { icon: "✍️", title: "Escribe el código", desc: "Cada lección te dice exactamente dónde escribir el código en Studio. ¡Sigue los pasos amarillos!" },
+        { icon: "▶️", title: "Ejecuta y prueba", desc: "Haz clic en ▶ Play para ver tu código en acción en el juego. Output muestra tus mensajes." },
+        { icon: "🎯", title: "Haz el reto", desc: "¡Cada lección tiene un Mini-reto Studio. ¡Complétalo para dominar de verdad el concepto!" },
+      ],
+      dl: "📥 Descargar Roblox Studio (gratis) →"
+    }
+  };
+  const c = content[lang] || content.fr;
+  return (
+    <div style={{ padding:16 }}>
+      <div style={{ background:"#1a1a2e",borderRadius:20,padding:24,marginBottom:16,textAlign:"center" }}>
+        <div style={{ display:"flex",justifyContent:"center",gap:16,marginBottom:16 }}>
+          <SuperpapaAvatar size={70} animate={true} />
+          <MathisAvatar size={60} />
+        </div>
+        <div style={{ fontSize:20,fontWeight:800,color:"#fff",marginBottom:4 }}>{c.title}</div>
+        <div style={{ fontSize:14,color:"#a0aec0" }}>{c.sub}</div>
+      </div>
+      <div style={{ display:"flex",flexDirection:"column",gap:10,marginBottom:16 }}>
+        {c.steps.map((s,i)=>(
+          <div key={i} style={{ background:"#fff",borderRadius:14,border:"0.5px solid #e2e8f0",padding:"14px 16px",display:"flex",gap:14,alignItems:"flex-start" }}>
+            <div style={{ fontSize:28,flexShrink:0 }}>{s.icon}</div>
+            <div>
+              <div style={{ fontSize:14,fontWeight:700,color:"#1a202c",marginBottom:4 }}>{s.title}</div>
+              <div style={{ fontSize:13,color:"#4a5568",lineHeight:1.6 }}>{s.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <a href="https://www.roblox.com/create" target="_blank" rel="noreferrer"
+        style={{ display:"block",background:"#f6ad55",color:"#744210",borderRadius:12,padding:"12px 16px",textAlign:"center",fontSize:14,fontWeight:700,textDecoration:"none",marginBottom:12 }}>
+        {c.dl}
+      </a>
+      <button onClick={onDone}
+        style={{ width:"100%",background:"#4C9BE8",color:"#fff",border:"none",borderRadius:12,padding:"14px 16px",fontSize:16,fontWeight:700,cursor:"pointer" }}>
+        {ui.studioGuideBtn}
+      </button>
     </div>
   );
 }
@@ -1405,167 +1904,156 @@ export default function Home() {
   const [view, setView] = useState("intro");
   const [selectedModule, setSelectedModule] = useState(null);
   const [selectedLesson, setSelectedLesson] = useState(null);
-  const [completed, setCompleted] = useState(() => {
-    if (typeof window !== "undefined") {
-      try { return new Set(JSON.parse(localStorage.getItem("robolua_v2") || "[]")); } catch {}
-    }
+  const [completed, setCompleted] = useState(()=>{
+    if (typeof window!=="undefined") { try { return new Set(JSON.parse(localStorage.getItem("robolua_v3")||"[]")); } catch {} }
     return new Set();
   });
 
+  useEffect(()=>{ if (typeof window!=="undefined") initVoice(lang); }, [lang]);
+  useEffect(()=>{ if (typeof window!=="undefined") window.speechSynthesis.onvoiceschanged=()=>initVoice(lang); }, [lang]);
+
   const ui = UI[lang];
-  const totalLessons = MODULES.reduce((s, m) => s + m.lessons.length, 0);
-  const prog = Math.round((completed.size / totalLessons) * 100);
+  const totalLessons = MODULES.reduce((s,m)=>s+m.lessons.length,0);
+  const prog = Math.round(completed.size/totalLessons*100);
   const xp = completed.size * 50;
 
-  const markComplete = useCallback((id) => {
-    setCompleted(prev => {
-      const next = new Set([...prev, id]);
-      try { localStorage.setItem("robolua_v2", JSON.stringify([...next])); } catch {}
-      return next;
-    });
+  const markComplete = useCallback((id)=>{
+    setCompleted(prev=>{ const next=new Set([...prev,id]); try{localStorage.setItem("robolua_v3",JSON.stringify([...next]));}catch{} return next; });
   }, []);
 
-  const switchLang = (l) => {
-    stopSpeak();
-    setLang(l);
-  };
+  const switchLang = (l) => { stopSpeak(); setLang(l); };
 
   const goToNextLesson = () => {
-    if (!selectedModule || !selectedLesson) return;
+    if (!selectedModule||!selectedLesson) return;
     const lessons = selectedModule.lessons;
-    const idx = lessons.findIndex(l => l.id === selectedLesson.id);
-    if (idx < lessons.length - 1) {
-      setSelectedLesson(lessons[idx + 1]);
-    } else {
-      setView("module");
-    }
+    const idx = lessons.findIndex(l=>l.id===selectedLesson.id);
+    if (idx < lessons.length-1) setSelectedLesson(lessons[idx+1]);
+    else setView("module");
   };
 
   const hasNextLesson = () => {
-    if (!selectedModule || !selectedLesson) return false;
+    if (!selectedModule||!selectedLesson) return false;
     const lessons = selectedModule.lessons;
-    const idx = lessons.findIndex(l => l.id === selectedLesson.id);
-    return idx < lessons.length - 1;
+    return lessons.findIndex(l=>l.id===selectedLesson.id) < lessons.length-1;
   };
 
   return (
     <>
       <Head>
         <title>RoboLua — Crée ton jeu Roblox</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1a1a2e" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <style>{`
+          @keyframes popIn{0%{transform:scale(0) rotate(-10deg);opacity:0}60%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0deg);opacity:1}}
+          @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+        `}</style>
       </Head>
 
-      <div style={{ minHeight: "100vh", background: "#f0f4ff", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+      <div style={{ minHeight:"100vh",background:"#f0f4ff",fontFamily:"system-ui,-apple-system,sans-serif" }}>
         {/* HEADER */}
-        {view !== "intro" && (
-          <div style={{ background: "#1a1a2e", padding: "10px 16px", display: "flex", alignItems: "center", gap: 12, position: "sticky", top: 0, zIndex: 50 }}>
-            <div style={{ fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: -0.5 }}>
-              Robo<span style={{ color: "#4C9BE8" }}>Lua</span>
-            </div>
-            <div style={{ display: "flex", gap: 4 }}>
-              {["fr", "en", "es"].map(l => (
-                <button key={l} onClick={() => switchLang(l)}
-                  style={{ padding: "3px 8px", borderRadius: 6, border: "0.5px solid " + (lang === l ? "#4C9BE8" : "rgba(255,255,255,0.2)"), background: lang === l ? "#4C9BE8" : "transparent", color: lang === l ? "#fff" : "rgba(255,255,255,0.6)", fontSize: 11, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>
+        {view!=="intro" && (
+          <div style={{ background:"#1a1a2e",padding:"10px 16px",display:"flex",alignItems:"center",gap:12,position:"sticky",top:0,zIndex:50 }}>
+            <div style={{ fontSize:17,fontWeight:800,color:"#fff",letterSpacing:-0.5 }}>Robo<span style={{ color:"#4C9BE8" }}>Lua</span></div>
+            <div style={{ display:"flex",gap:4 }}>
+              {["fr","en","es"].map(l=>(
+                <button key={l} onClick={()=>switchLang(l)}
+                  style={{ padding:"3px 8px",borderRadius:6,border:"0.5px solid "+(lang===l?"#4C9BE8":"rgba(255,255,255,0.2)"),background:lang===l?"#4C9BE8":"transparent",color:lang===l?"#fff":"rgba(255,255,255,0.6)",fontSize:11,cursor:"pointer",textTransform:"uppercase",fontWeight:600 }}>
                   {l}
                 </button>
               ))}
             </div>
-            <div style={{ flex: 1, height: 5, background: "rgba(255,255,255,0.1)", borderRadius: 3, overflow: "hidden" }}>
-              <div style={{ height: "100%", background: "#4CBE72", width: prog + "%", transition: "width 0.5s", borderRadius: 3 }} />
+            <div style={{ flex:1,height:5,background:"rgba(255,255,255,0.1)",borderRadius:3,overflow:"hidden" }}>
+              <div style={{ height:"100%",background:"#4CBE72",width:prog+"%",transition:"width 0.5s",borderRadius:3 }} />
             </div>
-            <div style={{ fontSize: 12, color: "#f6ad55", whiteSpace: "nowrap", fontWeight: 600 }}>⭐ {xp} XP</div>
+            <div style={{ fontSize:12,color:"#f6ad55",whiteSpace:"nowrap",fontWeight:600 }}>⭐ {xp} XP</div>
           </div>
         )}
 
-        <div style={{ maxWidth: 680, margin: "0 auto", padding: view === "intro" ? 0 : 16 }}>
+        <div style={{ maxWidth:680,margin:"0 auto",padding:view==="intro"?0:16 }}>
 
-          {/* INTRO SCREEN */}
-          {view === "intro" && (
-            <div style={{ minHeight: "100vh", background: "#1a1a2e", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24 }}>
-              <div style={{ display: "flex", gap: 4, marginBottom: 32, alignSelf: "flex-end", marginRight: 8 }}>
-                {["fr", "en", "es"].map(l => (
-                  <button key={l} onClick={() => setLang(l)}
-                    style={{ padding: "4px 10px", borderRadius: 6, border: "0.5px solid " + (lang === l ? "#4C9BE8" : "rgba(255,255,255,0.3)"), background: lang === l ? "#4C9BE8" : "transparent", color: lang === l ? "#fff" : "rgba(255,255,255,0.6)", fontSize: 12, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>
+          {/* INTRO */}
+          {view==="intro" && (
+            <div style={{ minHeight:"100vh",background:"#1a1a2e",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24 }}>
+              <div style={{ display:"flex",gap:4,marginBottom:32,alignSelf:"flex-end" }}>
+                {["fr","en","es"].map(l=>(
+                  <button key={l} onClick={()=>setLang(l)}
+                    style={{ padding:"4px 10px",borderRadius:6,border:"0.5px solid "+(lang===l?"#4C9BE8":"rgba(255,255,255,0.3)"),background:lang===l?"#4C9BE8":"transparent",color:lang===l?"#fff":"rgba(255,255,255,0.6)",fontSize:12,cursor:"pointer",textTransform:"uppercase",fontWeight:600 }}>
                     {l}
                   </button>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: 24, alignItems: "flex-end", marginBottom: 32 }}>
-                <div style={{ textAlign: "center" }}>
-                  <SuperpapaAvatar size={110} animate={true} />
-                  <div style={{ fontSize: 11, color: "#a0aec0", marginTop: 4 }}>Superpapa973</div>
+              <div style={{ display:"flex",gap:20,alignItems:"flex-end",marginBottom:28 }}>
+                <div style={{ textAlign:"center" }}>
+                  <SuperpapaAvatar size={100} animate={true} />
+                  <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Superpapa973</div>
+                  <div style={{ fontSize:10,color:"#718096" }}>Ton professeur</div>
                 </div>
-                <div style={{ textAlign: "center" }}>
-                  <MathisAvatar size={90} />
-                  <div style={{ fontSize: 11, color: "#a0aec0", marginTop: 4 }}>Mathis</div>
+                <div style={{ textAlign:"center" }}>
+                  <MathisAvatar size={85} />
+                  <div style={{ fontSize:11,color:"#a0aec0",marginTop:6 }}>Mathis</div>
+                  <div style={{ fontSize:10,color:"#718096" }}>Toi !</div>
                 </div>
               </div>
-              <div style={{ fontSize: 32, fontWeight: 800, color: "#fff", textAlign: "center", marginBottom: 8, letterSpacing: -1 }}>
-                Robo<span style={{ color: "#4C9BE8" }}>Lua</span>
+              <div style={{ fontSize:34,fontWeight:800,color:"#fff",textAlign:"center",marginBottom:8,letterSpacing:-1 }}>
+                Robo<span style={{ color:"#4C9BE8" }}>Lua</span>
               </div>
-              <div style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", textAlign: "center", marginBottom: 12, maxWidth: 300 }}>
-                {ui.welcomeSub}
+              <div style={{ fontSize:15,color:"rgba(255,255,255,0.7)",textAlign:"center",marginBottom:10,maxWidth:300 }}>
+                {lang==="fr"&&"Apprends à créer ton propre jeu Roblox"}
+                {lang==="en"&&"Learn to create your own Roblox game"}
+                {lang==="es"&&"Aprende a crear tu propio juego Roblox"}
               </div>
-              <div style={{ fontSize: 13, color: "#4CBE72", textAlign: "center", marginBottom: 32 }}>
+              <div style={{ fontSize:13,color:"#4CBE72",textAlign:"center",marginBottom:28 }}>
                 {totalLessons} leçons • 6 modules • FR / EN / ES
               </div>
-              <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 14, padding: "14px 20px", marginBottom: 32, maxWidth: 340, textAlign: "center" }}>
-                <div style={{ fontSize: 13, color: "#a0aec0", lineHeight: 1.7 }}>
-                  {lang === "fr" && "De ton premier print() à ton premier jeu complet — avec Superpapa973 comme guide !"}
-                  {lang === "en" && "From your first print() to your first complete game — with Superpapa973 as your guide!"}
-                  {lang === "es" && "¡Desde tu primer print() hasta tu primer juego completo — con Superpapa973 como guía!"}
-                </div>
-              </div>
-              <button onClick={() => setView("map")}
-                style={{ background: "#4C9BE8", color: "#fff", border: "none", borderRadius: 14, padding: "16px 40px", fontSize: 17, fontWeight: 700, cursor: "pointer", letterSpacing: 0.3 }}>
+              <button onClick={()=>setView("studio-guide")}
+                style={{ background:"#4C9BE8",color:"#fff",border:"none",borderRadius:14,padding:"16px 40px",fontSize:17,fontWeight:700,cursor:"pointer",letterSpacing:0.3 }}>
                 {ui.start}
               </button>
             </div>
           )}
 
-          {/* MODULE MAP */}
-          {view === "map" && (
+          {/* STUDIO GUIDE */}
+          {view==="studio-guide" && <StudioGuide lang={lang} ui={ui} onDone={()=>setView("map")} />}
+
+          {/* MAP */}
+          {view==="map" && (
             <div>
-              <div style={{ background: "#1a1a2e", borderRadius: 16, padding: "16px 18px", marginBottom: 16, display: "flex", alignItems: "center", gap: 14 }}>
+              <div style={{ background:"#1a1a2e",borderRadius:16,padding:"16px 18px",marginBottom:16,display:"flex",alignItems:"center",gap:14 }}>
                 <SuperpapaAvatar size={54} animate={true} />
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#fff", marginBottom: 2 }}>
-                    {lang === "fr" && "Choisis ton module, partenaire !"}
-                    {lang === "en" && "Choose your module, partner!"}
-                    {lang === "es" && "¡Elige tu módulo, compañero!"}
+                <div style={{ flex:1 }}>
+                  <div style={{ fontSize:14,fontWeight:600,color:"#fff",marginBottom:2 }}>
+                    {lang==="fr"&&"Choisis ton module, partenaire !"}
+                    {lang==="en"&&"Choose your module, partner!"}
+                    {lang==="es"&&"¡Elige tu módulo, compañero!"}
                   </div>
-                  <div style={{ fontSize: 12, color: "#a0aec0" }}>
-                    {completed.size}/{totalLessons} {ui.modules} • {prog}% • {xp} XP
-                  </div>
+                  <div style={{ fontSize:12,color:"#a0aec0" }}>{completed.size}/{totalLessons} {ui.lessons} • {prog}% • {xp} XP</div>
                 </div>
-                <MathisAvatar size={54} />
+                <MathisAvatar size={50} />
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                {MODULES.map((mod, idx) => {
-                  const prevDone = idx === 0 || MODULES[idx - 1].lessons.every(l => completed.has(l.id));
-                  const doneLessons = mod.lessons.filter(l => completed.has(l.id)).length;
-                  const modProg = Math.round(doneLessons / mod.lessons.length * 100);
+              <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
+                {MODULES.map((mod,idx)=>{
+                  const prevDone = idx===0||MODULES[idx-1].lessons.every(l=>completed.has(l.id));
+                  const doneLessons = mod.lessons.filter(l=>completed.has(l.id)).length;
+                  const modProg = Math.round(doneLessons/mod.lessons.length*100);
                   const locked = !prevDone;
                   return (
-                    <div key={mod.id} onClick={() => !locked && (setSelectedModule(mod), setView("module"))}
-                      style={{ background: "#fff", borderRadius: 16, border: "2px solid " + (locked ? "#e2e8f0" : mod.color + "44"), padding: "16px 18px", cursor: locked ? "not-allowed" : "pointer", opacity: locked ? 0.6 : 1, display: "flex", alignItems: "center", gap: 14 }}>
-                      <div style={{ width: 48, height: 48, borderRadius: 14, background: locked ? "#f7fafc" : mod.color + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, flexShrink: 0 }}>
-                        {locked ? "🔒" : mod.icon}
+                    <div key={mod.id} onClick={()=>!locked&&(setSelectedModule(mod),setView("module"))}
+                      style={{ background:"#fff",borderRadius:16,border:"2px solid "+(locked?"#e2e8f0":mod.color+"44"),padding:"16px 18px",cursor:locked?"not-allowed":"pointer",opacity:locked?0.6:1,display:"flex",alignItems:"center",gap:14 }}>
+                      <div style={{ width:48,height:48,borderRadius:14,background:locked?"#f7fafc":mod.color+"22",display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,flexShrink:0 }}>
+                        {locked?"🔒":mod.icon}
                       </div>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 15, fontWeight: 700, color: locked ? "#a0aec0" : "#1a202c", marginBottom: 2 }}>{mod.title}</div>
-                        <div style={{ fontSize: 12, color: "#718096", marginBottom: 8, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{mod.sub}</div>
-                        <div style={{ height: 5, background: "#f0f0f0", borderRadius: 3, overflow: "hidden" }}>
-                          <div style={{ height: "100%", background: mod.color, width: modProg + "%", transition: "width 0.5s", borderRadius: 3 }} />
+                      <div style={{ flex:1,minWidth:0 }}>
+                        <div style={{ fontSize:15,fontWeight:700,color:locked?"#a0aec0":"#1a202c",marginBottom:2 }}>{t(mod.title,lang)}</div>
+                        <div style={{ fontSize:12,color:"#718096",marginBottom:8,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{t(mod.sub,lang)}</div>
+                        <div style={{ height:5,background:"#f0f0f0",borderRadius:3,overflow:"hidden" }}>
+                          <div style={{ height:"100%",background:mod.color,width:modProg+"%",transition:"width 0.5s",borderRadius:3 }} />
                         </div>
                       </div>
-                      <div style={{ textAlign: "right", flexShrink: 0 }}>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: mod.color }}>{doneLessons}/{mod.lessons.length}</div>
-                        <div style={{ fontSize: 11, color: "#a0aec0" }}>{ui.modules}</div>
+                      <div style={{ textAlign:"right",flexShrink:0 }}>
+                        <div style={{ fontSize:13,fontWeight:700,color:mod.color }}>{doneLessons}/{mod.lessons.length}</div>
+                        <div style={{ fontSize:11,color:"#a0aec0" }}>{ui.lessons}</div>
                       </div>
                     </div>
                   );
@@ -1574,32 +2062,18 @@ export default function Home() {
             </div>
           )}
 
-          {/* MODULE VIEW */}
-          {view === "module" && selectedModule && (
-            <ModuleView
-              module={selectedModule}
-              ui={ui}
-              lang={lang}
-              onBack={() => setView("map")}
-              completed={completed}
-              onComplete={markComplete}
-              onSelectLesson={(ls) => { setSelectedLesson(ls); setView("lesson"); }}
-            />
+          {/* MODULE */}
+          {view==="module" && selectedModule && (
+            <ModuleView module={selectedModule} ui={ui} lang={lang}
+              onBack={()=>setView("map")} completed={completed}
+              onSelectLesson={(ls)=>{ setSelectedLesson(ls); setView("lesson"); }} />
           )}
 
-          {/* LESSON VIEW */}
-          {view === "lesson" && selectedLesson && (
-            <LessonView
-              lesson={selectedLesson}
-              module={selectedModule}
-              ui={ui}
-              lang={lang}
-              onBack={() => setView("module")}
-              completed={completed}
-              onComplete={markComplete}
-              onNext={goToNextLesson}
-              hasNext={hasNextLesson()}
-            />
+          {/* LESSON */}
+          {view==="lesson" && selectedLesson && (
+            <LessonView lesson={selectedLesson} module={selectedModule} ui={ui} lang={lang}
+              onBack={()=>setView("module")} completed={completed}
+              onComplete={markComplete} onNext={goToNextLesson} hasNext={hasNextLesson()} />
           )}
         </div>
       </div>
